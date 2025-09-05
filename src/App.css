@@ -19,6 +19,9 @@ button {
 .mainColor {
   color: #960000;
 }
+.mainBg {
+  background-color: #960000;
+}
 .activeTabs {
   background: linear-gradient(to left top, #960000, #BE2F2B);
   color: #fff;

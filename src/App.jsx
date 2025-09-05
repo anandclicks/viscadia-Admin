@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import "remixicon/fonts/remixicon.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
+import EventAndWebenar from "./pages/EventAndWebenar";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/events-and-webinars" element={<EventAndWebenar/>} />
           </Route>
         </Routes>
       </BrowserRouter>
