@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: "Roboto";
+}
+.fsTwo * {
+  font-family: "Montserrat";
+}
+body {
+  background-color: #F4F1F2;
+}
+button {
+  cursor: pointer;
+}
+.shadowcus1 {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.mainColor {
+  color: #960000;
+}
+.activeTabs {
+  background: linear-gradient(to left top, #960000, #BE2F2B);
+  color: #fff;
+}
+
+.outletWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tabicons {
+  height: 45px !important;
+  width: 45px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50%;
+}
+
+.gredianBg {
+  color: #fff;
+  background: linear-gradient(to left top, #960000, #BE2F2B);
+}
+
+.gredianText {
+  background: linear-gradient(90deg, #960000, #BE2F2B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.homeSlider .swiper-wrapper {
+  padding: 20px 0;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #BE2F2B; /* green-600 */
+  border-radius: 4px;
+}
