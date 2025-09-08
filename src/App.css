@@ -67,6 +67,25 @@ button {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #BE2F2B; /* green-600 */
+  background-color: #BE2F2B; 
   border-radius: 4px;
+}
+
+
+/* classname for status  */
+.Published {
+  background-color: #3ab70025;
+  color: #37ad00;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 20px;
+}
+.draft {
+  background-color: #be302b2a;
+  color: #BE2F2B;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 20px;
 }
