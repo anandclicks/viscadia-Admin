@@ -3,25 +3,33 @@
 
 * {
   font-family: "Roboto";
+  box-sizing: border-box;
 }
+
 .fsTwo * {
   font-family: "Montserrat";
 }
+
 body {
   background-color: #F4F1F2;
 }
+
 button {
   cursor: pointer;
 }
+
 .shadowcus1 {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .mainColor {
   color: #960000;
 }
+
 .mainBg {
   background-color: #960000;
 }
+
 .activeTabs {
   background: linear-gradient(to left top, #960000, #BE2F2B);
   color: #fff;
@@ -51,6 +59,7 @@ button {
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
+
 .homeSlider .swiper-wrapper {
   padding: 20px 0;
 }
@@ -67,7 +76,7 @@ button {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #BE2F2B; 
+  background-color: #BE2F2B;
   border-radius: 4px;
 }
 
@@ -81,6 +90,7 @@ button {
   font-size: 15px;
   padding: 10px 20px;
 }
+
 .draft {
   background-color: #be302b2a;
   color: #BE2F2B;
@@ -88,4 +98,25 @@ button {
   font-weight: 600;
   font-size: 15px;
   padding: 10px 20px;
+}
+
+.activeEventPageSection {
+  background-color: #be302b0c;
+  position: relative;
+  color: #BE2F2B;
+  font-weight: 600;
+}
+.activeEventPageSection::after {
+  height: 100% ;
+  width: 5px;
+  background-color: #BE2F2B;
+  position: absolute;
+  top: 0;
+  content: "";
+  right: 0;
+}
+
+.generalCssForInputs {
+  outline: none;
+  border: 0;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const EventAndWebFilter = ({active, setActive}) => {
   return (
@@ -12,10 +13,10 @@ const EventAndWebFilter = ({active, setActive}) => {
         </div>
       </div>
       <div className='h-full flex items-center gap-3'>
-         <button className={`z-10 h-[45px] border-1  min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] font-medium transition-all rounded-full`}>
-          <img className='h-[15px]' src='./icons/plus.png'/> New Event</button>
-         <button className={`z-10 h-[45px] border-1  min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] font-medium transition-all rounded-full`}>
-          <img className='h-[15px]' src='./icons/plus.png'/> New Webinar</button>
+         <Link to={'/event/create'} className={`z-10 h-[45px] border-1  min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] font-medium transition-all rounded-full`}>
+          <img className='h-[15px]' src='./icons/plus.png'/> New Event</Link>
+         <Link  to={'/event/webanar'} className={`z-10 h-[45px] border-1  min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] font-medium transition-all rounded-full`}>
+          <img className='h-[15px]' src='./icons/plus.png'/> New Webinar</Link>
          <button className={`z-10 h-[45px] border-1  min-w-[50px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] font-medium transition-all rounded-full`}>
           <img className='h-[15px]' src='./icons/setting.png'/> </button>
       </div>

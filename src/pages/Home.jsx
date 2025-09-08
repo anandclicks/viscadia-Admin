@@ -68,7 +68,8 @@ const Home = () => {
           className={`min-h-[110px] shadow-[0px_0px_3px_#0000000f] w-full rounded-[30px] border border-[#E8E8E8] mt-4 p-4 px-2 grid grid-cols-4`}
         >
           {dataOne?.map((el, index) => (
-            <div
+            <div 
+            key={index}
               className={`h-full flex flex-col ${
                 index === dataOne.length - 1 ? "" : "border-r border-[#E8E8E8]"
               } justify-center px-6 `}
