@@ -9,7 +9,10 @@ import "swiper/css/pagination";
 
 const SectionFour = () => {
   const [forecasters, setForecasters] = useState([
-    { image: "", name: "", designation: "", intro: "" },{ image: "", name: "", designation: "", intro: "" },{ image: "", name: "", designation: "", intro: "" },{ image: "", name: "", designation: "", intro: "" },
+    { image: "", name: "", designation: "", intro: "" },
+    { image: "", name: "", designation: "", intro: "" },
+    { image: "", name: "", designation: "", intro: "" },
+    { image: "", name: "", designation: "", intro: "" },
   ]);
 
   const addForecaster = () => {
