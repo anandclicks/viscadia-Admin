@@ -25,6 +25,9 @@ button {
 .mainColor {
   color: #960000;
 }
+.grediantBg {
+  background: linear-gradient(to right ,#BE2F2B,#960000);
+}
 
 .mainBg {
   background-color: #960000;
