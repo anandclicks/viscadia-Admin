@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { EventPageContext } from "../../../context/EventPageContext";
 const SectionOne = () => {
   const [logoPreview, setLogoPreview] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -16,6 +17,8 @@ const SectionOne = () => {
       setImagePreview(imageUrl);
     }
   };
+  const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
+  
   return (
     <div className="h-[340px] w-full shadow relative flex">
       <div className="EventPagesectionOne w-full h-[340px] object-cover absolute z-10">
@@ -26,29 +29,32 @@ const SectionOne = () => {
           <div className="h-[130px] border border-dashed border-[#960000] w-full bg-amber-200 relative">
             <div className="absolute left-0 top-0 h-full w-full bg-[#FFF5F5] flex justify-center items-center flex-col">
               <img src="../icons/upload.png" alt="" />
-              <h3 className="text-[#960000] font-semibold mt-2">Upload Logo</h3>
+              <h3 className="text-[#960000]  mt-2">Upload Logo</h3>
             </div>
             {logoPreview && (
               <div className="absolute left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
                 <img src={logoPreview} className="max-w-full max-h-full object-contain" alt="" />
               </div>
             )}
-            <input onChange={handleLogoChange} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" name="" id="" />
+            <input onChange={(evt)=> {
+              handleLogoChange(evt)
+              handleEventInputfiledsChanges(evt)
+              }} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" name="logo" id="" />
           </div>
-          <p className="text-[13px] mt-2 font-medium text-end">Upload JPG/PNG · Max 5MB</p>
+          <p className="text-[13px] mt-2 text-end">Upload JPG/PNG · Max 5MB</p>
         </div>
         <div className="">
           <div className="h-[40px] w-full">
-            <input placeholder="Enter Title Name" className="w-full h-full outline-0 border-0 text-[#133D65] placeholder:text-[#133D65]  text-[21px]" type="text" name="" id="" />
+            <input onInput={handleEventInputfiledsChanges} value={createEventFormData?.title} placeholder="Enter Title Name" className="w-full h-full outline-0 border-0 text-[#133D65] placeholder:text-[#133D65]  text-[21px]" type="text" name="title" id="" />
           </div>
           <div className="mt-5 mb-3 flex gap-10 ">
             <div className="flex gap-2 min-w-[100px]">
               <img className="h-[20px]" src="../icons/date.png" alt="" />
-              <input type="text" className="generalCssForInputs h-[20px] text-[15px] placeholder:font-medium" placeholder="September 10-12-2025" name="date" id="" />
+              <input onInput={handleEventInputfiledsChanges} value={createEventFormData?.date} type="text" className="generalCssForInputs h-[20px] text-[15px] placeholder:font-medium" placeholder="September 10-12-2025" name="date" id="" />
             </div>
             <div className="flex gap-2 min-w-[60%]">
               <img className="h-[20px]" src="../icons/location.png" alt="" />
-              <input type="text" className="generalCssForInputs h-[20px] text-[15px] placeholder:font-medium w-full" placeholder="Add Location" name="date" id="" />
+              <input onInput={handleEventInputfiledsChanges} value={createEventFormData?.location} type="text" className="generalCssForInputs h-[20px] text-[15px] placeholder:font-medium w-full" placeholder="Add Location" name="location" id="" />
             </div>
           </div>
         </div>
@@ -56,7 +62,7 @@ const SectionOne = () => {
       <div className="w-[42%] border-dashed border-[#960000] border h-full rightSide  bg-amber-400 z-0 flex justify-end relative">
         <div className="absolute left-0 top-0 h-full w-full bg-[#FFF8F8] flex justify-center items-center flex-col">
           <img src="../icons/upload.png" alt="" />
-          <h3 className="text-[#960000] font-semibold mt-2">Upload Image</h3>
+          <h3 className="text-[#960000]  mt-2">Upload Image</h3>
         </div>
         {imagePreview && (
           <div className=" left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
@@ -64,7 +70,10 @@ const SectionOne = () => {
           </div>
         )}
       </div>
-      <input onChange={handleImageChange} type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="" id="" />
+      <input onChange={(evt)=> {
+        handleImageChange(evt)
+        handleEventInputfiledsChanges(evt)
+      }} type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="image" id="" />
     </div>
   );
 };

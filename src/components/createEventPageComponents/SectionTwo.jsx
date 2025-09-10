@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { EventPageContext } from "../../../context/EventPageContext";
 const SectionTwo = () => {
   const [headingImage, setHeadingImage] = useState(null);
   const handleHeadingImageChange = (evt) => {
@@ -8,6 +9,10 @@ const SectionTwo = () => {
       setHeadingImage(imageUrl);
     }
   };
+  
+  const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
+  console.log(createEventFormData);
+  
   return (
     <div className="h-[310px] w-full shadow relative flex mt-10 overflow-hidden">
       <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
@@ -18,14 +23,17 @@ const SectionTwo = () => {
           <div className="h-full w-full bg-amber-200 relative">
             <div className="absolute border border-dashed border-[#960000] left-0 top-0 h-full w-full bg-[#FFF5F5] flex justify-center items-center flex-col">
               <img src="../icons/upload.png" alt="" />
-              <h3 className="text-[#960000] font-semibold mt-2">Upload Logo</h3>
+              <h3 className="text-[#960000]  mt-2">Upload Logo</h3>
             </div>
             {headingImage && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
                 <img src={headingImage} className="h-full w-full object-cover" alt="" />
               </div>
             )}
-            <input onChange={handleHeadingImageChange} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" />
+            <input onChange={(evt)=> {
+              handleHeadingImageChange(evt)
+              handleEventInputfiledsChanges(evt)
+            }} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="headingImage" accept="image/*" />
           </div>
         </div>
       </div>
@@ -33,10 +41,10 @@ const SectionTwo = () => {
         <div className="w-[100%] relative z-10 flex justify-end">
           <div className="w-[90%]">
             <div className="h-[60px]">
-              <input placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" type="text" />
+              <input onInput={handleEventInputfiledsChanges} value={createEventFormData?.heading} placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="heading" type="text" />
             </div>
             <div className="h-[30px]">
-              <input placeholder="Sub Heading" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[25px] font-light" type="text" />
+              <input onInput={handleEventInputfiledsChanges} value={createEventFormData?.subHeading} placeholder="Sub Heading" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[25px] font-light" name="subHeading" type="text" />
             </div>
           </div>
         </div>

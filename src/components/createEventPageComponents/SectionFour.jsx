@@ -60,7 +60,7 @@ const SectionFour = () => {
                   )}
                   <div className="relative flex flex-col justify-center items-center bg-[#FFF5F5] h-full w-full">
                     <img src="../icons/upload.png" alt="" />
-                    <h3 className="text-[#960000] font-semibold mt-2">
+                    <h3 className="text-[#960000] mt-2">
                       Upload Image
                     </h3>
                   </div>
