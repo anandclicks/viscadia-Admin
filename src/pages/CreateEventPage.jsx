@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import SectionOne from "../components/createEventPageComponents/SectionOne";
 import SectionTwo from "../components/createEventPageComponents/SectionTwo";
 import SectionFour from "../components/createEventPageComponents/SectionFour";
 import SectionThree from "../components/createEventPageComponents/SectionThree";
+import { EventPageContext } from "../../context/EventPageContext";
 
 const CreateEventPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,8 @@ const CreateEventPage = () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const {handleSubmit} = useContext(EventPageContext)
 
   return (
     <div className="h-[100vh] w-full p-4">
@@ -89,7 +92,7 @@ const CreateEventPage = () => {
             <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5" >
               Cancle
               </button>
-            <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5" >
+            <button onClick={handleSubmit} className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5" >
               Save
               </button>
             </div>

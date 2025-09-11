@@ -11,7 +11,6 @@ const SectionTwo = () => {
   };
   
   const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
-  console.log(createEventFormData);
   
   return (
     <div className="h-[310px] w-full shadow relative flex mt-10 overflow-hidden">
