@@ -8,10 +8,13 @@ import Home from "./pages/Home";
 import EventAndWebenar from "./pages/EventAndWebenar";
 import CreateEventPage from "./pages/CreateEventPage";
 import { EventPageContextProvider } from "../context/EventPageContext";
+import CreateWebinarPage from "./pages/CreateWebinarPage";
+import { WebinarContextProvider } from "../context/WebinarPageContext";
 
 function App() {
   return (
     <div className=" max-w-[1600px] max-w-ful mx-auto overflow-hidden">
+      <WebinarContextProvider>
       <EventPageContextProvider>
         <BrowserRouter>
           <Routes>
@@ -24,10 +27,12 @@ function App() {
             </Route>
             <Route>
               <Route path="/event/create" element={<CreateEventPage />} />
+              <Route path="/webinar/create" element={<CreateWebinarPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
       </EventPageContextProvider>
+      </WebinarContextProvider>
       <ToastContainer />
     </div>
   );
