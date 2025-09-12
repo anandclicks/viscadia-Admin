@@ -1,13 +1,11 @@
 import { createContext, useState } from "react";
 let payload = {
-  heading: "",
   subHeading: "",
   imageOne: null,
   imageTwo: null,
-  HeadingTwo: "",
   keyPoints: [""],
   webibarVideo: null,
-  speakers: [
+  speaker: [
     {
       fullName: "",
       designation: "",
@@ -21,7 +19,6 @@ export const WebinarContextProvider = ({ children }) => {
   const hanldeWebinarInputsChanges = (evt) => {
     const { name, value, type, files } = evt.target;
     if (type === "file" && files && files[0]) {
-      
       setWebinarCreateData((prev) => {
         return { ...prev, [name]: files[0] };
       });
@@ -40,11 +37,35 @@ export const WebinarContextProvider = ({ children }) => {
 
   const functionForAddingSpeakers = ()=>{
     setWebinarCreateData((prev)=> {
-      let updatedSpeakerArr = prev.speakers
+      let updatedSpeakerArr = prev.speaker
       updatedSpeakerArr = [...updatedSpeakerArr, {fullName: "",designation: "",image: null,}]
-      return {...prev, speakers : updatedSpeakerArr}
+      return {...prev, speaker : updatedSpeakerArr}
     })
   }
+
+  const handleKeyPointsChange = (evt,index)=>{
+    let UpdatedKeyPoints = webinarCreateData?.keyPoints
+    UpdatedKeyPoints[index] = evt.target.value
+    setWebinarCreateData((prev)=> ({...prev,keyPoints : UpdatedKeyPoints}))
+  }
+
+const handleSpeakersChnages = (evt, index) => {
+  const { name, value, type, files } = evt.target;
+  setWebinarCreateData((prev) => {
+    const updatedSpeakers = [...prev.speaker];
+    updatedSpeakers[index] = {
+      ...updatedSpeakers[index],
+      [name]: type === "file" ? files[0] : value,
+    };
+    return { ...prev, speaker: updatedSpeakers };
+  });
+};
+
+const handleSubmit = (evt)=>{
+  console.log(webinarCreateData);
+  
+}
+
 
   return (
     <>
@@ -53,7 +74,10 @@ export const WebinarContextProvider = ({ children }) => {
           webinarCreateData,
           hanldeWebinarInputsChanges,
           functionForAddingPoints,
-          functionForAddingSpeakers
+          functionForAddingSpeakers,
+          handleKeyPointsChange,
+          handleSpeakersChnages,
+          handleSubmit
         }}
       >
         {children}

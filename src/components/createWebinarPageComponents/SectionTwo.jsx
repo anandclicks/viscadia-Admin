@@ -6,7 +6,7 @@ const SectionTwo = () => {
     hanldeWebinarInputsChanges,
     webinarCreateData,
     functionForAddingPoints,
-    functionForAddingSpeakers
+    handleKeyPointsChange,
   } = useContext(WebinarContext)
     console.log(webinarCreateData);
   
@@ -38,9 +38,10 @@ const SectionTwo = () => {
               <input placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="heading" type="text" />
             </div>
            <div>
-             {webinarCreateData?.keyPoints.map((_,index)=>(
+             {webinarCreateData?.keyPoints.map((data,index)=>(
              <div key={index} className="h-[30px] flex items-center gap-2 my-1">
-             <img className="h-[80%] object-cover" src="../icons/keyPoints.png" alt="" /> <input placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[21px] font-light" name="subHeading" type="text" />
+             <img className="h-[80%] object-cover" src="../icons/keyPoints.png" alt="" />
+             <input value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[21px] font-light" name="keyPoint" type="text" />
             </div>
            ))}
             

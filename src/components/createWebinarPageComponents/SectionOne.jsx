@@ -14,7 +14,7 @@ const SectionOne = () => {
           <div className="h-[40px] w-full">
             <input onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.headingOne}  placeholder="Enter Heading" className="w-full h-full outline-0 border-0 text-[#000000] placeholder:text-[#000000]  text-[30px]" type="text" name="headingOne" id="" />
           </div>
-            <textarea  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeading} placeholder="Enter Heading" className="w-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
+            <textarea  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeadingOne} placeholder="Enter Heading" className="w-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
           <button className="grediantBg cursor-pointer text-white p-2 rounded-none px-8 text-[16px] ">View Webinar</button>
         </div>
       </div>

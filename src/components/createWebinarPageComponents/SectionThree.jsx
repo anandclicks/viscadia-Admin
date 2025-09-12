@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { WebinarContext } from "../../../context/WebinarPageContext";
 
 function SectionThree() {
   const [speakerStatus, setSpeakerStatus] = useState(false);
+  const {hanldeWebinarInputsChanges,webinarCreateData} = useContext(WebinarContext)
   return (
     <div className="min-h-[300px] w-full bg-white shadow mt-7 p-5">
      <div className="w-full flex justify-end">
-         <div className="text-[30px] font-light">Webinar Video</div>
+     <div className="text-[30px] font-light">Webinar Video</div>
       <div className="px-10 h-[40px] w-[40%] flex justify-end gap-2 items-center">
         <p>{!speakerStatus ? "Unhide" : "Hide"}</p>
         <button
@@ -26,12 +28,13 @@ function SectionThree() {
               <img src="../icons/upload.png" alt="" />
               <h3 className="text-[#960000]  mt-2">Upload Video</h3>
             </div>
-            {false && (
+            {webinarCreateData?.webibarVideo && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <img src="" className="h-full w-full object-cover" alt="" />
+                <video autoPlay muted loop src={URL.createObjectURL(webinarCreateData?.webibarVideo)} className="h-full w-full object-cover" alt="" />
+
               </div>
             )}
-            <input type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="headingImage" accept="image/*" />
+            <input onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="webibarVideo" accept="video/*" />
           </div>
      </div>
     </div>

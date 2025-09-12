@@ -6,6 +6,7 @@ import SectionOne from "../components/createWebinarPageComponents/SectionOne";
 import SectionTwo from "../components/createWebinarPageComponents/SectionTwo";
 import SectionThree from "../components/createWebinarPageComponents/SectionThree";
 import SectionFour from "../components/createWebinarPageComponents/SectionFour";
+import { WebinarContext } from "../../context/WebinarPageContext";
 
 const CreateWebinarPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ const CreateWebinarPage = () => {
     };
   }, []);
 
-  const {handleSubmit} = useContext(EventPageContext)
+  const {handleSubmit} = useContext(WebinarContext)
 
   return (
     <div className="h-[100vh] w-full p-4">
