@@ -3,13 +3,12 @@ import { WebinarContext } from "../../../context/WebinarPageContext";
 
 const SectionOne = () => {
   const {hanldeWebinarInputsChanges,webinarCreateData} = useContext(WebinarContext)
-  console.log(webinarCreateData);
   
   return (
     <div className="h-[340px] w-full shadow relative flex">
       <div className="EventPagesectionOne w-full h-[340px] object-cover absolute z-10">
         <img className="h-full w-full object-cover" src="../images/SectionOneBg.png" alt="" />
-      </div>
+      </div> 
       <div className="w-[60%] pt-10 h-full px-7 flex flex-col gap-10 relative z-20">
         <div className="">
           <div className="h-[40px] w-full">

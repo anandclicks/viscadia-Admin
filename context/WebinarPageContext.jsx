@@ -21,6 +21,7 @@ export const WebinarContextProvider = ({ children }) => {
   const hanldeWebinarInputsChanges = (evt) => {
     const { name, value, type, files } = evt.target;
     if (type === "file" && files && files[0]) {
+      
       setWebinarCreateData((prev) => {
         return { ...prev, [name]: files[0] };
       });
