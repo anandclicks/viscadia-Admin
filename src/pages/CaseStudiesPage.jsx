@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CaseStudiesAndWhitePaperFilter from '../components/common/CaseStudiesAndWhitePaperFilter'
-import CaseStudiesListing from '../components/CaseStudiesPageComponents/CaseStudiesListing';
-import WhitePaperListing from '../components/WhitePaperPageComponents/WhitePaperListing';
+import CaseStudiesListing from '../components/CaseStudiesPage/CaseStudiesListing';
+import WhitePaperListing from '../components/WhitePaperPage/WhitePaperListing';
 const CaseStudiesPage = () => {
       const [active, setActive] = useState(0);
     

@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import SectionOne from "../createWebinarPageComponents/SectionOne.jsx";
-import SectionTwo from "../createWebinarPageComponents/SectionTwo";
-import SectionThree from "../createWebinarPageComponents/SectionThree";
-import SectionFour from "../createWebinarPageComponents/SectionFour";
-import Navbar from "../common/Navbar";
+import SectionOne from "./SectionOne.jsx";
+import SectionTwo from "./SectionTwo.jsx";
+import SectionThree from "./SectionThree.jsx";
+import SectionFour from "./SectionFour.jsx";
+import Navbar from "../common/Navbar.jsx";
 import { EventPageContext } from "../../../context/EventPageContext.jsx";
 import { WebinarContext } from "../../../context/WebinarPageContext.jsx";
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import SectionOne from "../createEventPageComponents/SectionOne";
-import SectionTwo from "../createEventPageComponents/SectionTwo";
-import SectionFour from "../createEventPageComponents/SectionFour";
-import SectionThree from "../createEventPageComponents/SectionThree";
+import SectionOne from "./SectionOne";
+import SectionTwo from "./SectionTwo";
+import SectionFour from "./SectionFour";
+import SectionThree from "./SectionThree";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
 

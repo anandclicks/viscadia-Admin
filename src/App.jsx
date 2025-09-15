@@ -9,8 +9,8 @@ import EventAndWebenar from "./pages/EventAndWebenar";
 import { EventPageContextProvider } from "../context/EventPageContext";
 import { WebinarContextProvider } from "../context/WebinarPageContext";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
-import CreateEventPage from "./components/createEventPageComponents/CreateEventPage";
-import CreateWebinarPage from "./components/createWebinarPageComponents/CreateWebinarPage";
+import CreateEventPage from "./components/createEventPage/CreateEventPage";
+import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage";
 
 
 function App() {
