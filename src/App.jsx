@@ -11,6 +11,7 @@ import { WebinarContextProvider } from "../context/WebinarPageContext";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CreateEventPage from "./components/createEventPage/CreateEventPage";
 import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage";
+import CaseStudy from "./components/CaseStudiesPage/CaseStudy";
 
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
               <Route path="/case-studies" element={<CaseStudiesPage />}/>
             </Route>
             <Route>
-              <Route path="/event/create" element={<CreateEventPage />} />
-              <Route path="/webinar/create" element={<CreateWebinarPage />} />
+              <Route path="/create/event" element={<CreateEventPage />} />
+              <Route path="/create/webinar" element={<CreateWebinarPage />} />
+              <Route path="/create/case-study" element={<CaseStudy />} />
             </Route>
           </Routes>
         </BrowserRouter>

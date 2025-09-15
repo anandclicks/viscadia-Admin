@@ -33,7 +33,7 @@ const Sidebar = () => {
       label: "Events & Webinars",
       icon: "event",
       whiteIcon: "eventWhite",
-      extraActiveRoutes: ["/event/create"],
+      extraActiveRoutes: ["/create/event"],
     },
     {
       to: "/careers",
@@ -59,7 +59,7 @@ const Sidebar = () => {
 
                 return (
                   <>
-                    <div className={`${isTabActive ? "activeTabs" : "bg-white"} rounded-full h-[55px] w-[55px] flex justify-center items-center shadowcus1`}>
+                    <div className={`${isTabActive ? "activeTabs" : "bg-white opacity-70"} rounded-full h-[55px] w-[55px] flex justify-center items-center shadowcus1`}>
                       <img
                         src={`../icons/${isTabActive ? whiteIcon : icon}.png`}
                         className="h-[30px] w-[30px]"
