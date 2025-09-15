@@ -18,7 +18,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle }) => {
       />
       <div className="w-[72%] h-full px-5 flex flex-col justify-center">
         <div className="w-full flex justify-between mb-2">
-          <h2 className="text-[25px] font-semibold ">Intellus Institute 2025</h2>
+          <h2 className="text-[22px] font-semibold ">Intellus Institute 2025</h2>
           <div className="relative flex gap-3 mb-2">
             <button className="Published">Published</button>
             <button

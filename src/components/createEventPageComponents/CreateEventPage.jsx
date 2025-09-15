@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from "react";
-import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
-import { EventPageContext } from "../../context/EventPageContext";
-import SectionOne from "../components/createWebinarPageComponents/SectionOne";
-import SectionTwo from "../components/createWebinarPageComponents/SectionTwo";
-import SectionThree from "../components/createWebinarPageComponents/SectionThree";
-import SectionFour from "../components/createWebinarPageComponents/SectionFour";
-import { WebinarContext } from "../../context/WebinarPageContext";
+import SectionOne from "../createEventPageComponents/SectionOne";
+import SectionTwo from "../createEventPageComponents/SectionTwo";
+import SectionFour from "../createEventPageComponents/SectionFour";
+import SectionThree from "../createEventPageComponents/SectionThree";
+import Navbar from "../common/Navbar";
+import { EventPageContext } from "../../../context/EventPageContext";
 
-const CreateWebinarPage = () => {
+const CreateEventPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleMenu = (evt) => {
     evt.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -23,14 +23,14 @@ const CreateWebinarPage = () => {
     };
   }, []);
 
-  const {handleSubmit} = useContext(WebinarContext)
+  const {handleSubmit} = useContext(EventPageContext)
 
   return (
     <div className="h-[100vh] w-full p-4">
       <Navbar />
       <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
         <div className="h-[70px] px-4 flex items-center justify-between">
-          <h2 className="text-[23px] font-semibold">New Webinar Page</h2>
+          <h2 className="text-[23px] font-semibold">Events</h2>
 
           <div className="h-full flex items-center gap-5">
             <div className="relative">
@@ -73,22 +73,21 @@ const CreateWebinarPage = () => {
                 Banner
               </li>
               <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
-               KEY Points
+                About Conference
               </li>
               <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
-                Webinar Video
+                Speaker
               </li>
               <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
-               Speaker
+                Our Forecasting
               </li>
             </ul>
           </div>
           <div className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
-           {/* components */}
-           <SectionOne/>
-           <SectionTwo/>
-           <SectionThree/>
-           <SectionFour/>
+            <SectionOne/>
+            <SectionTwo/>
+            <SectionThree/>
+            <SectionFour/>
             <div className="flex w-full justify-end gap-5">
             <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5" >
               Cancle
@@ -104,4 +103,4 @@ const CreateWebinarPage = () => {
   );
 };
 
-export default CreateWebinarPage;
+export default CreateEventPage;

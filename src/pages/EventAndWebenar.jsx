@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import EventAndWebFilter from '../components/EventAndWebFilter'
-import EventPage from './Event/EventPage'
-import WebanarPage from './Event/WebanarPage'
+import EventAndWebFilter from '../components/common/EventAndWebFilter'
+import EventPage from '../components/createEventPageComponents/EventPage'
+import WebanarPage from '../components/createWebinarPageComponents/WebanarPage'
 
 const EventAndWebenar = () => {
    const  [active,setActive] = useState(0)

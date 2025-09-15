@@ -1,4 +1,4 @@
-import HomePageChart from "../components/HomePageChart";
+import HomePageChart from "../components/common/HomePageChart";
 
 const Home = () => {
   const dataOne = [

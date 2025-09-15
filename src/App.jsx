@@ -6,10 +6,12 @@ import "remixicon/fonts/remixicon.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import EventAndWebenar from "./pages/EventAndWebenar";
-import CreateEventPage from "./pages/CreateEventPage";
 import { EventPageContextProvider } from "../context/EventPageContext";
-import CreateWebinarPage from "./pages/CreateWebinarPage";
 import { WebinarContextProvider } from "../context/WebinarPageContext";
+import CaseStudiesPage from "./pages/CaseStudiesPage";
+import CreateEventPage from "./components/createEventPageComponents/CreateEventPage";
+import CreateWebinarPage from "./components/createWebinarPageComponents/CreateWebinarPage";
+
 
 function App() {
   return (
@@ -20,10 +22,8 @@ function App() {
           <Routes>
             <Route path="/" element={<MainLayout />}>
               <Route path="/" element={<Home />} />
-              <Route
-                path="/events-and-webinars"
-                element={<EventAndWebenar />}
-              />
+              <Route path="/events-and-webinars" element={<EventAndWebenar />}/>
+              <Route path="/case-studies" element={<CaseStudiesPage />}/>
             </Route>
             <Route>
               <Route path="/event/create" element={<CreateEventPage />} />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EventAndWebListingCard from "../../components/EventAndWebListingCard";
+import EventAndWebListingCard from "../common/EventAndWebListingCard";
 
 const EventPage = () => {
   const [openCardId, setOpenCardId] = useState(null);

@@ -41,7 +41,7 @@ const SectionTwo = () => {
              {webinarCreateData?.keyPoints.map((data,index)=>(
              <div key={index} className="h-[30px] flex items-center gap-2 my-1">
              <img className="h-[80%] object-cover" src="../icons/keyPoints.png" alt="" />
-             <input value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[21px] font-light" name="keyPoint" type="text" />
+             <input value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[18px] font-light" name="keyPoint" type="text" />
             </div>
            ))}
             
