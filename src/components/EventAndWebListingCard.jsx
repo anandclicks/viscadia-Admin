@@ -23,7 +23,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle }) => {
             <button className="Published">Published</button>
             <button
               onClick={handleActionMenu}
-              className="hover:text-[#BE2F2B] text-[30px] relative"
+              className="hover:text-[#BD2F2C] text-[30px] relative"
             >
               <i className="ri-more-2-fill"></i>
             </button>

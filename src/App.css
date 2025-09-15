@@ -23,18 +23,18 @@ button {
 }
 
 .mainColor {
-  color: #960000;
+  color: #BD2F2C;
 }
 .grediantBg {
-  background: linear-gradient(to right ,#BE2F2B,#960000);
+  background: linear-gradient(to right ,#BD2F2C,#BD2F2C);
 }
 
 .mainBg {
-  background-color: #960000;
+  background-color: #BD2F2C;
 }
 
 .activeTabs {
-  background: linear-gradient(to left top, #960000, #BE2F2B);
+  background: linear-gradient(to left top, #BD2F2C, #BD2F2C);
   color: #fff;
 }
 
@@ -53,11 +53,11 @@ button {
 
 .gredianBg {
   color: #fff;
-  background: linear-gradient(to left top, #960000, #BE2F2B);
+  background: linear-gradient(to left top, #BD2F2C, #BD2F2C);
 }
 
 .gredianText {
-  background: linear-gradient(90deg, #960000, #BE2F2B);
+  background: linear-gradient(90deg, #BD2F2C, #BD2F2C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -79,7 +79,7 @@ button {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #BE2F2B;
+  background-color: #BD2F2C;
   border-radius: 4px;
 }
 
@@ -96,7 +96,7 @@ button {
 
 .draft {
   background-color: #be302b2a;
-  color: #BE2F2B;
+  color: #BD2F2C;
   border-radius: 25px;
   font-weight: 600;
   font-size: 15px;
@@ -106,13 +106,13 @@ button {
 .activeEventPageSection {
   background-color: #be302b0c;
   position: relative;
-  color: #BE2F2B;
+  color: #BD2F2C;
   font-weight: 600;
 }
 .activeEventPageSection::after {
   height: 100% ;
   width: 5px;
-  background-color: #BE2F2B;
+  background-color: #BD2F2C;
   position: absolute;
   top: 0;
   content: "";

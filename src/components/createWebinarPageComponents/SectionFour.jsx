@@ -18,12 +18,12 @@ const SectionFour = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="flex gap-2 h-full items-center justify-center min-w-[230px]">
             {webinarCreateData?.speaker.map((el, index) => (
-              <div key={index} className="h-[160px] relative w-[160px] rounded-full border border-[#960000] border-dashed overflow-hidden flex flex-col justify-center items-center">
-                <div className="flex flex-col justify-center items-center relative bg-[#9600001c] h-full w-full">
+              <div key={index} className="h-[160px] relative w-[160px] rounded-full border border-[#BD2F2C] border-dashed overflow-hidden flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center relative bg-[#BD2F2C1c] h-full w-full">
                   {el?.url && <img className="h-full w-full object-cover absolute z-10" src="" alt="" />}
                   <div className="relative flex flex-col justify-center items-center bg-[#FFF5F5] h-full w-full">
                     <img src="../icons/upload.png" alt="" />
-                    <h3 className="text-[#960000] mt-2">Upload Logo</h3>
+                    <h3 className="text-[#BD2F2C] mt-2">Upload Logo</h3>
                     {el.image && (
                     <img
                       src={URL.createObjectURL(el.image)}
@@ -44,7 +44,7 @@ const SectionFour = () => {
             <div className="flex items-center my-2">
               {webinarCreateData?.speaker.map((el,index)=>(
                <div key={index} className="pe-2">
-               <input type="text" onInput={(evt)=> handleSpeakersChnages(evt,index)} value={el.fullName} name="fullName" placeholder="Speaker Name" className="generalCssForInputs w-[130px] text-[19px] text-[#960000] placeholder:text-[#960000]" />
+               <input type="text" onInput={(evt)=> handleSpeakersChnages(evt,index)} value={el.fullName} name="fullName" placeholder="Speaker Name" className="generalCssForInputs w-[130px] text-[19px] text-[#BD2F2C] placeholder:text-[#BD2F2C]" />
                 {index !== webinarCreateData.speaker.length -1 && '& '}
                 </div>
               ))}

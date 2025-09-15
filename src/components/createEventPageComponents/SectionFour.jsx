@@ -29,7 +29,7 @@ const SectionFour = () => {
           {createEventFormData?.forecastingSpecialists.map((f, idx) => (
             <SwiperSlide key={idx}>
               <div className="h-full min-w-full">
-                <div className="flex flex-col justify-center items-center relative bg-[#9600001c] h-[250px] w-full">
+                <div className="flex flex-col justify-center items-center relative bg-[#BD2F2C1c] h-[250px] w-full">
                   {f.image && (
                     <img
                       src={
@@ -43,7 +43,7 @@ const SectionFour = () => {
                   )}
                   <div className="relative flex flex-col justify-center items-center bg-[#FFF5F5] h-full w-full">
                     <img src="../icons/upload.png" alt="" />
-                    <h3 className="text-[#960000] mt-2">Upload Image</h3>
+                    <h3 className="text-[#BD2F2C] mt-2">Upload Image</h3>
                   </div>
                   <input
                     type="file"

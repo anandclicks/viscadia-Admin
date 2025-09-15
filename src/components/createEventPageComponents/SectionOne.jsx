@@ -26,10 +26,10 @@ const SectionOne = () => {
       </div>
       <div className="w-[60%] h-full p-4  flex flex-col gap-10 relative z-20">
         <div className="w-[240px]">
-          <div className="h-[130px] border border-dashed border-[#960000] w-full bg-amber-200 relative">
+          <div className="h-[130px] border border-dashed border-[#BD2F2C] w-full bg-amber-200 relative">
             <div className="absolute left-0 top-0 h-full w-full bg-[#FFF5F5] flex justify-center items-center flex-col">
               <img src="../icons/upload.png" alt="" />
-              <h3 className="text-[#960000]  mt-2">Upload Logo</h3>
+              <h3 className="text-[#BD2F2C]  mt-2">Upload Logo</h3>
             </div>
             {logoPreview && (
               <div className="absolute left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
@@ -59,10 +59,10 @@ const SectionOne = () => {
           </div>
         </div>
       </div>
-      <div className="w-[42%] border-dashed border-[#960000] border h-full rightSide  bg-amber-400 z-0 flex justify-end relative">
+      <div className="w-[42%] border-dashed border-[#BD2F2C] border h-full rightSide  bg-amber-400 z-0 flex justify-end relative">
         <div className="absolute left-0 top-0 h-full w-full bg-[#FFF8F8] flex justify-center items-center flex-col">
           <img src="../icons/upload.png" alt="" />
-          <h3 className="text-[#960000]  mt-2">Upload Image</h3>
+          <h3 className="text-[#BD2F2C]  mt-2">Upload Image</h3>
         </div>
         {imagePreview && (
           <div className=" left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
