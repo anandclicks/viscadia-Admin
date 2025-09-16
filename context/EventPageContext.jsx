@@ -12,7 +12,9 @@ let payload = {
   speakerTopic: "",
   speakerTime: "",
   speakerDate: "",
-  speakerStatus: false,
+  sectionTwoStatus : 1,
+  sectionThreeStatus : 1,
+  sectionFourStatus : 1,
   status : 0,
   speaker: [
     {

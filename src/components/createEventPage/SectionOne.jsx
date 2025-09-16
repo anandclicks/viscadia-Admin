@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
-const SectionOne = () => {
+const SectionOne = ({ref}) => {
   const [logoPreview, setLogoPreview] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const handleLogoChange = (evt) => {
@@ -20,7 +20,7 @@ const SectionOne = () => {
   const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
   
   return (
-    <div className="h-[340px] w-full shadow relative flex">
+    <div ref={ref} className="h-[340px] w-full shadow relative flex">
       <div className="EventPagesectionOne w-full h-[340px] object-cover absolute z-10">
         <img className="h-full w-full object-cover" src="../images/SectionOneBg.png" alt="" />
       </div>

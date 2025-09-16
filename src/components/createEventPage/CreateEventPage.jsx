@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
@@ -20,7 +20,59 @@ const CreateEventPage = () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  // function for handling submit 
   const { handleSubmit } = useContext(EventPageContext);
+
+  // function for handling scrolling by button click 
+  const [activeSection,setActiveSection] = useState(null)
+
+  const sectionOneRef = useRef(null)
+  const sectionTwoRef = useRef(null)
+  const sectionThreeRef = useRef(null)
+  const sectionFourRef = useRef(null)
+
+  const sectionRefs = [
+    {ref : sectionOneRef, id : "sectionOne"},
+    {ref : sectionTwoRef, id : "sectionTwo"},
+    {ref : sectionThreeRef, id : "sectionThree"},
+    {ref : sectionFourRef, id : "sectionFour"},
+  ]
+
+  useEffect(()=>{
+   const observer = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        setActiveSection(entry.target.id)
+      }
+    })
+   },{threshold : 0.7})
+
+   sectionRefs.forEach(({ref,id})=>{
+    if(ref.current){
+      ref.current.id = id
+      observer.observe(ref.current)
+    }
+   })
+
+   return (()=> {
+    sectionRefs.forEach(({ref,id})=> {
+      if(ref.current){
+        observer.unobserve(ref)
+      }
+    })
+   })
+  },[])
+
+  const handleScrolling = (ref)=>{
+    ref.current.scrollIntoView({behavior: "smooth", block: "start"})
+  }
+
+
+  useEffect(()=>{
+    console.log(activeSection);
+  },[activeSection])
+
   return (
     <div className="h-[100vh] w-full p-4">
       <Navbar />
@@ -44,28 +96,28 @@ const CreateEventPage = () => {
             </Link>
           </div>
         </div>
-        <div className="flex gap-2 h-full pb-20">
+        <div className="flex gap-2 h-[calc(100%-70px)] pb-3">
           <div className="w-[18%] h-full bg-white border-r border-stone-300">
             <ul>
-              <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px] activeEventPageSection">
+              <li onClick={()=> handleScrolling(sectionOneRef)} className={`px-4 text-stone-600 flex items-center cursor-pointer text-[18px] h-[45px] ${activeSection === "sectionOne" && "activeEventPageSection"}`}>
                 <button> Banner</button>
               </li>
-              <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
+              <li onClick={()=> handleScrolling(sectionTwoRef)} className={`px-4 text-stone-600 flex items-center cursor-pointer text-[18px] h-[45px] ${activeSection === "sectionTwo" && "activeEventPageSection"}`}>
                 <button>About Conference</button>
               </li>
-              <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
+              <li onClick={()=> handleScrolling(sectionThreeRef)} className={`px-4 text-stone-600 flex items-center cursor-pointer text-[18px] h-[45px] ${activeSection === "sectionThree" && "activeEventPageSection"}`}>
                 <button>Speaker</button>
               </li>
-              <li className="px-4 text-stone-600 flex items-center text-[18px] h-[45px]">
+              <li onClick={()=> handleScrolling(sectionFourRef)} className={`px-4 text-stone-600 flex items-center cursor-pointer text-[18px] h-[45px] ${activeSection === "sectionFour" && "activeEventPageSection"}`}>
                 <button>Our Forecasting</button>
               </li>
             </ul>
           </div>
-          <div className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
-            <SectionOne />
-            <SectionTwo />
-            <SectionThree />
-            <SectionFour />
+          <div className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
+            <SectionOne ref={sectionOneRef} />
+            <SectionTwo ref={sectionTwoRef} />
+            <SectionThree ref={sectionThreeRef} />
+            <SectionFour ref={sectionFourRef} />
             <div className="flex w-full justify-end gap-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
               <button onClick={handleSubmit} className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>

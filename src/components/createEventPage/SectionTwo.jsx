@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
-const SectionTwo = () => {
+const SectionTwo = ({ref}) => {
   const [headingImage, setHeadingImage] = useState(null);
   const handleHeadingImageChange = (evt) => {
     const file = evt.target.files[0];
@@ -13,7 +13,7 @@ const SectionTwo = () => {
   const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
   
   return (
-    <div className="h-[310px] w-full shadow relative flex mt-10 overflow-hidden">
+    <div ref={ref} className="h-[310px] w-full shadow relative flex mt-10 overflow-hidden">
       <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
         <img className="h-full w-full object-cover" src="../images/sectionTwo.png" alt="" />
       </div>

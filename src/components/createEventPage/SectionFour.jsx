@@ -8,10 +8,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { EventPageContext } from "../../../context/EventPageContext";
 
-const SectionFour = () => {
+const SectionFour = ({ref}) => {
   const { createEventFormData, handleForecastingInputs,addNewForcastingSection } = useContext(EventPageContext);
   return (
-    <div className="min-h-[500px] w-full shadow mt-2 py-4 px-7">
+    <div ref={ref} className="min-h-[500px] w-full shadow mt-2 py-4 px-7">
       <h2 className="text-center text-[27px] font-light">
         Our Forecasting Specialists at the Event
       </h2>
