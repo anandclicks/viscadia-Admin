@@ -61,6 +61,11 @@ const CreateWebinarPage = () => {
       }
     });
 
+    return () => {
+      sectionRef.forEach(({ ref }) => {
+        if (ref.current) observer.unobserve(ref.current);
+      });
+    };
   }, []);
 
   const handleScrolling = (ref) => {
@@ -119,22 +124,26 @@ const CreateWebinarPage = () => {
             <ul>
               <li
                 onClick={() => handleScrolling(sectionOneRef)}
-                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionOne" ? "font-bold activeEventPageSection text-black" : ""}`}>
+                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
+                  activeSection === "sectionOne" ? "font-bold activeEventPageSection text-black" :  "" }`}>
                 <button>Banner</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionTwoRef)}
-                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : ""}`}>
+                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
+                  activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : "" }`}>
                 <button>KEY Points</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionThreeRef)}
-                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}>
+                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
+                  activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}>
                 <button>Webinar Video</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionFourRef)}
-                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black" : ""}`}>
+                className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
+                  activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black": "" }`}>
                 <button>Speaker</button>
               </li>
             </ul>
