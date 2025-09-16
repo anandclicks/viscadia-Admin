@@ -6,7 +6,6 @@ import SectionOne from "./SectionOne";
 
 const CaseStudy = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = (evt) => {
     evt.stopPropagation();
     setIsOpen((prev) => !prev);

@@ -13,7 +13,7 @@ let payload = {
   speakerTime: "",
   speakerDate: "",
   speakerStatus: false,
-  eventStatus : 0,
+  status : 0,
   speaker: [
     {
       fullName: "",
@@ -52,9 +52,7 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  const [createEventFormData, setCreateEventFormData] = useState({
-    ...payload,
-  });
+  const [createEventFormData, setCreateEventFormData] = useState({...payload});
   const handleEventInputfiledsChanges = (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
@@ -102,7 +100,7 @@ export const EventPageContextProvider = ({ children }) => {
     
   }
 
-const handleSpeakersInputsChanges = (evt, i) => {
+  const handleSpeakersInputsChanges = (evt, i) => {
   const { name, type, files, value } = evt.target;
   
   setCreateEventFormData((prev) => {
@@ -113,13 +111,12 @@ const handleSpeakersInputsChanges = (evt, i) => {
     };
     return { ...prev, speaker: updatedSpeakers };
   });
-};
+  };
 
-const handleSubmit = (evt)=> {
+  const handleSubmit = (evt)=> {
   evt.preventDefault()
   console.log(createEventFormData);
-}
-
+  }
 
   return (
     <EventPageContext.Provider

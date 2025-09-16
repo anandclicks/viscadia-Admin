@@ -12,6 +12,7 @@ import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CreateEventPage from "./components/createEventPage/CreateEventPage";
 import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage";
 import CaseStudy from "./components/CaseStudiesPage/CaseStudy";
+import { NewCaseStudyContextProvider } from "../context/NewCaseStudy";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     <div className=" max-w-[1600px] max-w-ful mx-auto overflow-hidden">
       <WebinarContextProvider>
       <EventPageContextProvider>
+      <NewCaseStudyContextProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainLayout />}>
@@ -33,6 +35,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+      </NewCaseStudyContextProvider>
       </EventPageContextProvider>
       </WebinarContextProvider>
       <ToastContainer />
