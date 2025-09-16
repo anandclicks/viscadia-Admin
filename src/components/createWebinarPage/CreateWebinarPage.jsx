@@ -48,10 +48,7 @@ const CreateWebinarPage = () => {
           }
         });
       },
-      {
-        root: null,
-        threshold: 0.5,
-      }
+      {threshold: 1,}
     );
 
     sectionRef.forEach(({ ref, id }) => {
