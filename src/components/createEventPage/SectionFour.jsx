@@ -32,11 +32,7 @@ const SectionFour = ({ref}) => {
                 <div className="flex flex-col justify-center items-center relative bg-[#BD2F2C1c] h-[250px] w-full">
                   {f.image && (
                     <img
-                      src={
-                        typeof f.image === "string"
-                          ? f.image
-                          : URL.createObjectURL(f.image)
-                      }
+                      src={f.image}
                       className="w-full object-cover absolute z-10 h-full"
                       alt=""
                     />

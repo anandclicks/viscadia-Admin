@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { uploadSignleImage } from "../src/utils/reuseable";
 
 let payload = {
   logo: "",
@@ -12,10 +13,10 @@ let payload = {
   speakerTopic: "",
   speakerTime: "",
   speakerDate: "",
-  sectionTwoStatus : 1,
-  sectionThreeStatus : 1,
-  sectionFourStatus : 1,
-  status : 0,
+  sectionTwoStatus: 1,
+  sectionThreeStatus: 1,
+  sectionFourStatus: 1,
+  status: 0,
   speaker: [
     {
       fullName: "",
@@ -54,13 +55,18 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  const [createEventFormData, setCreateEventFormData] = useState({...payload});
-  const handleEventInputfiledsChanges = (evt) => {
+  const [createEventFormData, setCreateEventFormData] = useState({
+    ...payload,
+  });
+  const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
+      let formData = new FormData();
+      formData.append("file", files[0]);
+      let uploadedImageUrl = await uploadSignleImage(formData)
       setCreateEventFormData((prev) => ({
         ...prev,
-        [name]: files[0],
+        [name]: uploadedImageUrl,
       }));
     } else {
       setCreateEventFormData((prev) => ({
@@ -68,18 +74,33 @@ export const EventPageContextProvider = ({ children }) => {
         [name]: value,
       }));
     }
+    console.log(createEventFormData);
   };
 
-  const handleForecastingInputs = (evt, i) => {
-    const { name, type, value, files } = evt.target;
-    setCreateEventFormData((prev) => {
-      const updatedData = [...prev.forecastingSpecialists];
-      updatedData[i] = {
-        ...updatedData[i],
-        [name]: type === "file" && files && files[0] ? files[0] : value,
-      };
-      return { ...prev, forecastingSpecialists: updatedData };
-    });
+  const handleForecastingInputs = async (evt, i) => {
+    const { name, value, files } = evt.target;
+    if (files && files[0]) {
+      let formData = new FormData();
+      formData.append("file", files[0]);
+       let uploadedImageUrl = await uploadSignleImage(formData)
+      setCreateEventFormData((prev) => {
+        const updatedData = [...prev.forecastingSpecialists];
+        updatedData[i] = {
+          ...updatedData[i],
+          [name]: uploadedImageUrl,
+        };
+        return { ...prev, forecastingSpecialists: updatedData };
+      });
+    } else {
+      setCreateEventFormData((prev) => {
+        const updatedData = [...prev.forecastingSpecialists];
+        updatedData[i] = {
+          ...updatedData[i],
+          [name]: value,
+        };
+        return { ...prev, forecastingSpecialists: updatedData };
+      });
+    }
   };
 
   const addNewForcastingSection = () => {
@@ -93,32 +114,44 @@ export const EventPageContextProvider = ({ children }) => {
     });
   };
 
-  const addNewSpeaker = ()=>{
-    setCreateEventFormData((prev)=>{
-      let speakers = createEventFormData?.speaker
-      speakers = [...speakers, {name: "", designation: "", img: null,},]
-      return {...prev, speaker : speakers}
-    })
-    
-  }
-
-  const handleSpeakersInputsChanges = (evt, i) => {
-  const { name, type, files, value } = evt.target;
-  
-  setCreateEventFormData((prev) => {
-    let updatedSpeakers = [...prev.speaker];
-    updatedSpeakers[i] = {
-      ...updatedSpeakers[i],
-      [name]: type === 'file' && files && files[0] ? files[0] : value
-    };
-    return { ...prev, speaker: updatedSpeakers };
-  });
+  const addNewSpeaker = () => {
+    setCreateEventFormData((prev) => {
+      let speakers = createEventFormData?.speaker;
+      speakers = [...speakers, { name: "", designation: "", img: null }];
+      return { ...prev, speaker: speakers };
+    });
   };
 
-  const handleSubmit = (evt)=> {
-  evt.preventDefault()
-  console.log(createEventFormData);
-  }
+  const handleSpeakersInputsChanges = async (evt, i) => {
+    const { name, files, value } = evt.target;
+    if (files && files[0]) {
+      let formData = new FormData();
+      formData.append("file", files[0]);
+     let uploadedImageUrl = await uploadSignleImage(formData)
+      setCreateEventFormData((prev) => {
+        let updatedSpeakers = [...prev.speaker];
+        updatedSpeakers[i] = {
+          ...updatedSpeakers[i],
+          [name]: uploadedImageUrl,
+        };
+        return { ...prev, speaker: updatedSpeakers };
+      });
+    } else {
+      setCreateEventFormData((prev) => {
+        let updatedSpeakers = [...prev.speaker];
+        updatedSpeakers[i] = {
+          ...updatedSpeakers[i],
+          [name]: value,
+        };
+        return { ...prev, speaker: updatedSpeakers };
+      });
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    console.log(createEventFormData);
+  };
 
   return (
     <EventPageContext.Provider
@@ -130,7 +163,7 @@ export const EventPageContextProvider = ({ children }) => {
         addNewForcastingSection,
         addNewSpeaker,
         handleSpeakersInputsChanges,
-        handleSubmit
+        handleSubmit,
       }}
     >
       {children}

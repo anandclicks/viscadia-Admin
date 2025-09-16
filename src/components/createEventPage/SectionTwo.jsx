@@ -1,14 +1,6 @@
 import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
 const SectionTwo = ({ref}) => {
-  const [headingImage, setHeadingImage] = useState(null);
-  const handleHeadingImageChange = (evt) => {
-    const file = evt.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setHeadingImage(imageUrl);
-    }
-  };
   
   const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
   
@@ -24,13 +16,12 @@ const SectionTwo = ({ref}) => {
               <img src="../icons/upload.png" alt="" />
               <h3 className="text-[#BD2F2C]  mt-2">Upload Logo</h3>
             </div>
-            {headingImage && (
+            {createEventFormData?.headingImage && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <img src={headingImage} className="h-full w-full object-cover" alt="" />
+                <img src={createEventFormData?.headingImage} className="h-full w-full object-cover" alt="" />
               </div>
             )}
             <input onChange={(evt)=> {
-              handleHeadingImageChange(evt)
               handleEventInputfiledsChanges(evt)
             }} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="headingImage" accept="image/*" />
           </div>

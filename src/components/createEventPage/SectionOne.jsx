@@ -1,22 +1,7 @@
 import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
 const SectionOne = ({ref}) => {
-  const [logoPreview, setLogoPreview] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const handleLogoChange = (evt) => {
-    const file = evt.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setLogoPreview(imageUrl);
-    }
-  };
-  const handleImageChange = (evt) => {
-    const file = evt.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-    }
-  };
+
   const {handleEventInputfiledsChanges,createEventFormData} = useContext(EventPageContext)
   
   return (
@@ -31,13 +16,12 @@ const SectionOne = ({ref}) => {
               <img src="../icons/upload.png" alt="" />
               <h3 className="text-[#BD2F2C]  mt-2">Upload Logo</h3>
             </div>
-            {logoPreview && (
+            {createEventFormData?.logo && (
               <div className="absolute left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <img src={logoPreview} className="max-w-full max-h-full object-contain" alt="" />
+                <img src={createEventFormData?.logo} className="max-w-full max-h-full object-contain" alt="" />
               </div>
             )}
             <input onChange={(evt)=> {
-              handleLogoChange(evt)
               handleEventInputfiledsChanges(evt)
               }} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" name="logo" id="" />
           </div>
@@ -64,14 +48,13 @@ const SectionOne = ({ref}) => {
           <img src="../icons/upload.png" alt="" />
           <h3 className="text-[#BD2F2C]  mt-2">Upload Image</h3>
         </div>
-        {imagePreview && (
+        {createEventFormData?.image && (
           <div className=" left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-            <img src={imagePreview} className="h-full w-full  object-cover" alt="" />
+            <img src={createEventFormData?.image} className="h-full w-full  object-cover" alt="" />
           </div>
         )}
       </div>
       <input onChange={(evt)=> {
-        handleImageChange(evt)
         handleEventInputfiledsChanges(evt)
       }} type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="image" id="" />
     </div>
