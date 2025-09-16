@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { WebinarContext } from "../../../context/WebinarPageContext";
 
-const SectionFour = () => {
+const SectionFour = ({ref}) => {
   const [speakerStatus,setSpeakerStatus] = useState(false)
   const { webinarCreateData,functionForAddingSpeakers,handleSpeakersChnages,hanldeWebinarInputsChanges} = useContext(WebinarContext)
 
   return (
-    <div className="h-[400px] w-full mt-10 pt-5 shadow mb-8">
+    <div ref={ref}  className="h-[400px] w-full mt-10 pt-5 shadow mb-8">
       <div className="px-10  flex justify-end gap-2 items-center">
         <p>{!speakerStatus ? "Unhide" : "Hide"}</p>
         <button onClick={()=> setSpeakerStatus((prev)=> !prev)} className={`w-[80px] transition-all duration-200 grediantBg h-full rounded-full p-1 cursor-pointer flex items-center`}>

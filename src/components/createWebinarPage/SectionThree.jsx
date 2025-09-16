@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { WebinarContext } from "../../../context/WebinarPageContext";
 
-function SectionThree() {
+function SectionThree({ref}) {
   const [speakerStatus, setSpeakerStatus] = useState(false);
   const {hanldeWebinarInputsChanges,webinarCreateData} = useContext(WebinarContext)
   return (
-    <div className="min-h-[300px] w-full bg-white shadow mt-7 p-5">
+    <div ref={ref}  className="min-h-[300px] w-full bg-white shadow mt-7 p-5">
      <div className="w-full flex justify-end">
      <div className="text-[30px] font-light">Webinar Video</div>
       <div className="px-10 h-[40px] w-[40%] flex justify-end gap-2 items-center">
