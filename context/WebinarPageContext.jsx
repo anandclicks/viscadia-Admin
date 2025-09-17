@@ -18,6 +18,7 @@ let payload = {
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
+  
   const hanldeWebinarInputsChanges = async(evt) => {
     const { name, value, type, files } = evt.target;
     if (type === "file" && files && files[0]) {

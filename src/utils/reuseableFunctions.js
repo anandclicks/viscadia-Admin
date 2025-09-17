@@ -18,13 +18,11 @@ export const uploadSingleImage = async (files) => {
     toast.dismiss(t);
     if (res.data?.success) {
       toast.success("File uploaded successfully!");
-      return files[0].type === "video/mp4" ? res.data?.data?.additional_files[0]?.url :res.data.data.url ;
+      return files[0].type === "video/mp4" ? res.data?.data?.additional_files[0]?.url :res.data?.data?.url ;
     }
     toast.error(res.data?.message || "Upload failed");
     return "";
   } catch (err) {
-    console.log(err);
-    
     toast.dismiss(t);
     toast.error(err.response?.data?.message || err.message || "Upload error");
     return "";

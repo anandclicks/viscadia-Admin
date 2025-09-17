@@ -56,9 +56,8 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  const [createEventFormData, setCreateEventFormData] = useState({
-    ...payload,
-  });
+  const [createEventFormData, setCreateEventFormData] = useState({...payload});
+  
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
