@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
-import { uploadSignleImage } from "../src/utils/reuseable";
+import { uploadSignleImage } from "../src/utils/reuseableFunctions.js";
 
 let payload = {
   logo: "",
   title: "",
   date: "",
   location: "",
-  image: null,
-  headingImage: null,
+  image: "",
+  headingImage: "",
   heading: "",
   subHeading: "",
   speakerTopic: "",
@@ -61,9 +61,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
-      let formData = new FormData();
-      formData.append("file", files[0]);
-      let uploadedImageUrl = await uploadSignleImage(formData)
+      let uploadedImageUrl = await uploadSignleImage(files);
       setCreateEventFormData((prev) => ({
         ...prev,
         [name]: uploadedImageUrl,
@@ -80,9 +78,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleForecastingInputs = async (evt, i) => {
     const { name, value, files } = evt.target;
     if (files && files[0]) {
-      let formData = new FormData();
-      formData.append("file", files[0]);
-       let uploadedImageUrl = await uploadSignleImage(formData)
+      let uploadedImageUrl = await uploadSignleImage(files);
       setCreateEventFormData((prev) => {
         const updatedData = [...prev.forecastingSpecialists];
         updatedData[i] = {
@@ -125,9 +121,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleSpeakersInputsChanges = async (evt, i) => {
     const { name, files, value } = evt.target;
     if (files && files[0]) {
-      let formData = new FormData();
-      formData.append("file", files[0]);
-     let uploadedImageUrl = await uploadSignleImage(formData)
+      let uploadedImageUrl = await uploadSignleImage(files);
       setCreateEventFormData((prev) => {
         let updatedSpeakers = [...prev.speaker];
         updatedSpeakers[i] = {

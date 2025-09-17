@@ -64,7 +64,6 @@ const handleSpeakersChnages = (evt, index) => {
 
 const handleSubmit = (evt)=>{
   console.log(webinarCreateData);
-  
 }
 
 
