@@ -1,24 +1,26 @@
 import axios from "axios";
+import toast from "react-hot-toast";
+
 export const uploadSignleImage = async (files) => {
+  if (!files?.length) return "";
+  const t = toast.loading("Please wait, uploading image...");
   try {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("file", files[0]);
-    let response = await axios.post(
-      "http://192.168.0.191:4005/api/upload/single",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    if (response.data?.success) {
-      return response.data?.data?.url;
-    } else {
-      return "";
+    const res = await axios.post("http://192.168.0.191:4005/api/upload/single", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+      timeout: 20000,
+    });
+    toast.dismiss(t);
+    if (res.data?.success && res.data?.data?.url) {
+      toast.success("Image uploaded successfully!");
+      return res.data.data.url;
     }
-  } catch (error) {
-    console.log(error);
-    return ""
+    toast.error(res.data?.message || "Upload failed");
+    return "";
+  } catch (err) {
+    toast.dismiss(t);
+    toast.error(err.response?.data?.message || err.message || "Upload error");
+    return "";
   }
 };

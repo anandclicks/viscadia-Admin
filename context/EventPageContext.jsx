@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { uploadSignleImage } from "../src/utils/reuseableFunctions.js";
+import toast from "react-hot-toast";
 
 let payload = {
   logo: "",

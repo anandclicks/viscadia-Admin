@@ -13,6 +13,7 @@ import CreateEventPage from "./components/createEventPage/CreateEventPage";
 import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage";
 import CaseStudy from "./components/CaseStudiesPage/CaseStudy";
 import { NewCaseStudyContextProvider } from "../context/NewCaseStudy";
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       </EventPageContextProvider>
       </WebinarContextProvider>
       <ToastContainer />
+      <Toaster/>
     </div>
   );
 }
