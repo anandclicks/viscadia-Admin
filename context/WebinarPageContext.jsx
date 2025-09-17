@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 let payload = {
   subHeading: "",
   imageOne: null,
@@ -17,11 +18,12 @@ let payload = {
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
-  const hanldeWebinarInputsChanges = (evt) => {
+  const hanldeWebinarInputsChanges = async(evt) => {
     const { name, value, type, files } = evt.target;
     if (type === "file" && files && files[0]) {
+      const imageUrl = await uploadSingleImage(files)
       setWebinarCreateData((prev) => {
-        return { ...prev, [name]: files[0] };
+        return { ...prev, [name]: imageUrl };
       });
     } else {
       setWebinarCreateData((prev) => ({ ...prev, [name]: value }));
@@ -50,16 +52,28 @@ export const WebinarContextProvider = ({ children }) => {
     setWebinarCreateData((prev)=> ({...prev,keyPoints : UpdatedKeyPoints}))
   }
 
-const handleSpeakersChnages = (evt, index) => {
+const handleSpeakersChnages = async(evt, index) => {
   const { name, value, type, files } = evt.target;
-  setWebinarCreateData((prev) => {
+  if(files && files[0]){
+    const imageUrl = await uploadSingleImage(files)
+     setWebinarCreateData((prev) => {
     const updatedSpeakers = [...prev.speaker];
     updatedSpeakers[index] = {
       ...updatedSpeakers[index],
-      [name]: type === "file" ? files[0] : value,
+      [name]: imageUrl,
     };
     return { ...prev, speaker: updatedSpeakers };
   });
+  }else {
+     setWebinarCreateData((prev) => {
+    const updatedSpeakers = [...prev.speaker];
+    updatedSpeakers[index] = {
+      ...updatedSpeakers[index],
+      [name]: value,
+    };
+    return { ...prev, speaker: updatedSpeakers };
+  });
+  }
 };
 
 const handleSubmit = (evt)=>{

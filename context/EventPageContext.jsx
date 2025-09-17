@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { uploadSignleImage } from "../src/utils/reuseableFunctions.js";
+import { uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import toast from "react-hot-toast";
 
 let payload = {
@@ -14,9 +14,9 @@ let payload = {
   speakerTopic: "",
   speakerTime: "",
   speakerDate: "",
-  sectionTwoStatus: 1,
-  sectionThreeStatus: 1,
-  sectionFourStatus: 1,
+  sectionTwoStatus: true,
+  sectionThreeStatus: true,
+  sectionFourStatus: true,
   status: 0,
   speaker: [
     {
@@ -62,7 +62,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
-      let uploadedImageUrl = await uploadSignleImage(files);
+      let uploadedImageUrl = await uploadSingleImage(files);
       setCreateEventFormData((prev) => ({
         ...prev,
         [name]: uploadedImageUrl,
@@ -79,7 +79,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleForecastingInputs = async (evt, i) => {
     const { name, value, files } = evt.target;
     if (files && files[0]) {
-      let uploadedImageUrl = await uploadSignleImage(files);
+      let uploadedImageUrl = await uploadSingleImage(files);
       setCreateEventFormData((prev) => {
         const updatedData = [...prev.forecastingSpecialists];
         updatedData[i] = {
@@ -122,7 +122,7 @@ export const EventPageContextProvider = ({ children }) => {
   const handleSpeakersInputsChanges = async (evt, i) => {
     const { name, files, value } = evt.target;
     if (files && files[0]) {
-      let uploadedImageUrl = await uploadSignleImage(files);
+      let uploadedImageUrl = await uploadSingleImage(files);
       setCreateEventFormData((prev) => {
         let updatedSpeakers = [...prev.speaker];
         updatedSpeakers[i] = {

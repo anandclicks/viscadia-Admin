@@ -30,7 +30,7 @@ function SectionThree({ref}) {
             </div>
             {webinarCreateData?.webibarVideo && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <video autoPlay muted loop src={URL.createObjectURL(webinarCreateData?.webibarVideo)} className="h-full w-full object-cover" alt="" />
+                <video autoPlay muted loop src={webinarCreateData?.webibarVideo} className="h-full w-full object-cover" alt="" />
 
               </div>
             )}

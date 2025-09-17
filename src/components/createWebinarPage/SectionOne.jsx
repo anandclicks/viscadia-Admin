@@ -25,7 +25,7 @@ const SectionOne = ({ref}) => {
         </div>
         {webinarCreateData?.imageOne && (
           <div className=" left-0 z-10 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-            <img src={URL.createObjectURL(webinarCreateData?.imageOne)} className="h-full w-full  object-cover" alt="" />
+            <img src={webinarCreateData?.imageOne} className="h-full w-full  object-cover" alt="" />
           </div>
         )}
       </div>

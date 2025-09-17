@@ -26,7 +26,7 @@ const SectionFour = ({ref}) => {
                     <h3 className="text-[#BD2F2C] mt-2">Upload Logo</h3>
                     {el.image && (
                     <img
-                      src={URL.createObjectURL(el.image)}
+                      src={el.image}
                       className="w-full object-cover absolute z-10 h-full"
                       alt=""
                     />

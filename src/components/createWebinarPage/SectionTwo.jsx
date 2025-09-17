@@ -23,7 +23,7 @@ const SectionTwo = ({ref}) => {
             </div>
             {webinarCreateData?.imageTwo && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <img src={URL.createObjectURL(webinarCreateData?.imageTwo)} className="h-full w-full object-cover" alt="" />
+                <img src={webinarCreateData?.imageTwo} className="h-full w-full object-cover" alt="" />
               </div>
             )}
             <input onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="imageTwo" accept="image/*" />
