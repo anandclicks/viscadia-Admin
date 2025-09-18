@@ -91,17 +91,21 @@ button {
   color: #37ad00;
   border-radius: 25px;
   font-weight: 600;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-size: 14px;
+  height: 40px;
+  width: fit-content;
+  padding: 0 25px;
 }
 
 .draft {
   background-color: #be302b2a;
   color: #BD2F2C;
-  border-radius: 25px;
+   border-radius: 25px;
   font-weight: 600;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-size: 14px;
+  height: 40px;
+  width: fit-content;
+  padding: 0 25px;
 }
 
 .activeEventPageSection {

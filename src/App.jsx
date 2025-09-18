@@ -37,7 +37,7 @@ function App() {
             </Route>
             {/* Preview pages route  */}
             <Route>
-              <Route path="/preview/event" element={<Event/>}/>
+              <Route path="/preview/event/:id" element={<Event/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>

@@ -1,6 +1,25 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
+export const commonGetApiCall = async(endpoint)=>{
+  try {
+    const res = await axios.get(`http://192.168.0.191:4005/api/admin${endpoint}`)
+    return res.data
+  } catch (error) {
+    return error
+  }
+}
+
+export const putCommonApi = async(endPoint,data)=>{
+  try {
+    const res = await axios.put(`http://192.168.0.191:4005/api/admin${endPoint}`,data)
+    return res.data
+  } catch (error) {
+    return error
+  }
+}
+
 export const uploadSingleImage = async (files) => {
   if (!files?.length) return "";
     const t = toast.loading("Please wait, uploading File...");
@@ -33,7 +52,6 @@ export const uploadSingleImage = async (files) => {
 
 export const createEventApiCall = async (data) => {
   let t = toast.loading("Creating Event..!");
-
   try {
     const res = await axios.post("http://192.168.0.191:4005/api/admin/events", data);
     toast.dismiss(t);
@@ -46,3 +64,5 @@ export const createEventApiCall = async (data) => {
     return e;
   }
 };
+
+

@@ -5,20 +5,8 @@ const PageBuildingLoader = () => {
 
   useEffect(() => {
     const loader = loaderRef.current;
-    const particleCount = 20;
     const orbiterCount = 4;
     const animationDuration = 5000; // 5 seconds
-
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      const angle = (i / particleCount) * 2 * Math.PI;
-      const radius = Math.random() * 120 + 60; // Vary radius for depth
-      particle.style.left = `${200 + radius * Math.cos(angle)}px`;
-      particle.style.top = `${200 + radius * Math.sin(angle)}px`;
-      loader.appendChild(particle);
-    }
 
     // Create orbiting particles
     for (let i = 0; i < orbiterCount; i++) {
@@ -39,20 +27,6 @@ const PageBuildingLoader = () => {
     core.style.top = '160px';
     core.style.animation = 'glow 2.5s infinite ease-in-out';
     loader.appendChild(core);
-
-    // Animate particles with spiral and scale effect
-    const particles = loader.querySelectorAll('.particle');
-    particles.forEach((particle, index) => {
-      setTimeout(() => {
-        particle.style.transition = `all ${animationDuration / 1000 * 0.7}s cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
-        particle.style.left = '200px';
-        particle.style.top = '200px';
-        particle.style.transform = `rotate(${Math.random() * 720}deg) scale(0.4)`;
-        particle.style.opacity = '0';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-      }, index * 60);
-    });
 
     // Stop orbiters and animate core
     setTimeout(() => {

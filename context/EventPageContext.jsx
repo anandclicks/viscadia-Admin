@@ -18,7 +18,7 @@ let payload = {
   sectionTwoStatus: 1,
   sectionThreeStatus: 1,
   sectionFourStatus: 1,
-  status: 0,
+  status: "draft",
   speaker: [
     {
       fullName: "",
@@ -39,7 +39,7 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-
+  let navigate = useNavigate()
   const [createEventFormData, setCreateEventFormData] = useState({...payload});
 
   const handleEventInputfiledsChanges = async (evt) => {
