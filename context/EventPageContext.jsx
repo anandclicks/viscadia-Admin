@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 let payload = {
   logo: "",
@@ -143,7 +144,7 @@ export const EventPageContextProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async(evt) => {
     evt.preventDefault();
     localStorage.setItem("event", JSON.stringify(createEventFormData));
     console.log(createEventFormData);

@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PageBuildingLoader from '../../components/common/PageBuildingLoader'
+import { Link } from "react-router-dom";
 
 const Event = () => {
   let data = localStorage.getItem("event")
   data = JSON.parse(data);
   
-  const [isLoaderOn,setIsLoaderOn] = useState(true)
-  useEffect(()=>{
-    setTimeout(() => {
-      setIsLoaderOn(false)
-    }, 5000);
-  },[])
-  
   return (
    <>
-   {isLoaderOn && <PageBuildingLoader/>}
-   {!isLoaderOn &&  <div className="pt-20 bg-white">
+  <div className="pt-20 bg-white">
       {/* section one start  */}
       <div className="h-[370px] w-full relative flex">
         <div className="EventPagesectionOne w-full h-[370px] object-cover absolute z-10">
@@ -192,7 +185,48 @@ const Event = () => {
         </div>
       </div>
       {/* section three ends */}
-    </div>}
+
+      {/* section four  */}
+         <div className="grid grid-cols-3 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
+              {data?.forecastingSpecialists?.map((person) => (
+               <>
+                {person?.image && person.fullName && (
+                    <Link to={'/'}>
+                    <div className="flex pb-3 hover:shadow-[0px_3px_6px_2px_rgba(0,_0,_0,_0.1)] flex-col items-center cursor-pointer">
+                      <div className="relative w-full h-[260px] group overflow-hidden">
+                        <img
+                          src={person?.image}
+                          alt={person?.fullName}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#BD3028]/60 to-[#BD3028]/30 text-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between">
+                          <p className="text-[14px] leading-4">
+                            {person?.introduction}
+                          </p>
+                          {person?.click && (
+                            <span className="mt-4 text-[14px]">
+                              {person?.click}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-2 text-center">
+                        <h2 className="text-[#BD302B] font-roboto text-[20px] font-normal">
+                          {person?.fullName}
+                        </h2>
+                        <p className="text-black text-[14px] px-1 font-light">
+                          {person?.designation}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+               </>
+                ))}
+            </div>
+ 
+      {/* section four ends  */}
+    </div>
    </>
   );
 };
