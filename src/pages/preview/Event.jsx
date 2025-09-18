@@ -7,7 +7,7 @@ const Event = () => {
   data = JSON.parse(data);
   
   return (
-   <>
+   <div className="bg-white">
   <div className="pt-20 bg-white">
       {/* section one start  */}
       <div className="h-[370px] w-full relative flex">
@@ -116,7 +116,7 @@ const Event = () => {
       {/* section two ends */}
 
       {/* section three starts  */}
-      <div className="h-[500px] w-full pt-5 shadow mb-8">
+      <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8">
         <h2 className="text-[40px] font-light text-center">Speakers</h2>
 
         {/* Speakers */}
@@ -125,6 +125,8 @@ const Event = () => {
             <div className="flex gap-5 h-full items-center justify-center min-w-[230px]">
               {/* Speaker 1 */}
               {data?.speaker?.map((sp,index)=>(
+              <>
+              {sp?.image && sp.fullName && (
                  <div className="h-[160px] w-[160px] rounded-full overflow-hidden flex justify-center items-center">
                 <img
                 key={index}
@@ -133,6 +135,8 @@ const Event = () => {
                   alt="Speaker 2"
                 />
               </div>
+              )}
+              </>
               ))}
             </div>
           </div>
@@ -187,12 +191,12 @@ const Event = () => {
       {/* section three ends */}
 
       {/* section four  */}
-         <div className="grid grid-cols-3 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
+         <div className="grid content-center mb-10 grid-cols-3 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
               {data?.forecastingSpecialists?.map((person) => (
                <>
                 {person?.image && person.fullName && (
                     <Link to={'/'}>
-                    <div className="flex pb-3 hover:shadow-[0px_3px_6px_2px_rgba(0,_0,_0,_0.1)] flex-col items-center cursor-pointer">
+                    <div className="flex pb-3  hover:shadow-[0px_3px_6px_2px_rgba(0,_0,_0,_0.1)] flex-col items-center cursor-pointer">
                       <div className="relative w-full h-[260px] group overflow-hidden">
                         <img
                           src={person?.image}
@@ -223,11 +227,11 @@ const Event = () => {
                 )}
                </>
                 ))}
-            </div>
+        </div>
  
       {/* section four ends  */}
     </div>
-   </>
+   </div>
   );
 };
 
