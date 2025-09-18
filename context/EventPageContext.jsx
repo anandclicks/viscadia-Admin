@@ -39,11 +39,8 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  let navigate = useNavigate()
-  let data = localStorage.getItem("event")
- data = JSON.parse(data)
-  
-  const [createEventFormData, setCreateEventFormData] = useState({...data});
+
+  const [createEventFormData, setCreateEventFormData] = useState({...payload});
 
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
