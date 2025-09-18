@@ -19,10 +19,11 @@ import Event from './pages/preview/Event'
 function App() {
   return (
     <div className=" max-w-[1600px] max-w-ful mx-auto overflow-hidden">
+        <BrowserRouter>
+
       <WebinarContextProvider>
       <EventPageContextProvider>
       <NewCaseStudyContextProvider>
-        <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainLayout />}>
               <Route path="/" element={<Home />} />
@@ -39,10 +40,10 @@ function App() {
               <Route path="/preview/event" element={<Event/>}/>
             </Route>
           </Routes>
-        </BrowserRouter>
       </NewCaseStudyContextProvider>
       </EventPageContextProvider>
       </WebinarContextProvider>
+        </BrowserRouter>
       <ToastContainer />
       <Toaster/>
     </div>

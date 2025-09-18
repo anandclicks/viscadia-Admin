@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { uploadSingleImage } from "../src/utils/reuseableFunctions.js";
-import toast from "react-hot-toast";
+import { createEventApiCall, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 let payload = {
-  logo: "",
+  logo: "", 
   title: "",
   date: "",
   location: "",
@@ -15,9 +15,9 @@ let payload = {
   speakerTopic: "",
   speakerTime: "",
   speakerDate: "",
-  sectionTwoStatus: true,
-  sectionThreeStatus: true,
-  sectionFourStatus: true,
+  sectionTwoStatus: 1,
+  sectionThreeStatus: 1,
+  sectionFourStatus: 1,
   status: 0,
   speaker: [
     {
@@ -34,31 +34,16 @@ let payload = {
       designation: "",
       introduction: "",
     },
-    {
-      image: null,
-      fullName: "",
-      designation: "",
-      introduction: "",
-    },
-    {
-      image: null,
-      fullName: "",
-      designation: "",
-      introduction: "",
-    },
-    {
-      image: null,
-      fullName: "",
-      designation: "",
-      introduction: "",
-    },
   ],
 };
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
+  let navigate = useNavigate()
+  let data = localStorage.getItem("event")
+ data = JSON.parse(data)
   
-  const [createEventFormData, setCreateEventFormData] = useState({...payload});
+  const [createEventFormData, setCreateEventFormData] = useState({...data});
 
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
@@ -147,7 +132,12 @@ export const EventPageContextProvider = ({ children }) => {
   const handleSubmit = async(evt) => {
     evt.preventDefault();
     localStorage.setItem("event", JSON.stringify(createEventFormData));
-    console.log(createEventFormData);
+   let res = await createEventApiCall(createEventFormData)
+   if(res.success){
+    setTimeout(() => {
+      navigate("/events-and-webinars")
+    }, 1000);
+   }
   };
 
   return (

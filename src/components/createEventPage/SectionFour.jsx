@@ -34,17 +34,17 @@ const SectionFour = ({ ref }) => {
                     <img src="../icons/upload.png" alt="" />
                     <h3 className="text-[#BD2F2C] mt-2">Upload Image</h3>
                   </div>
-                  <input type="file" name="image" onChange={(evt) => handleForecastingInputs(evt, idx)} className="absolute w-full h-full opacity-0 cursor-pointer z-20" />
+                  <input type="file" name="image" onChange={(evt) => handleForecastingInputs(evt, idx)} required={!f?.image} className="absolute w-full h-full opacity-0 cursor-pointer z-20" />
                 </div>
                 <div className="mt-3">
                   <div className="flex items-center my-2">
-                    <textarea placeholder="Full Name" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" value={f.fullName} name="fullName" onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
+                    <textarea placeholder="Full Name" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" required value={f.fullName} name="fullName" onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
                   </div>
                   <div className="flex items-center my-2">
-                    <textarea placeholder="Designation" name="designation" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" value={f.designation} onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
+                    <textarea placeholder="Designation" name="designation" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" required value={f.designation} onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
                   </div>
                   <div className="flex items-center my-2">
-                    <textarea placeholder="Introduction" name="introduction" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" value={f.introduction} onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
+                    <textarea placeholder="Introduction" name="introduction" className="generalCssForInputs text-[14px] text-black placeholder:text-black resize-none overflow-hidden h-[20px] w-[90%]" required value={f.introduction} onInput={(e) => { handleForecastingInputs(e, idx); autoResize(e); }} />
                   </div>
                 </div>
               </div>

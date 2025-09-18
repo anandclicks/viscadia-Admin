@@ -32,7 +32,7 @@ const SectionThree = ({ ref }) => {
                     {el.image && <img src={el.image} className="w-full object-cover absolute z-10 h-full" alt="" />}
                   </div>
                 </div>
-                <input onChange={(evt) => handleSpeakersInputsChanges(evt, index)} type="file" className="h-full w-full z-20 absolute cursor-pointer opacity-0" name="image" />
+                <input onChange={(evt) => handleSpeakersInputsChanges(evt, index)} required={!el?.image} type="file" className="h-full w-full z-20 absolute cursor-pointer opacity-0" name="image" />
               </div>
             ))}
           </div>
@@ -42,7 +42,7 @@ const SectionThree = ({ ref }) => {
             <div className="flex items-center">
               {createEventFormData?.speaker.map((el, index) => (
                 <div key={index} className="pe-2">
-                  <textarea onInput={(evt) => { handleSpeakersInputsChanges(evt, index); autoResize(evt); }} value={el.fullName} name="fullName" placeholder="Speaker Name" className="generalCssForInputs w-[130px] text-[15px] text-[#BD2F2C] placeholder:text-[#BD2F2C] resize-none overflow-hidden h-[20px]" />
+                  <textarea onInput={(evt) => { handleSpeakersInputsChanges(evt, index); autoResize(evt); }} required value={el.fullName} name="fullName" placeholder="Speaker Name" className="generalCssForInputs w-[130px] text-[15px] text-[#BD2F2C] placeholder:text-[#BD2F2C] resize-none overflow-hidden h-[20px]" />
                   {index !== createEventFormData.speaker.length - 1 && " & "}
                 </div>
               ))}
@@ -50,19 +50,19 @@ const SectionThree = ({ ref }) => {
             <div className="flex items-center">
               {createEventFormData?.speaker.map((el, index) => (
                 <div key={index} className="pe-2">
-                  <textarea value={el.designation} onInput={(evt) => { handleSpeakersInputsChanges(evt, index); autoResize(evt); }} name="designation" placeholder="Designation" className="generalCssForInputs w-[110px] text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
+                  <textarea value={el.designation} onInput={(evt) => { handleSpeakersInputsChanges(evt, index); autoResize(evt); }} required name="designation" placeholder="Designation" className="generalCssForInputs w-[110px] text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
                   {index !== createEventFormData?.speaker?.length - 1 && " & "}
                 </div>
               ))}
             </div>
             <div className="flex items-center ">
-              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerTopic} placeholder="Topic" name="speakerTopic" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
+              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerTopic} required placeholder="Topic" name="speakerTopic" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
             </div>
             <div className="flex items-center my-2">
-              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerDate} placeholder="Date" name="speakerDate" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
+              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerDate} required placeholder="Date" name="speakerDate" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
             </div>
             <div className="flex items-center my-2">
-              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerTime} placeholder="Time" name="speakerTime" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
+              <textarea onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} value={createEventFormData.speakerTime} required placeholder="Time" name="speakerTime" className="generalCssForInputs text-[15px] text-black placeholder:text-black resize-none overflow-hidden h-[20px]" />
             </div>
             <button className="grediantBg cursor-pointer text-white p-2 rounded-none px-8 text-[16px] mt-5">Agenda</button>
           </div>
@@ -74,7 +74,7 @@ const SectionThree = ({ ref }) => {
         </div>
       </div>
       <div className="w-full flex justify-center items-center mt-7">
-        <textarea name="description" value={createEventFormData?.description} onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} placeholder="Description" className="w-[70%] placeholder:text-center pla5eholder:text-black outline-0 border-0 resize-none overflow-hidden h-[20px]" />
+        <textarea name="description" value={createEventFormData?.description} onInput={(evt) => { handleEventInputfiledsChanges(evt); autoResize(evt); }} required placeholder="Description" className="w-[70%] placeholder:text-center pla5eholder:text-black outline-0 border-0 resize-none overflow-hidden h-[20px]" />
       </div>
     </div>
   );

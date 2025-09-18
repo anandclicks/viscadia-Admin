@@ -26,22 +26,22 @@ const SectionOne = ({ ref }) => {
                 <img src={createEventFormData?.logo} className="max-w-full max-h-full object-contain" alt="" />
               </div>
             )}
-            <input onChange={(evt) => handleEventInputfiledsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" name="logo" />
+            <input onChange={(evt) => handleEventInputfiledsChanges(evt)} type="file" required={!createEventFormData?.logo} className="opacity-0 h-full w-full cursor-pointer relative z-20" accept="image/*" name="logo" />
           </div>
           <p className="text-[13px] mt-2 text-end">Upload JPG/PNG · Max 5MB</p>
         </div>
         <div>
           <div className="h-[40px] w-full">
-            <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} value={createEventFormData?.title} placeholder="Enter Title Name" className="w-full outline-0 border-0 text-[#133D65] placeholder:text-[#133D65] text-[21px] resize-none overflow-hidden" name="title" />
+            <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.title} placeholder="Enter Title Name" className="w-full outline-0 border-0 text-[#133D65] placeholder:text-[#133D65] text-[21px] resize-none overflow-hidden" name="title" />
           </div>
           <div className="mt-5 mb-3 flex gap-10">
             <div className="flex gap-2 min-w-[200px]">
               <img className="h-[20px]" src="../icons/date.png" alt="" />
-              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} value={createEventFormData?.date} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="September 10-12-2025" name="date" />
+              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.date} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="September 10-12-2025" name="date" />
             </div>
             <div className="flex gap-2 min-w-[200px]">
               <img className="h-[20px]" src="../icons/location.png" alt="" />
-              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} value={createEventFormData?.location} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="Add Location" name="location" />
+              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.location} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="Add Location" name="location" />
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ const SectionOne = ({ ref }) => {
           </div>
         )}
       </div>
-      <input onChange={(evt) => handleEventInputfiledsChanges(evt)} type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="image" />
+      <input onChange={(evt) => handleEventInputfiledsChanges(evt)} type="file" required={!createEventFormData?.image} className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="image" />
     </div>
   );
 };

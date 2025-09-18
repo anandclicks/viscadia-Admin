@@ -113,16 +113,16 @@ const CreateEventPage = () => {
               </li>
             </ul>
           </div>
-          <div className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
+          <form onSubmit={handleSubmit} className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef} />
             <SectionTwo ref={sectionTwoRef} />
             <SectionThree ref={sectionThreeRef} />
             <SectionFour ref={sectionFourRef} />
             <div className="flex w-full justify-end gap-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
-              <button onClick={handleSubmit} className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
+              <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

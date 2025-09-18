@@ -28,3 +28,21 @@ export const uploadSingleImage = async (files) => {
     return "";
   }
 };
+
+
+
+export const createEventApiCall = async (data) => {
+  let t = toast.loading("Creating Event..!");
+
+  try {
+    const res = await axios.post("http://192.168.0.191:4005/api/admin/events", data);
+    toast.dismiss(t);
+    toast.success("Event Created Successfully!");
+    return res.data; 
+  } catch (e) {
+    toast.dismiss(t);
+    toast.error("Something Went Wrong!");
+    console.error("API error:", e);
+    return e;
+  }
+};

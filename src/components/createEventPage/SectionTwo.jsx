@@ -26,7 +26,7 @@ const SectionTwo = ({ ref }) => {
                 <img src={createEventFormData?.headingImage} className="h-full w-full object-cover" alt="" />
               </div>
             )}
-            <input onChange={(evt) => handleEventInputfiledsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="headingImage" accept="image/*" />
+            <input onChange={(evt) => handleEventInputfiledsChanges(evt)} required={!createEventFormData?.headingImage} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="headingImage" accept="image/*" />
           </div>
         </div>
       </div>
@@ -34,10 +34,10 @@ const SectionTwo = ({ ref }) => {
         <div className="w-full relative z-10 flex justify-end">
           <div className="w-[90%]">
             <div className="h-[60px]">
-              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} value={createEventFormData?.heading} placeholder="HEADING" className="w-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light resize-none overflow-hidden" name="heading" />
+              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.heading} placeholder="HEADING" className="w-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light resize-none overflow-hidden" name="heading" />
             </div>
             <div className="h-[30px]">
-              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} value={createEventFormData?.subHeading} placeholder="Sub Heading" className="w-[80%] outline-0 border-0 text-white placeholder:text-white text-[16px] leading-5 font-light resize-none overflow-hidden" name="subHeading" />
+              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.subHeading} placeholder="Sub Heading" className="w-[80%] outline-0 border-0 text-white placeholder:text-white text-[16px] leading-5 font-light resize-none overflow-hidden" name="subHeading" />
             </div>
           </div>
         </div>
