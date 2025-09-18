@@ -25,8 +25,9 @@ button {
 .mainColor {
   color: #BD2F2C;
 }
+
 .grediantBg {
-  background: linear-gradient(to right ,#BD2F2C,#BD2F2C);
+  background: linear-gradient(to right, #BD2F2C, #BD2F2C);
 }
 
 .mainBg {
@@ -109,8 +110,9 @@ button {
   color: #BD2F2C;
   font-weight: 600;
 }
+
 .activeEventPageSection::after {
-  height: 100% ;
+  height: 100%;
   width: 5px;
   background-color: #BD2F2C;
   position: absolute;
@@ -123,3 +125,136 @@ button {
   outline: none;
   border: 0;
 }
+
+
+/* loader css  */
+
+.particle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--particle-bg);
+  border-radius: 50%;
+  box-shadow: var(--particle-shadow);
+  opacity: 0.95;
+}
+
+.particle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: trail 0.6s infinite ease-out;
+}
+
+.core {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: var(--core-gradient);
+  border-radius: 10px;
+  transform: scale(0) rotate(0deg);
+  opacity: 0;
+  box-shadow: var(--core-shadow);
+}
+
+.core::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--particle-bg);
+  animation: ripple 2s infinite ease-in-out;
+}
+
+.core::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px dashed #ffffff;
+  border-radius: 8px;
+  opacity: 0.7;
+  animation: spin 3s infinite linear;
+}
+
+.orbit {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--particle-bg);
+  border-radius: 50%;
+  box-shadow: var(--orbit-shadow);
+  opacity: 0.8;
+}
+
+@keyframes trail {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: var(--particle-shadow);
+  }
+
+  50% {
+    box-shadow: 0 0 40px #BD2F2C, 0 0 70px #BD2F2C;
+  }
+
+  100% {
+    box-shadow: var(--particle-shadow);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(60px) rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg) translateX(60px) rotate(-360deg);
+  }
+}
+
+/* loader css ends  */

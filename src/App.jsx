@@ -14,7 +14,7 @@ import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage"
 import CaseStudy from "./components/CaseStudiesPage/CaseStudy";
 import { NewCaseStudyContextProvider } from "../context/NewCaseStudy";
 import { Toaster } from "react-hot-toast";
-
+import Event from './pages/preview/Event'
 
 function App() {
   return (
@@ -33,6 +33,10 @@ function App() {
               <Route path="/create/event" element={<CreateEventPage />} />
               <Route path="/create/webinar" element={<CreateWebinarPage />} />
               <Route path="/create/case-study" element={<CaseStudy />} />
+            </Route>
+            {/* Preview pages route  */}
+            <Route>
+              <Route path="/preview/event" element={<Event/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

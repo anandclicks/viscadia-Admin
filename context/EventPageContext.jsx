@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import toast from "react-hot-toast";
 
@@ -56,8 +56,9 @@ let payload = {
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  const [createEventFormData, setCreateEventFormData] = useState({...payload});
   
+  const [createEventFormData, setCreateEventFormData] = useState({...payload});
+
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
@@ -144,6 +145,7 @@ export const EventPageContextProvider = ({ children }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    localStorage.setItem("event", JSON.stringify(createEventFormData));
     console.log(createEventFormData);
   };
 

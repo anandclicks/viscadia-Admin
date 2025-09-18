@@ -59,7 +59,8 @@ const Home = () => {
   ];
 
   return (
-    <div className="h-full w-full fsTwo">
+    <>
+     <div className="h-full w-full fsTwo">
       <div className="min-h-[40px] py-2 w-full">
         <h1 className="text-[25px] font-[400] fsTwo">
           Welcome Back, <span className="font-semibold">Viscadia Team</span>
@@ -140,6 +141,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

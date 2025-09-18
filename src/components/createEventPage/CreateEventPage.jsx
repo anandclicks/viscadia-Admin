@@ -88,7 +88,7 @@ const CreateEventPage = () => {
                 <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Edit</button>
                 <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
                 <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Preview</button>
+                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]"><Link to={'/preview/event'} className="h-full w-full">Preview</Link></button>
               </div>
             </div>
             <Link to={'/events-and-webinars'} className="h-[40px] w-[40px] rounded-full">

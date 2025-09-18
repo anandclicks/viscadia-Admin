@@ -12,6 +12,9 @@ const payload = {
   status : 0
 }
 
+const handleNewCaseStudyInputs = (evt)=>{
+    const {name,files,value,type} = evt.target
+}
 
 export const NewCaseStudyContext = createContext({})
 export const NewCaseStudyContextProvider = ({children})=>{
