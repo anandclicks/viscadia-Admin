@@ -9,7 +9,8 @@ import { EventPageContext } from "../../../context/EventPageContext";
 
 
 const SectionFour = ({ ref }) => {
-    const [speakerStatus, setSpeakerStatus] = useState(true);
+  const [speakerStatus, setSpeakerStatus] = useState(true);
+  
   const { createEventFormData,setCreateEventFormData, handleForecastingInputs, addNewForcastingSection } = useContext(EventPageContext);
   const handleSectionFourStatus = ()=>{
     setSpeakerStatus((prev) => !prev)

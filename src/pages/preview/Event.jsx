@@ -3,14 +3,12 @@ import PageBuildingLoader from "../../components/common/PageBuildingLoader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
-// import LockedOverlay from "../../components/createEventPage/LockedOverlay";
+import LockedOverlay from "../../components/createEventPage/LockedOverlay";
 
 const Event = () => {
   const redirect = useNavigate()
   const [pageData, setPageData] = useState();
   const [loading,setloading] = useState(true)
-  let data = localStorage.getItem("event");
-  data = JSON.parse(data);
   const { id } = useParams();
   useEffect(() => {
     const getData = async () => {
@@ -94,7 +92,7 @@ const Event = () => {
 
         {/* section two starts */}
         <div className="h-[380px] w-full shadow relative flex overflow-hidden">
-          {/* {pageData?.section_two_status && <LockedOverlay/>} */}
+          {!pageData?.section_two_status && <LockedOverlay/>}
 
           <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
             <img
@@ -141,18 +139,17 @@ const Event = () => {
 
         {/* section three starts  */}
         <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8 relative">
-          {/* {pageData?.section_two_status && <LockedOverlay/>} */}
+             {!pageData?.section_three_status && <LockedOverlay/>}
           <h2 className="text-[40px] font-light text-center">Speakers</h2>
-
           {/* Speakers */}
-          <div className="flex min-h-[55%] justify-end px-10 gap-5 items-center">
+          <div className="flex min-h-[55%] relative justify-end px-10 gap-5 items-center">
             <div className="flex flex-col justify-center items-center">
               <div className="flex gap-5 h-full items-center justify-center min-w-[230px]">
                 {/* Speaker 1 */}
                 {pageData?.speaker?.map((sp, index) => (
                   <>
                     {sp?.image && sp.fullName && (
-                      <div className="h-[160px] w-[160px] rounded-full overflow-hidden flex justify-center items-center">
+                      <div className="h-[160px] w-[160px] relative rounded-full overflow-hidden flex justify-center items-center">
                         <img
                           key={index}
                           src={sp?.image}
@@ -219,12 +216,13 @@ const Event = () => {
 
         {/* section four  */}
         <div className="relative">
-         {/* {pageData?.section_three_status && <LockedOverlay/>} */}
+          <h2 className="text-[30px] my-2 text-center font-light">Our Forecasting Specialists at the Event</h2>
           <div className="grid content-center  mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
           {pageData?.forecasting_specialists?.map((person) => (
             <>
               {person?.image && person.fullName && (
-                <Link to={"/"}>
+                <Link className="relative" to={"#"}>
+                  {!pageData?.section_four_status && <LockedOverlay/>}
                   <div className="flex pb-3  hover:shadow-[0px_3px_6px_2px_rgba(0,_0,_0,_0.1)] flex-col items-center cursor-pointer">
                     <div className="relative w-full h-[260px] group overflow-hidden">
                       <img
