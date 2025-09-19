@@ -26,7 +26,8 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle,data }) => {
   
 
   return (
-    <div
+  <>
+    {data &&   <div
       onClick={() => onToggle(null)}
       className="w-full h-[220px] my-5  rounded-[30px] flex fsTwo shadow-[0px_0px_3px_#0000000f] border border-[#f1f1f1]">
       <img
@@ -98,7 +99,11 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle,data }) => {
          {data?.sub_heading}
         </p>
       </div>
-    </div>
+    </div> }
+    {!data && <div className="h-[100px] w-full flex items-center justify-center">
+      <h2 className="text-center">No Data Found!</h2></div>}
+  </>
+  
   );
 };
 
