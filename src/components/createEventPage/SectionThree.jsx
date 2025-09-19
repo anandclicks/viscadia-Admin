@@ -2,8 +2,12 @@ import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
 
 const SectionThree = ({ ref }) => {
-  const [speakerStatus, setSpeakerStatus] = useState(false);
-  const { createEventFormData, handleSpeakersInputsChanges, addNewSpeaker, handleEventInputfiledsChanges } = useContext(EventPageContext);
+  const [speakerStatus, setSpeakerStatus] = useState(true);
+  const { createEventFormData,setCreateEventFormData, handleSpeakersInputsChanges, addNewSpeaker, handleEventInputfiledsChanges } = useContext(EventPageContext);
+    const handleSectionThreeStatus = ()=>{
+    setSpeakerStatus((prev) => !prev)
+    setCreateEventFormData((prev)=> ({...prev,sectionThreeStatus : prev?.sectionThreeStatus ? 0 : 1}))
+  }
 
   const autoResize = (e) => {
     e.target.style.height = "20px";
@@ -13,8 +17,8 @@ const SectionThree = ({ ref }) => {
   return (
     <div ref={ref} className="h-[500px] w-full mt-10 pt-5 shadow mb-8">
       <div className="px-10 flex justify-end gap-2 items-center">
-        <p>{!speakerStatus ? "Unhide" : "Hide"}</p>
-        <button type="button" onClick={() => setSpeakerStatus((prev) => !prev)} className={`w-[80px] transition-all duration-200 ${speakerStatus ? "grediantBg" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
+        <p>{speakerStatus ? "Hide" : "Unhide"}</p>
+        <button type="button" onClick={() => handleSectionThreeStatus()} className={`w-[80px] transition-all duration-200 ${speakerStatus ? "grediantBg" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
           <div className={`h-[30px] w-[30px] transition-all bg-white rounded-full ${speakerStatus ? "translate-x-0" : "translate-x-10"}`}></div>
         </button>
       </div>

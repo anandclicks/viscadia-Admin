@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -7,16 +7,29 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { EventPageContext } from "../../../context/EventPageContext";
 
+
 const SectionFour = ({ ref }) => {
-  const { createEventFormData, handleForecastingInputs, addNewForcastingSection } = useContext(EventPageContext);
+    const [speakerStatus, setSpeakerStatus] = useState(true);
+  const { createEventFormData,setCreateEventFormData, handleForecastingInputs, addNewForcastingSection } = useContext(EventPageContext);
+  const handleSectionFourStatus = ()=>{
+    setSpeakerStatus((prev) => !prev)
+    setCreateEventFormData((prev)=> ({...prev,sectionFourStatus : Number(prev?.sectionFourStatus) ? 0 : 1}))
+  }
+  
 
   const autoResize = (e) => {
-    e.target.style.height = "20px"; // reset to base height
-    e.target.style.height = e.target.scrollHeight + "px"; // expand as needed
+    e.target.style.height = "20px";
+    e.target.style.height = e.target.scrollHeight + "px";
   };
 
   return (
     <div ref={ref} className="min-h-[500px] w-full shadow mt-2 py-4 px-7">
+      <div className="px-10 flex justify-end gap-2 items-center">
+        <p>{speakerStatus ? "Hide" : "Unhide"}</p>
+        <button type="button" onClick={() => handleSectionFourStatus()} className={`w-[80px] transition-all duration-200 ${speakerStatus ? "grediantBg" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
+          <div className={`h-[30px] w-[30px] transition-all bg-white rounded-full ${speakerStatus ? "translate-x-0" : "translate-x-10"}`}></div>
+        </button>
+      </div>
       <h2 className="text-center text-[27px] font-light">Our Forecasting Specialists at the Event</h2>
       <div className="w-full flex justify-end mb-4">
         <button onClick={addNewForcastingSection} type="button" className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">

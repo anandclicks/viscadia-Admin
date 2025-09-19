@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
 
 const SectionTwo = ({ ref }) => {
-  const { handleEventInputfiledsChanges, createEventFormData } = useContext(EventPageContext);
+    const [speakerStatus, setSpeakerStatus] = useState(true);
+  const { setCreateEventFormData,handleEventInputfiledsChanges, createEventFormData } = useContext(EventPageContext);
 
+ const handleSectionTwoStatus = ()=>{
+    setSpeakerStatus((prev) => !prev)
+    setCreateEventFormData((prev)=> ({...prev,sectionTwoStatus : prev?.sectionTwoStatus ? 0 : 1}))
+  }
   const autoResize = (e) => {
     e.target.style.height = "auto";
     e.target.style.height = e.target.scrollHeight + "px";
@@ -30,7 +35,13 @@ const SectionTwo = ({ ref }) => {
           </div>
         </div>
       </div>
-      <div className="w-[60%] h-full rightSide bg-amber-400 flex items-center relative overflow-hidden">
+      <div className="w-[60%] h-full  rightSide bg-amber-400 flex items-center relative overflow-hidden">
+           <div className="px-10 pt-10 z-30 flex justify-end gap-2 items-center absolute top-0 end-0">
+        <p className="text-white">{speakerStatus ? "Hide" : "Unhide"}</p>
+        <button type="button" onClick={() => handleSectionTwoStatus()} className={`w-[80px] transition-all duration-200 ${speakerStatus ? "bg-white" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
+          <div className={`h-[30px] w-[30px] transition-all  rounded-full ${speakerStatus ? "translate-x-0 bg-[#BD2F2C]" : "translate-x-10 bg-[#d1d1d1]"}`}></div>
+        </button>
+      </div>
         <div className="w-full relative z-10 flex justify-end">
           <div className="w-[90%]">
             <div className="h-[40px]">

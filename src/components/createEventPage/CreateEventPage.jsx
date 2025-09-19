@@ -22,7 +22,7 @@ const CreateEventPage = () => {
   }, []);
 
   // function for handling submit 
-  const { handleSubmit } = useContext(EventPageContext);
+  const { handleSubmit,setCreateEventFormData,createEventFormData } = useContext(EventPageContext);
 
   // function for handling scrolling by button click 
   const [activeSection,setActiveSection] = useState(null)
@@ -62,12 +62,16 @@ const CreateEventPage = () => {
       }
     })
    })
-  },[])
+  },[]) 
 
   const handleScrolling = (ref)=>{
     ref.current.scrollIntoView({behavior: "smooth", block: "start"})
   }
 
+  const handleEventStatus = (status)=>{
+    setCreateEventFormData((prev)=> ({...prev,status : status}))
+    setIsOpen(false)
+  }
 
   useEffect(()=>{
     console.log(activeSection);
@@ -81,13 +85,13 @@ const CreateEventPage = () => {
           <h2 className="text-[23px] font-semibold">Events</h2>
           <div className="h-full flex items-center gap-5">
             <div className="relative">
-              <div onClick={toggleMenu} className="z-40 h-[45px] border min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer">
-                Mark as Draft <img className="h-[10px]" src="../icons/aeroBottom.png" />
+              <div onClick={toggleMenu} className="z-40 h-[45px] capitalize border min-w-[130px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer">
+                {createEventFormData?.status === "live" ? "Public" : createEventFormData?.status} <img className="h-[10px]" src="../icons/aeroBottom.png" />
               </div>
               <div onClick={(e) => e.stopPropagation()} className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}>
-                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
-                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
-                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
+                <button onClick={()=> handleEventStatus('draft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
+                <button onClick={()=> handleEventStatus('undraft')}  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
+                <button onClick={()=> handleEventStatus('live')}  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
               </div>
             </div>
             <Link to={'/events-and-webinars'} className="h-[40px] w-[40px] rounded-full">

@@ -137,6 +137,11 @@ export const EventPageContextProvider = ({ children }) => {
    }
   };
 
+  useEffect(()=>{
+    console.log(createEventFormData);
+    
+  },[createEventFormData])
+
   return (
     <EventPageContext.Provider
       value={{
