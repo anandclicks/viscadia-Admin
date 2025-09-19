@@ -116,7 +116,7 @@ const CreateEventPage = () => {
               </li>
             </ul>
           </div>
-          <form onSubmit={handleSubmit} className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
+          <form onSubmit={(evt)=> handleSubmit(evt)} className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef} />
             <SectionTwo ref={sectionTwoRef} />
             <SectionThree ref={sectionThreeRef} />

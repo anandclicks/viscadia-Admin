@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { createEventApiCall, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 let payload = {
@@ -56,7 +55,6 @@ export const EventPageContextProvider = ({ children }) => {
         [name]: value,
       }));
     }
-    console.log(createEventFormData);
   };
 
   const handleForecastingInputs = async (evt, i) => {
