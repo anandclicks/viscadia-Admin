@@ -5,7 +5,6 @@ const WebanarPage = () => {
   const [openCardId, setOpenCardId] = useState(null);
 
   const handleToggle = (id) => {
-    
     setOpenCardId((prev) => (prev === id ? null : id));
   };
   return (

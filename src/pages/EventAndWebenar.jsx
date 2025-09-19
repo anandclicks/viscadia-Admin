@@ -5,10 +5,10 @@ import WebanarPage from '../components/createWebinarPage/WebanarPage'
 
 const EventAndWebenar = () => {
    const  [active,setActive] = useState(0)
-
+   const [filterKey, setFilterKey] = useState()
   return (
     <div>
-      <EventAndWebFilter active={active} setActive={setActive}/> 
+      <EventAndWebFilter setFilterKey={setFilterKey} active={active} setActive={setActive}/> 
      {active ?  <WebanarPage/> : <EventPage/>}
     </div>
   )

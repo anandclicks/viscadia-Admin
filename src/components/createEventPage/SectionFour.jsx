@@ -19,11 +19,11 @@ const SectionFour = ({ ref }) => {
     <div ref={ref} className="min-h-[500px] w-full shadow mt-2 py-4 px-7">
       <h2 className="text-center text-[27px] font-light">Our Forecasting Specialists at the Event</h2>
       <div className="w-full flex justify-end mb-4">
-        <button onClick={addNewForcastingSection} className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">
+        <button onClick={addNewForcastingSection} type="button" className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">
           <i className="ri-add-line"></i> Add More
         </button>
       </div>
-      <div className="w-full h-[400px]">
+      <div className="w-full min-h-[400px]">
         <Swiper modules={[Navigation, Pagination]} spaceBetween={20} slidesPerView={4}>
           {createEventFormData?.forecastingSpecialists.map((f, idx) => (
             <SwiperSlide key={idx}>

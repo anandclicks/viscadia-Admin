@@ -30,14 +30,14 @@ const SectionTwo = ({ ref }) => {
           </div>
         </div>
       </div>
-      <div className="w-[60%] h-full rightSide bg-amber-400 flex items-center relative">
+      <div className="w-[60%] h-full rightSide bg-amber-400 flex items-center relative overflow-hidden">
         <div className="w-full relative z-10 flex justify-end">
           <div className="w-[90%]">
-            <div className="h-[60px]">
+            <div className="h-[40px]">
               <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.heading} placeholder="HEADING" className="w-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light resize-none overflow-hidden" name="heading" />
             </div>
-            <div className="h-[30px]">
-              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.subHeading} placeholder="Sub Heading" className="w-[80%] outline-0 border-0 text-white placeholder:text-white text-[16px] leading-5 font-light resize-none overflow-hidden" name="subHeading" />
+            <div className="min-h-[30px] mt-2 max-h-[90px]">
+              <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.subHeading} placeholder="Sub Heading" className="w-[80%] outline-0 border-0 text-white placeholder:text-white text-[13px] leading-5 font-light resize-none overflow-hidden" name="subHeading" />
             </div>
           </div>
         </div>
