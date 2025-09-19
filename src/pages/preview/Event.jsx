@@ -3,6 +3,7 @@ import PageBuildingLoader from "../../components/common/PageBuildingLoader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
+// import LockedOverlay from "../../components/createEventPage/LockedOverlay";
 
 const Event = () => {
   const redirect = useNavigate()
@@ -40,7 +41,6 @@ const Event = () => {
               alt="Background"
             />
           </div>
-
           {/* Left side logo + text */}
           <div className="w-[60%] h-full p-4 pt-[40px] flex flex-col gap-4 relative z-20 ps-[70px]">
             <div className="w-[240px]">
@@ -94,6 +94,8 @@ const Event = () => {
 
         {/* section two starts */}
         <div className="h-[380px] w-full shadow relative flex overflow-hidden">
+          {/* {pageData?.section_two_status && <LockedOverlay/>} */}
+
           <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
             <img
               className="h-full w-full object-cover"
@@ -138,7 +140,8 @@ const Event = () => {
         {/* section two ends */}
 
         {/* section three starts  */}
-        <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8">
+        <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8 relative">
+          {/* {pageData?.section_two_status && <LockedOverlay/>} */}
           <h2 className="text-[40px] font-light text-center">Speakers</h2>
 
           {/* Speakers */}
@@ -215,7 +218,9 @@ const Event = () => {
         {/* section three ends */}
 
         {/* section four  */}
-        <div className="grid content-center mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
+        <div className="relative">
+         {/* {pageData?.section_three_status && <LockedOverlay/>} */}
+          <div className="grid content-center  mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
           {pageData?.forecasting_specialists?.map((person) => (
             <>
               {person?.image && person.fullName && (
@@ -251,6 +256,7 @@ const Event = () => {
               )}
             </>
           ))}
+        </div>
         </div>
         {/* section four ends  */}
 

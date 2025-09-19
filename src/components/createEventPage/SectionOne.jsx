@@ -40,7 +40,7 @@ const SectionOne = ({ ref }) => {
               <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.date} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="September 10-12-2025" name="date" />
             </div>
             <div className="flex gap-2 min-w-[200px]">
-              <img className="h-[20px]" src="../icons/location.png" alt="" />
+              <img className="h-[20px] overflow-y-scroll" src="../icons/location.png" alt="" />
               <textarea onInput={(e) => { handleEventInputfiledsChanges(e); autoResize(e); }} required value={createEventFormData?.location} className="w-[90%] generalCssForInputs text-[15px] placeholder:font-medium resize-none overflow-hidden" placeholder="Add Location" name="location" />
             </div>
           </div>
