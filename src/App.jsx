@@ -18,7 +18,7 @@ import Event from './pages/preview/Event'
 
 function App() {
   return (
-    <div className=" max-w-[1600px] max-w-ful mx-auto overflow-hidden">
+    <div className=" overflow-hidden">
         <BrowserRouter>
 
       <WebinarContextProvider>

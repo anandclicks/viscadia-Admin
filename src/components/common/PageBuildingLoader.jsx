@@ -1,80 +1,103 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
-const PageBuildingLoader = () => {
-  const loaderRef = useRef(null);
-
-  useEffect(() => {
-    const loader = loaderRef.current;
-    const orbiterCount = 4;
-    const animationDuration = 5000; // 5 seconds
-
-    // Create orbiting particles
-    for (let i = 0; i < orbiterCount; i++) {
-      const orbiter = document.createElement('div');
-      orbiter.classList.add('orbit');
-      const angle = (i / orbiterCount) * 2 * Math.PI;
-      orbiter.style.left = '200px';
-      orbiter.style.top = '200px';
-      orbiter.style.transform = `rotate(${angle}rad) translateX(60px)`;
-      orbiter.style.animation = `orbit ${animationDuration / 1000 * 0.5}s linear infinite`;
-      loader.appendChild(orbiter);
-    }
-
-    // Create core
-    const core = document.createElement('div');
-    core.classList.add('core');
-    core.style.left = '160px'; // Center of 400x400 container
-    core.style.top = '160px';
-    core.style.animation = 'glow 2.5s infinite ease-in-out';
-    loader.appendChild(core);
-
-    // Stop orbiters and animate core
-    setTimeout(() => {
-      const orbiters = loader.querySelectorAll('.orbit');
-      orbiters.forEach(orbiter => {
-        orbiter.style.animation = 'none';
-        orbiter.style.transition = `all 1s ease-in-out`;
-        orbiter.style.left = '200px';
-        orbiter.style.top = '200px';
-        orbiter.style.opacity = '0';
-        orbiter.style.transform = 'scale(0.2)';
-      });
-      core.style.transition = `all 1.8s cubic-bezier(0.4, 0, 0.2, 1)`;
-      core.style.transform = 'scale(1) rotate(180deg)';
-      core.style.opacity = '1';
-    }, animationDuration * 0.5);
-
-    // Fade out loader
-    setTimeout(() => {
-      loader.style.transition = 'opacity 1s ease';
-      loader.style.opacity = '0';
-      setTimeout(() => {
-        loader.remove();
-      }, 1000);
-    }, animationDuration);
-
-    // Cleanup on component unmount
-    return () => {
-      loader.innerHTML = ''; // Clear dynamically added elements
-    };
-  }, []);
-
+export default function PageBuildingLoader() {
   return (
-    <div className="bg-white flex items-center justify-center h-[100vh] fixed top-0 left-0 z-30 w-full">
-      <div
-        ref={loaderRef}
-        className="relative w-[400px] h-[400px]"
-        style={{
-          '--particle-bg': '#BD2F2C',
-          '--particle-shadow': '0 0 25px #BD2F2C, 0 0 50px #BD2F2C',
-          '--core-gradient': 'linear-gradient(135deg, #BD2F2C, #BD2F2C)',
-          '--core-shadow': '0 0 40px #BD2F2C, 0 0 60px #BD2F2C',
-          '--orbit-shadow': '0 0 15px #BD2F2C',
-        }}
-      >
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div role="status" aria-live="polite" aria-busy="true" className="relative">
+        <div className="spinner" aria-hidden="false">
+          <svg
+            viewBox="0 0 64 64"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+            className="w-16 h-16"
+          >
+            <circle
+              className="track"
+              cx="32"
+              cy="32"
+              r="28"
+              fill="none"
+              stroke="#e5e7eb"
+              strokeWidth="4"
+            />
+            <circle
+              className="head"
+              cx="32"
+              cy="32"
+              r="28"
+              fill="none"
+              stroke="#BD2F2C"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray="70 140"
+            />
+          </svg>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-4 h-4 bg-[#BD2F2C] rounded-full animate-pulse-glow" />
+        </div>
+        <span className="sr-only">Loading...</span>
       </div>
+
+      <style jsx>{`
+        :root {
+          --spinner-size: 64px;
+          --duration: 1s;
+          --primary-color: #BD2F2C;
+        }
+
+        .spinner {
+          animation: spin var(--duration) cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% {
+            opacity: 0.6;
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(189, 47, 44, 0.4);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+            box-shadow: 0 0 8px 2px rgba(189, 47, 44, 0.6);
+          }
+        }
+
+        .animate-pulse-glow {
+          animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .spinner {
+            animation: none;
+          }
+          .head {
+            stroke-dasharray: 1 0;
+          }
+          .animate-pulse-glow {
+            animation: none;
+          }
+        }
+      `}</style>
     </div>
   );
-};
-
-export default PageBuildingLoader;
+}

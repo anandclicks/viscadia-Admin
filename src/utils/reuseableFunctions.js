@@ -1,6 +1,17 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
+export function sligGenerator(str) {
+  return str
+    .toString()
+    .normalize('NFKD')             
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') 
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
+}
+
 
 export const commonGetApiCall = async(endpoint)=>{
   try {
@@ -47,7 +58,6 @@ export const uploadSingleImage = async (files) => {
     return "";
   }
 };
-
 
 
 export const createEventApiCall = async (data) => {

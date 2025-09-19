@@ -86,7 +86,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle,data }) => {
             }
              
              <button className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
-<Link to={`/preview/event/${data?.id}`} className="h-full w-full">
+<Link to={`/preview/event/${data?.id}`} className="h-[40px]  w-[100%]">
                 Preview
               </Link>
              </button>

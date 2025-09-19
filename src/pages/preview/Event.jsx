@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PageBuildingLoader from "../../components/common/PageBuildingLoader";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
+import toast from "react-hot-toast";
 
 const Event = () => {
+  const redirect = useNavigate()
   const [pageData, setPageData] = useState();
-  const [loeading,setloading] = useState(true)
+  const [loading,setloading] = useState(true)
   let data = localStorage.getItem("event");
   data = JSON.parse(data);
   const { id } = useParams();
@@ -13,21 +15,25 @@ const Event = () => {
     const getData = async () => {
       const res = await commonGetApiCall(`/events/${id}`);
       if (res.success) {
-        setPageData(res.data);
+      setPageData(res.data);
+      setloading(false)
+      }else {
+        toast.error("Couldn't Load ! Please Try Again.")
+        redirect("/events-and-webinars")
       }
     };
     getData();
-
-    setTimeout(() => {
-      setloading(false)
-    }, 2000);
   }, []);
   return (
-    <div className="bg-white">
-      <div className="pt-20 bg-white">
+   <>
+   {loading && <PageBuildingLoader/>}
+    {
+      !loading &&
+      <div className="bg-white">
+      <div className=" bg-white">
         {/* section one start  */}
-        <div className="h-[370px] w-full relative flex">
-          <div className="EventPagesectionOne w-full h-[370px] object-cover absolute z-10">
+        <div className="h-[400px] w-full relative flex ">
+          <div className="EventPagesectionOne w-full  h-[400px] object-cover absolute z-10">
             <img
               className="h-full w-full object-cover"
               src="/images/SectionOneBg.png"
@@ -36,7 +42,7 @@ const Event = () => {
           </div>
 
           {/* Left side logo + text */}
-          <div className="w-[60%] h-full p-4 flex flex-col gap-4 relative z-20">
+          <div className="w-[60%] h-full p-4 pt-[40px] flex flex-col gap-4 relative z-20 ps-[70px]">
             <div className="w-[240px]">
               <div className="h-[180px] w-full relative">
                 <div className="absolute left-0 top-0 h-full w-full  flex justify-center items-center flex-col">
@@ -209,7 +215,7 @@ const Event = () => {
         {/* section three ends */}
 
         {/* section four  */}
-        <div className="grid content-center mb-10 grid-cols-3 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
+        <div className="grid content-center mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
           {pageData?.forecasting_specialists?.map((person) => (
             <>
               {person?.image && person.fullName && (
@@ -327,6 +333,8 @@ const Event = () => {
         {/* contact use form ends  */}
       </div>
     </div>
+    }
+   </>
   );
 };
 
