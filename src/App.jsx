@@ -31,13 +31,17 @@ function App() {
               <Route path="/case-studies" element={<CaseStudiesPage />}/>
             </Route>
             <Route>
-              <Route path="/create/event" element={<CreateEventPage />} />
+              <Route path="/create/event" element={<CreateEventPage />} />c
               <Route path="/create/webinar" element={<CreateWebinarPage />} />
               <Route path="/create/case-study" element={<CaseStudy />} />
             </Route>
             {/* Preview pages route  */}
             <Route>
               <Route path="/preview/event/:id" element={<Event/>}/>
+            </Route>
+            {/* Edit pages route  */}
+            <Route>
+              <Route path="/edit/event/:id" element={<CreateEventPage/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>

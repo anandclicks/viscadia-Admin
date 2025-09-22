@@ -7,10 +7,10 @@ const Navbar = () => {
     <div className='h-18 w-full flex justify-between items-center bg-[#F4F1F2] '>
      <div className='flex items-center gap-5'>
       <Link to={'/'}>
-        <img className='h-[50px]' src="../logo.png" alt="" />
+        <img className='h-[50px]' src="/logo.png" alt="" />
         </Link>
       <div className='relative h-[45px] w-120'>
-       <img className='absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5' src="../searchIcon.png" alt="" />
+       <img className='absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5' src="/searchIcon.png" alt="" />
         <input
           type='text'
           placeholder='Search..'
@@ -20,10 +20,10 @@ const Navbar = () => {
      </div>
        <div className='flex gap-4 items-center'>
         <button className='h-[50px] w-[50px] bg-white flex justify-center items-center rounded-full'>
-          <img src="../icons/notificationIcon.png" alt="" />
+          <img src="/icons/notificationIcon.png" alt="" />
         </button>
         <button className='h-[50px] w-[50px] bg-white flex justify-center items-center rounded-full'>
-          <img src="../icons/settingIcon.png" alt="" />
+          <img src="/icons/settingIcon.png" alt="" />
         </button>
         <button className='h-[50px] w-[50px] border-[2px] border-[#c50000] rounded-full relative'>
          <img

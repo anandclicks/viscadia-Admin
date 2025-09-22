@@ -1,14 +1,22 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 import SectionFour from "./SectionFour";
 import SectionThree from "./SectionThree";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
+import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
+import toast from "react-hot-toast";
+import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const CreateEventPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditingPage,setIsEditingPage] = useState(false)
+  const [loading,setLoading] = useState(true)
+
+  const redirect = useNavigate()
+
   const toggleMenu = (evt) => {
     evt.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -26,20 +34,19 @@ const CreateEventPage = () => {
 
   // function for handling scrolling by button click 
   const [activeSection,setActiveSection] = useState(null)
-
-  const sectionOneRef = useRef(null)
+    const sectionOneRef = useRef(null)
   const sectionTwoRef = useRef(null)
   const sectionThreeRef = useRef(null)
   const sectionFourRef = useRef(null)
+  
 
+  useEffect(()=>{
   const sectionRefs = [
     {ref : sectionOneRef, id : "sectionOne"},
     {ref : sectionTwoRef, id : "sectionTwo"},
     {ref : sectionThreeRef, id : "sectionThree"},
     {ref : sectionFourRef, id : "sectionFour"},
   ]
-
-  useEffect(()=>{
    const observer = new IntersectionObserver((entries)=>{
     entries.forEach((entry)=>{
       if(entry.isIntersecting){
@@ -54,15 +61,7 @@ const CreateEventPage = () => {
       observer.observe(ref.current)
     }
    })
-
-   return (()=> {
-    sectionRefs.forEach(({ref,id})=> {
-      if(ref.current){
-        observer.unobserve(ref)
-      }
-    })
-   })
-  },[]) 
+  },[loading]) 
 
   const handleScrolling = (ref)=>{
     ref.current.scrollIntoView({behavior: "smooth", block: "start"})
@@ -73,12 +72,38 @@ const CreateEventPage = () => {
     setIsOpen(false)
   }
 
+
+
+
+  // if this is a editing page 
+  const {id} = useParams()
   useEffect(()=>{
-    console.log(activeSection);
-  },[activeSection])
+   if(id){
+     const getData = async()=>{
+      let response = await commonGetApiCall(`/events/${id}`)
+      if(response.success){
+        let convertedData = toCamelCase(response?.data)
+        setCreateEventFormData(convertedData)
+        setIsEditingPage(true)
+        setLoading(false)
+      }else {
+        redirect("/events-and-webinars")
+        toast.error("Couldn't Fetch Event!")
+        setLoading(false)
+      }
+    }
+    getData()
+   }else {
+    setLoading(false)
+   }
+  },[])
+
+
 
   return (
-    <div className="h-[100vh] w-full p-4">
+    <>
+    {loading && <PageBuildingLoader/>}
+    {!loading && <div className="h-[100vh] w-full p-4">
       <Navbar />
       <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
         <div className="h-[70px] px-4 flex items-center justify-between">
@@ -86,7 +111,7 @@ const CreateEventPage = () => {
           <div className="h-full flex items-center gap-5">
             <div className="relative">
               <div onClick={toggleMenu} className="z-40 h-[45px] capitalize border min-w-[130px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer">
-                {createEventFormData?.status === "live" ? "Public" : createEventFormData?.status} <img className="h-[10px]" src="../icons/aeroBottom.png" />
+                {createEventFormData?.status === "live" ? "Public" : createEventFormData?.status} <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div onClick={(e) => e.stopPropagation()} className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}>
                 <button onClick={()=> handleEventStatus('draft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
@@ -95,7 +120,7 @@ const CreateEventPage = () => {
               </div>
             </div>
             <Link to={'/events-and-webinars'} className="h-[40px] w-[40px] rounded-full">
-              <img className="h-full w-full rounded-full object-cover" src="../icons/close.png" alt="" />
+              <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
             </Link>
           </div>
         </div>
@@ -116,7 +141,7 @@ const CreateEventPage = () => {
               </li>
             </ul>
           </div>
-          <form onSubmit={(evt)=> handleSubmit(evt)} className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
+          <form onSubmit={(evt)=> handleSubmit(evt,isEditingPage,id)} className="w-[82%] h-[100%] overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef} />
             <SectionTwo ref={sectionTwoRef} />
             <SectionThree ref={sectionThreeRef} />
@@ -128,7 +153,8 @@ const CreateEventPage = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

@@ -12,19 +12,47 @@ export function sligGenerator(str) {
     .replace(/-{2,}/g, '-');
 }
 
+export function toSnakeCase(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(toSnakeCase);
+  } else if (obj !== null && typeof obj === "object") {
+    const newObj = {};
+    for (const key in obj) {
+      const snakeKey = key.replace(/([A-Z])/g, "_$1").toLowerCase();
+      newObj[snakeKey] = toSnakeCase(obj[key]);
+    }
+    return newObj;
+  }
+  return obj;
+}
+
+
+export function toCamelCase(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(toCamelCase);
+  } else if (obj !== null && typeof obj === "object") {
+    const newObj = {};
+    for (const key in obj) {
+      const camelKey = key.replace(/_([a-z])/g, (_, char) => char.toUpperCase());
+      newObj[camelKey] = toCamelCase(obj[key]);
+    }
+    return newObj;
+  }
+  return obj;
+}
 
 export const commonGetApiCall = async(endpoint)=>{
   try {
-    const res = await axios.get(`http://54.219.242.41:4005/api/admin${endpoint}`)
+    const res = await axios.get(`http://192.168.0.193:4005/api/admin${endpoint}`)
     return res.data
   } catch (error) {
     return error
   }
 }
 
-export const putCommonApi = async(endPoint,data)=>{
+export const putCommonApiForEvnts = async(endPoint,data)=>{
   try {
-    const res = await axios.put(`http://54.219.242.41:4005/api/admin${endPoint}`,data)
+    const res = await axios.put(`http://192.168.0.193:4005/api/admin${endPoint}`,data)
     return res.data
   } catch (error) {
     return error
@@ -39,7 +67,7 @@ export const uploadSingleImage = async (files) => {
     let endPoint = files[0].type === "video/mp4" ? "form-files" : "single";
     formData.append(files[0].type === "video/mp4" ? "additional_files" : "file",  files[0]);
     const res = await axios.post(
-      `http://54.219.242.41:4005/api/upload/${endPoint}`,
+      `http://192.168.0.193:4005/api/upload/${endPoint}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -63,14 +91,11 @@ export const uploadSingleImage = async (files) => {
 export const createEventApiCall = async (data) => {
   let t = toast.loading("Creating Event..!");
   try {
-    const res = await axios.post("http://54.219.242.41:4005/api/admin/events", data);
-    toast.dismiss(t);
-    toast.success("Event Created Successfully!");
+    const res = await axios.post("http://192.168.0.193:4005/api/admin/events", data);
+    toast.dismiss(t)
     return res.data; 
   } catch (e) {
-    toast.dismiss(t);
-    toast.error("Something Went Wrong!");
-    console.error("API error:", e);
+    toast.dismiss(t)
     return e;
   }
 };

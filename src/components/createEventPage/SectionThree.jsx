@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { EventPageContext } from "../../../context/EventPageContext";
 
 const SectionThree = ({ ref }) => {
-  const [speakerStatus, setSpeakerStatus] = useState(true);
   const {
     createEventFormData,
     setCreateEventFormData,
@@ -12,7 +11,6 @@ const SectionThree = ({ ref }) => {
   } = useContext(EventPageContext);
   
   const handleSectionThreeStatus = () => {
-    setSpeakerStatus((prev) => !prev);
     setCreateEventFormData((prev) => ({
       ...prev,
       sectionThreeStatus: prev?.sectionThreeStatus ? 0 : 1,
@@ -26,17 +24,17 @@ const SectionThree = ({ ref }) => {
   return (
     <div ref={ref} className="h-[500px] w-full mt-10 pt-5 shadow mb-8">
       <div className="px-10 flex justify-end gap-2 items-center">
-        <p>{speakerStatus ? "Hide" : "Unhide"}</p>
+        <p>{createEventFormData?.sectionThreeStatus ? "Hide" : "Unhide"}</p>
         <button
           type="button"
           onClick={() => handleSectionThreeStatus()}
           className={`w-[80px] transition-all duration-200 ${
-            speakerStatus ? "grediantBg" : "bg-gray-400"
+            createEventFormData?.sectionThreeStatus ? "grediantBg" : "bg-gray-400"
           } h-full rounded-full p-1 cursor-pointer flex items-center`}
         >
           <div
             className={`h-[30px] w-[30px] transition-all bg-white rounded-full ${
-              speakerStatus ? "translate-x-0" : "translate-x-10"
+              createEventFormData?.sectionThreeStatus ? "translate-x-0" : "translate-x-10"
             }`}
           ></div>
         </button>
@@ -59,7 +57,7 @@ const SectionThree = ({ ref }) => {
                     />
                   )}
                   <div className="relative flex flex-col justify-center items-center bg-[#FFF5F5] h-full w-full">
-                    <img src="../icons/upload.png" alt="" />
+                    <img src="/icons/upload.png" alt="" />
                     <h3 className="text-[#BD2F2C] mt-2">Upload Logo</h3>
                     {el.image && (
                       <img

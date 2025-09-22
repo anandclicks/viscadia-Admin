@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { createEventApiCall, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
+import { createEventApiCall, putCommonApiForEvnts, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 let payload = {
   logo: "", 
@@ -124,22 +125,33 @@ export const EventPageContextProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = async(evt) => {
+  const handleSubmit = async(evt,type,id) => {
     evt.preventDefault();
-    localStorage.setItem("event", JSON.stringify(createEventFormData));
-   let res = await createEventApiCall(createEventFormData)
+   if(type){
+    let t = toast.loading("Updating!")
+    let res = await putCommonApiForEvnts(`/events/${id}`,createEventFormData)
+    if(res.success){
+      toast.dismiss(t)
+      toast.success(res.message || "Updated successsfuly!")
+      setTimeout(() => {
+      navigate("/events-and-webinars")
+      setCreateEventFormData({...payload})
+    }, 500);
+    }else {
+      toast.error("couldn't Update!")
+    }
+   }else {
+    let res = await createEventApiCall(createEventFormData)
    if(res.success){
     setTimeout(() => {
       navigate("/events-and-webinars")
-    }, 1000);
+      setCreateEventFormData({...payload})
+    }, 500);
+   }
    }
   };
 
-  useEffect(()=>{
-    console.log(createEventFormData);
-    
-  },[createEventFormData])
-
+  
   return (
     <EventPageContext.Provider
       value={{
