@@ -28,7 +28,7 @@ const SectionFour = ({ ref }) => {
           <div className={`h-[30px] w-[30px] transition-all bg-white rounded-full ${createEventFormData?.sectionFourStatus ? "translate-x-0" : "translate-x-10"}`}></div>
         </button>
       </div>
-      <h2 className="text-center text-[27px] font-light">Our Forecasting Specialists at the Event</h2>
+      <h2 className="text-center text-[27px] my-10 font-light">Our Forecasting Specialists at the Event</h2>
       <div className="w-full flex justify-end mb-4">
         <button onClick={addNewForcastingSection} type="button" className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">
           <i className="ri-add-line"></i> Add More

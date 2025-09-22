@@ -14,7 +14,6 @@ const CreateEventPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditingPage,setIsEditingPage] = useState(false)
   const [loading,setLoading] = useState(true)
-
   const redirect = useNavigate()
 
   const toggleMenu = (evt) => {
@@ -72,9 +71,6 @@ const CreateEventPage = () => {
     setCreateEventFormData((prev)=> ({...prev,status : status}))
     setIsOpen(false)
   }
-
-
-
 
   // if this is a editing page 
   const {id} = useParams()
@@ -148,7 +144,7 @@ const CreateEventPage = () => {
             <SectionThree ref={sectionThreeRef} />
             <SectionFour ref={sectionFourRef} />
             <div className="flex w-full justify-end gap-5">
-              <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
+              <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
               <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
             </div>
           </form>

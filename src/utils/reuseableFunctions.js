@@ -37,8 +37,6 @@ export const eventPayload= {
   ],
 };
 
-
-
 export function sligGenerator(str) {
   return str
     .toString()
@@ -63,7 +61,6 @@ export function toSnakeCase(obj) {
   }
   return obj;
 }
-
 
 export function toCamelCase(obj) {
   if (Array.isArray(obj)) {

@@ -217,7 +217,7 @@ const Event = () => {
         {/* section four  */}
         {pageData?.section_four_status === 1 &&
          <div className="relative">
-          <h2 className="text-[30px] my-2 text-center font-light">Our Forecasting Specialists at the Event</h2>
+          <h2 className="text-[30px] my-10 text-center font-light">Our Forecasting Specialists at the Event</h2>
           <div className="grid content-center  mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
           {pageData?.forecasting_specialists?.map((person) => (
             <>
