@@ -1,6 +1,44 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
+// variable 
+export const eventPayload= {
+  logo: "", 
+  title: "",
+  date: "",
+  location: "",
+  image: "",
+  headingImage: "",
+  heading: "",
+  subHeading: "",
+  speakerTopic: "",
+  speakerTime: "",
+  speakerDate: "",
+  sectionTwoStatus: 1,
+  sectionThreeStatus: 1,
+  sectionFourStatus: 1,
+  status: "draft",
+  speaker: [
+    {
+      fullName: "",
+      designation: "",
+      image: null,
+    },
+  ],
+  description: "",
+  forecastingSpecialists: [
+    {
+      image: null,
+      fullName: "",
+      designation: "",
+      introduction: "",
+    },
+  ],
+};
+
+
+
 export function sligGenerator(str) {
   return str
     .toString()

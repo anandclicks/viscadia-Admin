@@ -91,9 +91,8 @@ const Event = () => {
         {/* section one end  */}
 
         {/* section two starts */}
-        <div className="h-[380px] w-full shadow relative flex overflow-hidden">
-          {!pageData?.section_two_status && <LockedOverlay/>}
-
+          {pageData?.section_two_status === 1 && 
+          <div className="h-[380px] w-full shadow relative flex overflow-hidden">
           <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
             <img
               className="h-full w-full object-cover"
@@ -134,12 +133,12 @@ const Event = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
         {/* section two ends */}
 
         {/* section three starts  */}
-        <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8 relative">
-             {!pageData?.section_three_status && <LockedOverlay/>}
+         {pageData?.section_three_status === 1 &&
+          <div className="min-h-[350px] py-10 w-full pt-5 shadow mb-8 relative">
           <h2 className="text-[40px] font-light text-center">Speakers</h2>
           {/* Speakers */}
           <div className="flex min-h-[55%] relative justify-end px-10 gap-5 items-center">
@@ -212,17 +211,19 @@ const Event = () => {
             </p>
           </div>
         </div>
+         }
         {/* section three ends */}
 
         {/* section four  */}
-        <div className="relative">
+        {pageData?.section_four_status === 1 &&
+         <div className="relative">
           <h2 className="text-[30px] my-2 text-center font-light">Our Forecasting Specialists at the Event</h2>
           <div className="grid content-center  mb-10 grid-cols-4 2xl:max-w-[1400px] md:max-w-[85%] mx-auto max gap-10 ">
           {pageData?.forecasting_specialists?.map((person) => (
             <>
               {person?.image && person.fullName && (
                 <Link className="relative" to={"#"}>
-                  {!pageData?.section_four_status && <LockedOverlay/>}
+                  
                   <div className="flex pb-3  hover:shadow-[0px_3px_6px_2px_rgba(0,_0,_0,_0.1)] flex-col items-center cursor-pointer">
                     <div className="relative w-full h-[260px] group overflow-hidden">
                       <img
@@ -256,6 +257,8 @@ const Event = () => {
           ))}
         </div>
         </div>
+        }
+     
         {/* section four ends  */}
 
         {/* contact us form  */}

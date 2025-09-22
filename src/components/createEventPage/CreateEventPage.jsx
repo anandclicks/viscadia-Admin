@@ -6,7 +6,7 @@ import SectionFour from "./SectionFour";
 import SectionThree from "./SectionThree";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
-import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
+import { commonGetApiCall, eventPayload, toCamelCase } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
@@ -22,6 +22,7 @@ const CreateEventPage = () => {
     setIsOpen((prev) => !prev);
   };
   useEffect(() => {
+    setCreateEventFormData({...eventPayload})
     const handleClickOutside = () => setIsOpen(false);
     window.addEventListener("click", handleClickOutside);
     return () => {
@@ -34,7 +35,7 @@ const CreateEventPage = () => {
 
   // function for handling scrolling by button click 
   const [activeSection,setActiveSection] = useState(null)
-    const sectionOneRef = useRef(null)
+  const sectionOneRef = useRef(null)
   const sectionTwoRef = useRef(null)
   const sectionThreeRef = useRef(null)
   const sectionFourRef = useRef(null)
