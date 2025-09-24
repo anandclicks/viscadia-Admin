@@ -10,7 +10,7 @@ const WhitePaperListing = () => {
   return (
     <div className="mt-5">
       {[...Array(3)].map((_, index) => (
-        <CaseStudyAndWhictePaperCard
+        <CaseStudyAndWhitePaperCard
           key={index}
           id={index}
           isOpen={openCardId === index}
