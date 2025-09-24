@@ -23,7 +23,7 @@ const CreateWebinarPage = () => {
   }, []);
 
   // Golbale function for handling submit event
-  const { handleSubmit } = useContext(WebinarContext);
+  const { handleSubmit,setCreateEventFormData,webinarCreateData } = useContext(WebinarContext);
 
   // Function for handle scrolling
   const [activeSection, setActiveSection] = useState(null);
@@ -69,6 +69,10 @@ const CreateWebinarPage = () => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const handleWebinarStatus = (state)=>{
+    setCreateEventFormData((prev)=> {({...prev, state : state})})
+  }
+
   return (
     <div className="h-[100vh] w-full p-4">
       <Navbar />
@@ -81,26 +85,26 @@ const CreateWebinarPage = () => {
                 onClick={toggleMenu}
                 className="z-40 h-[45px] border min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
               >
-                Mark as Draft{" "}
-                <img className="h-[10px]" src="../icons/aeroBottom.png" />
+                {webinarCreateData?.status}{" "}
+                <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div
                 onClick={(e) => e.stopPropagation()}
                 className={`${
                   isOpen ? "opacity-100 block" : "opacity-0 hidden"
-                } h-[200px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
+                } h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
               >
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Edit
                 </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button onClick={()=> handleWebinarStatus('draft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Mark as Draft
                 </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
-                  Publish
+                <button onClick={()=> handleWebinarStatus('undraft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                  Undraft
                 </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
-                  Preview
+                <button onClick={()=> handleWebinarStatus('live')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                  Publish
                 </button>
               </div>
             </div>

@@ -3,7 +3,6 @@ import PageBuildingLoader from "../../components/common/PageBuildingLoader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
-import LockedOverlay from "../../components/createEventPage/LockedOverlay";
 
 const Event = () => {
   const redirect = useNavigate()

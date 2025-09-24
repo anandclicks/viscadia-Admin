@@ -36,6 +36,21 @@ export const eventPayload= {
     },
   ],
 };
+export let webinarPayload = {
+  subHeading: "",
+  imageOne: null,
+  imageTwo: null,
+  keyPoints: [""],
+  webibarVideo: null,
+  status : "draft",
+  speaker: [
+    {
+      fullName: "",
+      designation: "",
+      image: null,
+    },
+  ],
+};
 
 export function sligGenerator(str) {
   return str
@@ -78,7 +93,7 @@ export function toCamelCase(obj) {
 
 export const commonGetApiCall = async(endpoint)=>{
   try {
-    const res = await axios.get(`http://192.168.0.193:4005/api/admin${endpoint}`)
+    const res = await axios.get(`http://54.219.242.41:4005/api/admin${endpoint}`)
     return res.data
   } catch (error) {
     return error
@@ -87,7 +102,7 @@ export const commonGetApiCall = async(endpoint)=>{
 
 export const putCommonApiForEvnts = async(endPoint,data)=>{
   try {
-    const res = await axios.put(`http://192.168.0.193:4005/api/admin${endPoint}`,data)
+    const res = await axios.put(`http://54.219.242.41:4005/api/admin${endPoint}`,data)
     return res.data
   } catch (error) {
     return error
@@ -102,7 +117,7 @@ export const uploadSingleImage = async (files) => {
     let endPoint = files[0].type === "video/mp4" ? "form-files" : "single";
     formData.append(files[0].type === "video/mp4" ? "additional_files" : "file",  files[0]);
     const res = await axios.post(
-      `http://192.168.0.193:4005/api/upload/${endPoint}`,
+      `http://54.219.242.41:4005/api/upload/${endPoint}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -126,7 +141,7 @@ export const uploadSingleImage = async (files) => {
 export const createEventApiCall = async (data) => {
   let t = toast.loading("Creating Event..!");
   try {
-    const res = await axios.post("http://192.168.0.193:4005/api/admin/events", data);
+    const res = await axios.post("http://54.219.242.41:4005/api/admin/events", data);
     toast.dismiss(t)
     return res.data; 
   } catch (e) {
@@ -134,5 +149,4 @@ export const createEventApiCall = async (data) => {
     return e;
   }
 };
-
 

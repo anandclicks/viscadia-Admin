@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
 import SectionOne from "./SectionOne";
+import SectionTwo from "./SectionTwo";
+import Chellenges from "./Chellenges";
+import Apporach from "./Apporach";
+import Outcomes from "./Outcomes";
 
-const CaseStudy = () => {
+const CreateCaseStudy = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (evt) => {
     evt.stopPropagation();
@@ -42,18 +46,16 @@ const CaseStudy = () => {
                 onClick={(e) => e.stopPropagation()}
                 className={`${
                   isOpen ? "opacity-100 block" : "opacity-0 hidden"
-                } h-[200px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
+                } h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
               >
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
-                  Edit
-                </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                
+                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Mark as Draft
                 </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Publish
                 </button>
-                <button className="w-full h-[20%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Preview
                 </button>
               </div>
@@ -84,6 +86,16 @@ const CaseStudy = () => {
           </div>
           <div className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
            <SectionOne/>
+           <SectionTwo/>
+           <Chellenges/>
+           <Apporach/>
+           <Outcomes/>
+
+
+
+
+
+
             {/* <div className="flex w-full justify-end gap-5">
             <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5" >
               Cancle
@@ -99,4 +111,4 @@ const CaseStudy = () => {
   );
 };
 
-export default CaseStudy;
+export default CreateCaseStudy;

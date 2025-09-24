@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EventAndWebListingCard from "../common/EventAndWebListingCard";
+import CaseStudyAndWhitePaperCard from "../common/CaseStudyAndWhitePaperCard";
 
 const CaseStudiesListing = () => {
   const [openCardId, setOpenCardId] = useState(null);
@@ -10,7 +10,7 @@ const CaseStudiesListing = () => {
   return (
     <div className="mt-5">
       {[...Array(1)].map((_, index) => (
-        <EventAndWebListingCard
+        <CaseStudyAndWhitePaperCard
           key={index}
           id={index}
           isOpen={openCardId === index}

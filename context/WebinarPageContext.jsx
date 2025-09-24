@@ -77,8 +77,14 @@ const handleSpeakersChnages = async(evt, index) => {
   }
 };
 
-const handleSubmit = (evt)=>{
+const handleSubmit = (evt,type,id)=>{
+  evt.preventDefault()
   console.log(webinarCreateData);
+  if(type){
+
+  }else {
+    
+  }
 }
 
 
