@@ -61,8 +61,8 @@ export const NewCaseStudyContextProvider = ({ children }) => {
   const handleObjInpusChanges = async (evt, arrName, index) => {
     const { type, name, value, files } = evt.target
     if (type === "file" && files && files[0]) {
-      const url = await uploadSingleImage(files)
-      if (url) {
+      // const url = await uploadSingleImage(files)
+      if (true) {
         setCreateStudyData((prev) => {
           let arr = [...createCaseStudyData[arrName]]
           arr[index] = {...arr[index],[name] : "tasting"}
@@ -77,6 +77,9 @@ export const NewCaseStudyContextProvider = ({ children }) => {
       })
     }
   }
+
+
+
 
   useEffect(() => {
     console.log(createCaseStudyData);
