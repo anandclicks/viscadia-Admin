@@ -1,6 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { NewCaseStudyContext } from "../../../context/NewCaseStudyContext";
 
 const SectionOne = () => {
+  const {handleNewCaseStudyInputs,createStudyData} = useContext(NewCaseStudyContext) 
+
+
   const [isImage, setIsImage] = useState(null);
   const subHeadingRef = useRef(null);
   const headingRef = useRef(null);
@@ -37,6 +41,7 @@ const SectionOne = () => {
             <div className="w-[40%] flex flex-col justify-center">
               <div className="w-full">
                 <textarea
+                name="urlTitle"
                   ref={subHeadingRef}
                   placeholder="Sub Heading"
                   style={{ height: "30px" }}
@@ -45,28 +50,39 @@ const SectionOne = () => {
                       ? "text-[#ffffff] placeholder:text-[#ffffff]"
                       : "text-[#000000] placeholder:text-[#000000]"
                   } text-[21px]`}
-                  onInput={() => autoResize(subHeadingRef)}
+                  onInput={(e) => {
+                    autoResize(subHeadingRef)
+                    handleNewCaseStudyInputs(e)
+                  }}
                 />
               </div>
               <div className=" w-full">
                 <textarea
                   ref={headingRef}
                   placeholder="Enter Heading"
+                  name="mainSubtitle"
                   style={{ height: "40px" }}
                   className={`w-full outline-0 border-0 resize-none overflow-hidden ${
                     isImage
                       ? "text-[#ffffff] placeholder:text-[#ffffff]"
                       : "text-[#000000] placeholder:text-[#000000]"
                   } text-[28px]`}
-                  onInput={() => autoResize(headingRef)}
+                  onInput={(e) => {
+                    autoResize(headingRef)
+                    handleNewCaseStudyInputs(e)
+                  }}
                 />
               </div>
             </div>
             <div className="w-[60%] relative flex justify-end items-center z-40 h-full">
               <div className="h-full w-[200px] flex justify-center items-center flex-col relative">
                 <input
-                  onChange={handleImageChange}
+                  onChange={(e)=>{  
+                    handleImageChange(e)
+                    handleNewCaseStudyInputs(e)
+                  }}
                   type="file"
+                  name="bannerImg"
                   className="absolute left-0 top-0 h-full w-full z-30 opacity-0 cursor-pointer"
                 />
                 {!isImage && (

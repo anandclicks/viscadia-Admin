@@ -11,7 +11,7 @@ import { WebinarContextProvider } from "../context/WebinarPageContext";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CreateEventPage from "./components/createEventPage/CreateEventPage";
 import CreateWebinarPage from "./components/createWebinarPage/CreateWebinarPage";
-import { NewCaseStudyContextProvider } from "../context/NewCaseStudy";
+import { NewCaseStudyContextProvider } from "../context/NewCaseStudyContext";
 import { Toaster } from "react-hot-toast";
 import Event from './pages/preview/Event'
 import CreateCaseStudy from "./components/CaseStudiesPage/CreateCaseStudy";

@@ -100,7 +100,7 @@ export const EventPageContextProvider = ({ children }) => {
       return { ...prev, speaker: speakers };
     });
   };
-
+  
   const handleSpeakersInputsChanges = async (evt, i) => {
     const { name, files, value } = evt.target;
     if (files && files[0]) {
