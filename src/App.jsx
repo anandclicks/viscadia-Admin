@@ -15,6 +15,8 @@ import { NewCaseStudyContextProvider } from "../context/NewCaseStudyContext";
 import { Toaster } from "react-hot-toast";
 import Event from './pages/preview/Event'
 import CreateCaseStudy from "./components/CaseStudiesPage/CreateCaseStudy";
+import LeadershipPage from "./pages/leadership/LeadershipPage";
+import CreateLeadership from "./components/createLedership/CreateLeadership";
 
 function App() {
   return (
@@ -29,11 +31,13 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/events-and-webinars" element={<EventAndWebenar />}/>
               <Route path="/case-studies" element={<CaseStudiesPage />}/>
+              <Route path="/leadership" element={<LeadershipPage />}/>
             </Route>
             <Route>
-              <Route path="/create/event" element={<CreateEventPage />} />c
+              <Route path="/create/event" element={<CreateEventPage />} />
               <Route path="/create/webinar" element={<CreateWebinarPage />} />
               <Route path="/create/case-study" element={<CreateCaseStudy />} />
+              <Route path="/create/leadership" element={<CreateLeadership />} />
             </Route>
             {/* Preview pages route  */}
             <Route>
