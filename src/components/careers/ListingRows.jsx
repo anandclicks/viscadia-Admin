@@ -6,7 +6,6 @@ const ListingRows = ({ id, isOpen, onToggle }) => {
     evt.stopPropagation();
     onToggle(id);
     console.log(id);
-    
   };
   return (
     <div  className="flex w-full justify-between items-center border-b border-stone-200 py-3">
@@ -26,7 +25,7 @@ const ListingRows = ({ id, isOpen, onToggle }) => {
         onClick={(e)=> e.stopPropagation()}
           className={`${
             isOpen ? "opacity-100 block" : "opacity-0 hidden"
-          } h-[200px] w-[170px] bg-white shadow-lg absolute left-[-140px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
+          } h-[200px] w-[170px] bg-white shadow-lg absolute left-[-50px] mt-[250px] z-20 border rounded-xl border-[#0000001c] px-2`}
         >
           <button className="w-full h-[20%] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
             Edit
