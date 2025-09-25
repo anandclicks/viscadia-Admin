@@ -23,7 +23,8 @@ const CreateWebinarPage = () => {
   }, []);
 
   // Golbale function for handling submit event
-  const { handleSubmit,setCreateEventFormData,webinarCreateData } = useContext(WebinarContext);
+  const { handleSubmit, setCreateEventFormData, webinarCreateData } =
+    useContext(WebinarContext);
 
   // Function for handle scrolling
   const [activeSection, setActiveSection] = useState(null);
@@ -48,7 +49,7 @@ const CreateWebinarPage = () => {
           }
         });
       },
-      {threshold: 1,}
+      { threshold: 1 }
     );
 
     sectionRef.forEach(({ ref, id }) => {
@@ -69,9 +70,11 @@ const CreateWebinarPage = () => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleWebinarStatus = (state)=>{
-    setCreateEventFormData((prev)=> {({...prev, state : state})})
-  }
+  const handleWebinarStatus = (state) => {
+    setCreateEventFormData((prev) => {
+      ({ ...prev, state: state });
+    });
+  };
 
   return (
     <div className="h-[100vh] w-full p-4">
@@ -83,7 +86,7 @@ const CreateWebinarPage = () => {
             <div className="relative">
               <div
                 onClick={toggleMenu}
-                className="z-40 h-[45px] border min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
+                className="z-40 h-[45px] border min-w-[170px] capitalize hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
               >
                 {webinarCreateData?.status}{" "}
                 <img className="h-[10px]" src="/icons/aeroBottom.png" />
@@ -97,13 +100,22 @@ const CreateWebinarPage = () => {
                 <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
                   Edit
                 </button>
-                <button onClick={()=> handleWebinarStatus('draft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button
+                  onClick={() => handleWebinarStatus("draft")}
+                  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]"
+                >
                   Mark as Draft
                 </button>
-                <button onClick={()=> handleWebinarStatus('undraft')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button
+                  onClick={() => handleWebinarStatus("undraft")}
+                  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]"
+                >
                   Undraft
                 </button>
-                <button onClick={()=> handleWebinarStatus('live')} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
+                <button
+                  onClick={() => handleWebinarStatus("live")}
+                  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]"
+                >
                   Publish
                 </button>
               </div>
@@ -126,25 +138,41 @@ const CreateWebinarPage = () => {
               <li
                 onClick={() => handleScrolling(sectionOneRef)}
                 className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
-                  activeSection === "sectionOne" ? "font-bold activeEventPageSection text-black" :  "" }`}>
+                  activeSection === "sectionOne"
+                    ? "font-bold activeEventPageSection text-black"
+                    : ""
+                }`}
+              >
                 <button>Banner</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionTwoRef)}
                 className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
-                  activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : "" }`}>
+                  activeSection === "sectionTwo"
+                    ? "font-bold activeEventPageSection text-black"
+                    : ""
+                }`}
+              >
                 <button>KEY Points</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionThreeRef)}
                 className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
-                  activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}>
+                  activeSection === "sectionThree"
+                    ? "font-bold activeEventPageSection text-black"
+                    : ""
+                }`}
+              >
                 <button>Webinar Video</button>
               </li>
               <li
                 onClick={() => handleScrolling(sectionFourRef)}
                 className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
-                  activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black": "" }`}>
+                  activeSection === "sectionFour"
+                    ? "font-bold activeEventPageSection text-black"
+                    : ""
+                }`}
+              >
                 <button>Speaker</button>
               </li>
             </ul>

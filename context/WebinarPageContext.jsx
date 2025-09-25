@@ -6,7 +6,7 @@ let payload = {
   imageTwo: null,
   keyPoints: [""],
   webibarVideo: null,
-  status : 0,
+  status : 'draft',
   speaker: [
     {
       fullName: "",
