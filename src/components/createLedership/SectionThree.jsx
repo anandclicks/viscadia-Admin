@@ -1,6 +1,6 @@
 const SectionThree = () => {
   return (
-    <div className="h-full w-full grid grid-cols-3 gap-10 ps-5">
+    <div className="min-h-[400px] pt-10 w-full grid grid-cols-3 gap-10 ps-5 shadow">
       {Array(3)
         .fill({})
         .map((_, index) => (

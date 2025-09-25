@@ -17,12 +17,14 @@ import Event from './pages/preview/Event'
 import CreateCaseStudy from "./components/CaseStudiesPage/CreateCaseStudy";
 import LeadershipPage from "./pages/leadership/LeadershipPage";
 import CreateLeadership from "./components/createLedership/CreateLeadership";
+import { LeadershipContextProvider } from "../context/LeadershipContext";
 
 function App() {
   return (
     <div className=" overflow-hidden">
-        <BrowserRouter>
+      <BrowserRouter>
 
+      <LeadershipContextProvider>
       <WebinarContextProvider>
       <EventPageContextProvider>
       <NewCaseStudyContextProvider>
@@ -51,7 +53,9 @@ function App() {
       </NewCaseStudyContextProvider>
       </EventPageContextProvider>
       </WebinarContextProvider>
-        </BrowserRouter>
+      </LeadershipContextProvider>
+    
+     </BrowserRouter>
       <ToastContainer />
       <Toaster/>
     </div>
