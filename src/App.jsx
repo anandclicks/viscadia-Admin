@@ -18,6 +18,7 @@ import CreateCaseStudy from "./components/CaseStudiesPage/CreateCaseStudy";
 import LeadershipPage from "./pages/leadership/LeadershipPage";
 import CreateLeadership from "./components/createLedership/CreateLeadership";
 import { LeadershipContextProvider } from "../context/LeadershipContext";
+import Careers from "./components/careers/Careers";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="/events-and-webinars" element={<EventAndWebenar />}/>
               <Route path="/case-studies" element={<CaseStudiesPage />}/>
               <Route path="/leadership" element={<LeadershipPage />}/>
+              <Route path="/careers" element={<Careers/>}/>
             </Route>
             <Route>
               <Route path="/create/event" element={<CreateEventPage />} />
