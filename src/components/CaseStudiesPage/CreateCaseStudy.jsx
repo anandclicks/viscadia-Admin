@@ -10,7 +10,7 @@ import Outcomes from "./Outcomes";
 import { NewCaseStudyContext } from "../../../context/NewCaseStudyContext";
 
 const CreateCaseStudy = () => {
-  const {createCaseStudyData,setCreateStudyData} = useContext(NewCaseStudyContext)
+  const {createCaseStudyData,setCreateStudyData,handleSubmit} = useContext(NewCaseStudyContext)
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (evt) => {
     evt.stopPropagation();
@@ -41,7 +41,6 @@ const CreateCaseStudy = () => {
   ];
 
   useEffect(() => {
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -125,7 +124,7 @@ const CreateCaseStudy = () => {
           </div>
 
           {/* Scrollable Content */}
-          <div className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+          <form onSubmit={handleSubmit} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef} />
             <SectionTwo ref={sectionTwoRef} />
             <Chellenges ref={sectionThreeRef} />
@@ -135,9 +134,9 @@ const CreateCaseStudy = () => {
             {/* Action Buttons */}
             <div className="flex w-full justify-end gap-5 mt-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px]">Cancel</button>
-              <button  className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px]">Save</button>
+              <button type="sunmit"  className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px]">Save</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

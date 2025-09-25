@@ -102,9 +102,11 @@ export const NewCaseStudyContextProvider = ({ children }) => {
     }));
   };
 
-  useEffect(() => {
+  const handleSubmit = (e)=>{
+    e.preventDefault()
     console.log(createCaseStudyData);
-  }, [createCaseStudyData]);
+  }
+
   return (
     <NewCaseStudyContext.Provider
       value={{
@@ -117,7 +119,8 @@ export const NewCaseStudyContextProvider = ({ children }) => {
         handleObjInpusChanges,
         addKeyPointsInArray,
         handleTextsChange,
-        setCreateStudyData
+        setCreateStudyData,
+        handleSubmit
       }}
     >
       {children}
