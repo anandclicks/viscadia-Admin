@@ -9,10 +9,10 @@ const payload = {
   texts: [""],
   mainSubtitle: "",
   challenges: [...Array(3).fill({ img: "", title: "", texts: [""] })],
-  approach: [{ title: "", texts: [] }],
+  approach: [...Array(3).fill({ img: "", title: "", texts: [""] })],
   outcomes: [...Array(3).fill({ img: "", title: "", texts: [""] })],
   pdf: "",
-  status: 0,
+  status: "draft",
 };
 
 export const NewCaseStudyContext = createContext({});
@@ -40,60 +40,86 @@ export const NewCaseStudyContextProvider = ({ children }) => {
   };
 
   const handleKeyPointsChange = (evt, index) => {
-    let UpdatedKeyPoints = createCaseStudyData?.texts
-    UpdatedKeyPoints[index] = evt.target.value
-    setCreateStudyData((prev) => ({ ...prev, texts: UpdatedKeyPoints }))
-  }
+    let UpdatedKeyPoints = createCaseStudyData?.texts;
+    UpdatedKeyPoints[index] = evt.target.value;
+    setCreateStudyData((prev) => ({ ...prev, texts: UpdatedKeyPoints }));
+  };
 
   const addObjsInSections = (name) => {
-    let arr = createCaseStudyData[name]
-    arr = [...arr, { img: "", title: "", texts: [] }]
-    setCreateStudyData((prev) => ({ ...prev, [name]: arr }))
+    let arr = createCaseStudyData[name];
+    arr = [...arr, { img: "", title: "", texts: [] }];
+    setCreateStudyData((prev) => ({ ...prev, [name]: arr }));
     console.log(createCaseStudyData);
-  }
+  };
 
   const addObjsInSectionsTwo = () => {
-    let arr = createCaseStudyData?.approach
-    arr = [...arr, { title: "", texts: [] }]
-    setCreateStudyData((prev) => ({ ...prev, approach: arr }))
-  }
+    let arr = createCaseStudyData?.approach;
+    arr = [...arr, { title: "", texts: [] }];
+    setCreateStudyData((prev) => ({ ...prev, approach: arr }));
+  };
 
   const handleObjInpusChanges = async (evt, arrName, index) => {
-    const { type, name, value, files } = evt.target
+    const { type, name, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
-      // const url = await uploadSingleImage(files)
-      if (true) {
+      const url = await uploadSingleImage(files);
+      if (url) {
         setCreateStudyData((prev) => {
-          let arr = [...createCaseStudyData[arrName]]
-          arr[index] = {...arr[index],[name] : "tasting"}
-          return {...prev,[arrName] : arr}
-        })
+          let arr = [...createCaseStudyData[arrName]];
+          arr[index] = { ...arr[index], [name]: url };
+          return { ...prev, [arrName]: arr };
+        });
       }
-    }else {
-      setCreateStudyData((prev)=>{
-        let arr = createCaseStudyData[arrName]
-        arr[index] = {...arr[index],[name] : value}
-        return {...prev,[arrName] :arr }
-      })
+    } else {
+      setCreateStudyData((prev) => {
+        let arr = createCaseStudyData[arrName];
+        arr[index] = { ...arr[index], [name]: value };
+        return { ...prev, [arrName]: arr };
+      });
     }
-  }
+  };
 
+  const addKeyPointsInArray = (keyName, index) => {
+    setCreateStudyData((prev) => ({
+      ...prev,
+      [keyName]: prev[keyName].map((item, i) =>
+        i === index ? { ...item, texts: [...(item.texts || []), ""] } : item
+      ),
+    }));
+  };
 
-
+  const handleTextsChange = (e, keyName, objIndex, textIndex) => {
+    const { value } = e.target;
+    setCreateStudyData((prev) => ({
+      ...prev,
+      [keyName]: prev[keyName].map((item, i) =>
+        i === objIndex
+          ? {
+              ...item,
+              texts: item.texts.map((t, j) => (j === textIndex ? value : t)),
+            }
+          : item
+      ),
+    }));
+  };
 
   useEffect(() => {
     console.log(createCaseStudyData);
-  }, [createCaseStudyData])
+  }, [createCaseStudyData]);
   return (
-    <NewCaseStudyContext.Provider value={{
-      handleNewCaseStudyInputs,
-      createCaseStudyData,
-      handleKeyPointsChange,
-      functionForAddingPoints,
-      addObjsInSections,
-      addObjsInSectionsTwo,
-      handleObjInpusChanges,
-    }}>
+    <NewCaseStudyContext.Provider
+      value={{
+        handleNewCaseStudyInputs,
+        createCaseStudyData,
+        handleKeyPointsChange,
+        functionForAddingPoints,
+        addObjsInSections,
+        addObjsInSectionsTwo,
+        handleObjInpusChanges,
+        addKeyPointsInArray,
+        handleTextsChange,
+        setCreateStudyData
+      }}
+    >
       {children}
     </NewCaseStudyContext.Provider>
   );
