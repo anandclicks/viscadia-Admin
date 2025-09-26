@@ -8,6 +8,7 @@ const SectionOne = ({ ref }) => {
 
   return (
     <div ref={ref} className="min-h-[500px] w-full shadow my-3">
+      
       <div className="p-5">
         <div className="w-full">
           <textarea
@@ -57,7 +58,25 @@ const SectionOne = ({ ref }) => {
         </div>
       </div>
 
-      <div className="h-[400px] w-full bg-[#FFF8F8] border-[1px] border-dashed border-[#BD2F2C]">
+      <div className="h-[400px] w-full bg-[#FFF8F8] border-[1px] relative border-dashed border-[#BD2F2C]">
+        <div className="px-10 pt-10 z-30 flex justify-end gap-2 items-center absolute top-0 end-0">
+          <p className="text-white">{true ? "Hide" : "Unhide"}</p>
+          <button
+            type="button"
+            onClick={() => handleSectionTwoStatus()}
+            className={`w-[80px] transition-all duration-200 ${
+              true ? "bg-[#BD2F2C]" : "bg-gray-400"
+            } h-full rounded-full p-1 cursor-pointer flex items-center`}
+          >
+            <div
+              className={`h-[30px] w-[30px] transition-all  rounded-full ${
+                true
+                  ? "translate-x-0 bg-[#fff]"
+                  : "translate-x-10 bg-[#BD2F2C]" 
+              }`}
+            ></div>
+          </button>
+        </div>
         <div className="h-full w-full relative">
           <div className="flex h-full w-full relative z-10">
             <div className="h-full w-full flex justify-center items-center flex-col relative">

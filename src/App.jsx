@@ -26,7 +26,7 @@ function App() {
   return (
     <div className=" overflow-hidden">
       <BrowserRouter>
-
+      <NewCaseStudyContextProvider>
       <LeadershipContextProvider>
       <WebinarContextProvider>
       <EventPageContextProvider>
@@ -60,6 +60,7 @@ function App() {
       </EventPageContextProvider>
       </WebinarContextProvider>
       </LeadershipContextProvider>
+      </NewCaseStudyContextProvider>
     
      </BrowserRouter>
       <ToastContainer />
