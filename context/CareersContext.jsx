@@ -1,3 +1,5 @@
+import { uploadSingleImage } from "../src/utils/reuseableFunctions";
+
 const { createContext, useState, useContext } = require("react");
 
 const payload = {
@@ -15,10 +17,23 @@ const payload = {
 export const CareersContext = createContext({...payload});
 export const CareersContextProvider = ({ children }) => {
   const [createCareerData, setCareerData] = useContext({});
+
+  const handleCareersInpust = async(evt)=>{
+    const {name,files,value,type} = evt.target
+    if(type === "file" && files && files[0]){
+      const url = await uploadSingleImage(files)
+      if(url){
+        setCareerData((prev)=> ({...prev,[name] :url}))
+      }
+    }else {
+      setCareerData((prev)=> ({...prev,[name] : value}))
+    }
+  }
   return (
       <CareersContext.Provider value={{
         createCareerData,
-        setCareerData
+        setCareerData,
+        handleCareersInpust
       }}>
         {children}
         </CareersContext.Provider>
