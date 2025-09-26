@@ -19,6 +19,8 @@ import LeadershipPage from "./pages/leadership/LeadershipPage";
 import CreateLeadership from "./components/createLedership/CreateLeadership";
 import { LeadershipContextProvider } from "../context/LeadershipContext";
 import Careers from "./components/careers/Careers";
+import NewsAndPress from "./components/NewsAndPress/NewsAndPress";
+import CreatePressReleases from "./pages/NewsAndPress/CreatePressReleases";
 
 function App() {
   return (
@@ -36,12 +38,14 @@ function App() {
               <Route path="/case-studies" element={<CaseStudiesPage />}/>
               <Route path="/leadership" element={<LeadershipPage />}/>
               <Route path="/careers" element={<Careers/>}/>
+              <Route path="/news-and-press-releases" element={<NewsAndPress/>}/>
             </Route>
             <Route>
               <Route path="/create/event" element={<CreateEventPage />} />
               <Route path="/create/webinar" element={<CreateWebinarPage />} />
               <Route path="/create/case-study" element={<CreateCaseStudy />} />
               <Route path="/create/leadership" element={<CreateLeadership />} />
+              <Route path="/create/news-and-press-releases" element={<CreatePressReleases />} />
             </Route>
             {/* Preview pages route  */}
             <Route>
