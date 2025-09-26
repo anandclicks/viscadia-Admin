@@ -82,7 +82,14 @@ export const LeadershipContextProvider = ({ children }) => {
     }
   };
 
-  const handlePointsInputOfObjs = (evt, objIndex, pointIndex) => {};
+  const handlePointsInputOfObjs = (evt, objIndex, pointIndex) => {
+    const {value} = evt.target
+    setCreateLeadershipData((prev)=>{
+      let updatedArr = [...createLeadershipData.sectionThree]
+      updatedArr[objIndex].subHeading[pointIndex] = value
+      return {...prev,sectionThree : updatedArr}
+    })
+  };
 
   useEffect(() => {
     console.log(createLeadershipData);
@@ -97,6 +104,7 @@ export const LeadershipContextProvider = ({ children }) => {
           addKeysInObjsTwo,
           handleCopanyNameInputs,
           handleSectionThreeObjInputs,
+          handlePointsInputOfObjs
         }}
       >
         {children}
