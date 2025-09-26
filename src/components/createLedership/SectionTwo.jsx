@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { LeadershipContext } from "../../../context/LeadershipContext";
 
-const SectionTwo = () => {
+const SectionTwo = ({ref}) => {
   const autoResize = (e) => {
     e.target.style.height = "24px";
     e.target.style.height = e.target.scrollHeight + "px";
@@ -11,7 +11,7 @@ const SectionTwo = () => {
     useContext(LeadershipContext);
 
   return (
-    <div className="min-h-[250px] w-full bg-[#ECECEC] shadow mt-20 mb-10 pb-10 flex ">
+    <div ref={ref} className="min-h-[250px] w-full bg-[#ECECEC] shadow mt-20 mb-10 pb-10 flex ">
       <div className="min-h-[250px] w-[50%] flex flex-col justify-center ps-7">
         <div className="w-full">
           <textarea

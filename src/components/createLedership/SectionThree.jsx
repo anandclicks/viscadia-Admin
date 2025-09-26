@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LeadershipContext } from "../../../context/LeadershipContext";
 
-const SectionThree = () => {
+const SectionThree = ({ref}) => {
   const autoResize = (e) => {
     e.target.style.height = "24px";
     e.target.style.height = e.target.scrollHeight + "px";
@@ -13,7 +13,7 @@ const SectionThree = () => {
     handlePointsInputOfObjs
   } = useContext(LeadershipContext);
   return (
-    <div className="min-h-[400px] pt-10 w-full grid grid-cols-3 gap-10 pb-10 ps-5 shadow">
+    <div ref={ref} className="min-h-[400px] pt-10 w-full grid grid-cols-3 gap-10 pb-10 ps-5 shadow">
       {createLeadershipData?.sectionThree?.map((el, index) => (
         <div key={index} className="h-full">
           <div className="h-[150px] w-[150px] rounded-full bg-[#FFF8F8] overflow-hidden border border-dashed border-[#BD2F2C]">
