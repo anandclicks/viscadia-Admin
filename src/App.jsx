@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import MainLayout from "./MainLayout";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -61,7 +61,6 @@ function App() {
       </WebinarContextProvider>
       </LeadershipContextProvider>
       </NewCaseStudyContextProvider>
-    
      </BrowserRouter>
       <ToastContainer />
       <Toaster/>

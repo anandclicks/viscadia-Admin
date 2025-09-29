@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { WebinarContext } from "../../../context/WebinarPageContext";
+import { ImagePreviewContext } from "../../../context/ImagePreveiw";
 
 const SectionOne = ({ref}) => {
   const {hanldeWebinarInputsChanges,webinarCreateData} = useContext(WebinarContext)
-  
+
   return (
     <div ref={ref} className="h-[340px] w-full shadow relative flex">
       <div className="EventPagesectionOne w-full h-[340px] object-cover absolute z-10">

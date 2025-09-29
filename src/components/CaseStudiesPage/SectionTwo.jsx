@@ -13,7 +13,7 @@ const SectionTwo = ({ref}) => {
     <div ref={ref} className="relative h-[460px]">
       <div className="h-[330px] flex w-full bg-white shadow my-8 relative z-20">
         <div className="w-[35%] bg-[#FFF8F8] relative">
-          <div className="w-full absolute left-0 top-0 z-20">
+          <div className="w-full absolute h-full left-0 top-0 z-20">
             <input onChange={handleNewCaseStudyInputs} className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20" type="file" name="img" />
           </div>
           <div className="flex h-full w-full relative border border-dashed border-[#BD2F2C] flex-col items-center justify-center">
