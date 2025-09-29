@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { postCommonApi, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const payload = {
   urlTitle: "",
   bannerImg: "",
@@ -18,6 +20,7 @@ const payload = {
 export const NewCaseStudyContext = createContext({});
 export const NewCaseStudyContextProvider = ({ children }) => {
   const [createCaseStudyData, setCreateStudyData] = useState({ ...payload });
+  const navigate = useNavigate()
 
   const handleNewCaseStudyInputs = async (evt) => {
     const { name, files, value, type } = evt.target;
@@ -102,9 +105,15 @@ export const NewCaseStudyContextProvider = ({ children }) => {
     }));
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log(createCaseStudyData);
+    const res = await postCommonApi('webinar',createCaseStudyData,"Case study")
+    if(res.success){
+      toast.success("Created Successfully!")
+      navigate('/case-studies')
+    }else {
+       toast.success("couldn't Create!")
+    }
   }
 
   return (
