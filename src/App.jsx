@@ -57,6 +57,7 @@ function App() {
             {/* Edit pages route  */}
             <Route>
               <Route path="/edit/event/:id" element={<CreateEventPage/>}/>
+              <Route path="/edit/case-study/:id" element={<CreateCaseStudy/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>

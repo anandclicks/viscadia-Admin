@@ -17,7 +17,7 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
   const handleStatusApiCall = async (status) => {
     onToggle(null);
     let t = toast.loading("Status updating!");
-    let res = await putCommonApiForEvnts(`/webinar/${data?.id}`, { status });
+    let res = await putCommonApiForEvnts(`/casestudy/${data?.id}`, { status });
     if (res.success) {
       toast.dismiss(t);
       toast.success("Status Updated Successfully");
@@ -67,7 +67,7 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
                   } min-h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <Link to={`/edit/webinar/${data?.id}`}>
+                  <Link to={`/edit/case-study/${data?.id}`}>
                     <button className="h-[40px] w-full my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                       Edit
                     </button>
@@ -124,7 +124,7 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
                     </>
                   )}
 
-                  <Link to={`/preview/webinar/${data?.id}`}>
+                  <Link to={`/preview/case-study/${data?.id}`}>
                     <button className="w-[170px] h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                       Preview
                     </button>

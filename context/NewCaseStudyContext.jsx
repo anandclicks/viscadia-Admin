@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { postCommonApi, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { postCommonApi, putCommonApiForEvnts, uploadSingleImage } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 const payload = {
@@ -105,16 +105,44 @@ export const NewCaseStudyContextProvider = ({ children }) => {
     }));
   };
 
-  const handleSubmit = async(e)=>{
-    e.preventDefault()
-    const res = await postCommonApi('webinar',createCaseStudyData,"Case study")
-    if(res.success){
-      toast.success("Created Successfully!")
-      navigate('/case-studies')
-    }else {
-       toast.success("couldn't Create!")
+const handleSubmit = async (e, type, id) => {
+  e.preventDefault();
+
+  if (type) {
+    // Updating existing case study
+    let t = toast.loading("Updating!");
+    let res = await putCommonApiForEvnts(`/casestudy/${id}`, createCaseStudyData);
+
+    if (res.success) {
+      toast.dismiss(t);
+      toast.success(res.message || "Updated successfully!");
+      setTimeout(() => {
+        navigate("/case-studies");
+        setCreateStudyData({ ...payload });
+      }, 500);
+    } else {
+      toast.dismiss(t);
+      toast.error("Couldn't Update!");
+    }
+  } else {
+    // Creating new case study
+    let t = toast.loading("Creating!");
+    let res = await postCommonApi("casestudy", createCaseStudyData, "Case study");
+
+    if (res.success) {
+      toast.dismiss(t);
+      toast.success("Created Successfully!");
+      setTimeout(() => {
+        navigate("/case-studies");
+        setCreateStudyData({ ...payload });
+      }, 500);
+    } else {
+      toast.dismiss(t);
+      toast.error("Couldn't Create!");
     }
   }
+};
+
 
   return (
     <NewCaseStudyContext.Provider

@@ -1,17 +1,21 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../common/Navbar";
-import { EventPageContext } from "../../../context/EventPageContext";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 import Chellenges from "./Chellenges";
 import Apporach from "./Apporach";
 import Outcomes from "./Outcomes";
 import { NewCaseStudyContext } from "../../../context/NewCaseStudyContext";
+import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
+import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const CreateCaseStudy = () => {
   const {createCaseStudyData,setCreateStudyData,handleSubmit} = useContext(NewCaseStudyContext)
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditingPage,setIsEditingPage] = useState(false)
+  const [loading,setLoading] = useState(true)
+  const redirect = useNavigate()
   const toggleMenu = (evt) => {
     evt.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -66,9 +70,10 @@ const CreateCaseStudy = () => {
         if (ref.current) observer.unobserve(ref.current);
       });
     };
+    
   }, []);
 
-  const handleScrolling = (ref) => {
+   const handleScrolling = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -78,9 +83,37 @@ const CreateCaseStudy = () => {
     setIsOpen(false)
   }
 
+  
+    // if this is a editing page 
+  const {id} = useParams()
+  useEffect(()=>{
+   if(id){
+     const getData = async()=>{
+      let response = await commonGetApiCall(`/casestudy/${id}`)
+      if(response.success){
+        let convertedData = toCamelCase(response?.caseStudy)
+        console.log(convertedData);
+        
+        setCreateStudyData(convertedData)
+        setIsEditingPage(true)
+        setLoading(false)
+      }else {
+        redirect("/events-and-webinars")
+        toast.error("Couldn't Fetch Event!")
+        setLoading(false)
+      }
+    }
+    getData()
+   }else {
+    setLoading(false)
+   }
+  },[])
+
 
   return (
-    <div className="h-[100vh] w-full p-4">
+    <>
+     {loading && <PageBuildingLoader/>}
+     {!loading && <div className="h-[100vh] w-full p-4">
       <Navbar />
       <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
         {/* Header */}
@@ -92,7 +125,7 @@ const CreateCaseStudy = () => {
                 onClick={toggleMenu}
                 className="z-40 h-[45px] border capitalize min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
               >
-                {createCaseStudyData.status === "live" ? "Publish" : createCaseStudyData.status} <img className="h-[10px]" src="../icons/aeroBottom.png" />
+                {createCaseStudyData?.status === "live" ? "Publish" : createCaseStudyData?.status} <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div
                 onClick={(e) => e.stopPropagation()}
@@ -101,11 +134,10 @@ const CreateCaseStudy = () => {
                 <button onClick={()=> handleStatusChange("draft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
                 <button onClick={()=> handleStatusChange("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
                 <button onClick={()=> handleStatusChange("undraft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
-                <button  className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Preview</button>
               </div>
             </div>
             <Link to={'/case-studies'} className="h-[40px] w-[40px] rounded-full">
-              <img className="h-full w-full rounded-full object-cover" src="../icons/close.png" alt="" />
+              <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
             </Link>
           </div>
         </div>
@@ -124,7 +156,9 @@ const CreateCaseStudy = () => {
           </div>
 
           {/* Scrollable Content */}
-          <form onSubmit={handleSubmit} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+          <form onSubmit={(e)=> {
+           handleSubmit(e,isEditingPage,id)}
+          } className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef} />
             <SectionTwo ref={sectionTwoRef} />
             <Chellenges ref={sectionThreeRef} />
@@ -139,7 +173,9 @@ const CreateCaseStudy = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
+    
   );
 };
 

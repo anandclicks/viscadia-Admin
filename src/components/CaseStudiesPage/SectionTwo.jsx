@@ -28,7 +28,7 @@ const SectionTwo = ({ref}) => {
           </div>
         </div>
         <div className="w-[65%] h-full p-14">
-          <textarea placeholder="Enter Heading" className="w-full h-[45px] placeholder:text-black text-black outline-0 border-0 resize-none overflow-hidden text-[28px]" name="title" onInput={(e) => { handleNewCaseStudyInputs(e); autoResize(e); }} />
+          <textarea placeholder="Enter Heading" value={createCaseStudyData?.title} className="w-full h-[45px] placeholder:text-black text-black outline-0 border-0 resize-none overflow-hidden text-[28px]" name="title" onInput={(e) => { handleNewCaseStudyInputs(e); autoResize(e); }} />
           <div className="flex flex-col min-h-[40px]">
             {createCaseStudyData?.texts?.map((data, index) => (
               <div key={index} className="flex items-center gap-2">

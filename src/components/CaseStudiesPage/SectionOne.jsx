@@ -5,7 +5,7 @@ const SectionOne = ({ref}) => {
   const {handleNewCaseStudyInputs,createCaseStudyData} = useContext(NewCaseStudyContext) 
 
 
-  const subHeadingRef = useRef(null);
+  const urlTitle = useRef(null);
   const headingRef = useRef(null);
 
   const autoResize = (ref) => {
@@ -36,7 +36,8 @@ const SectionOne = ({ref}) => {
               <div className="w-full">
                 <textarea
                 name="urlTitle"
-                  ref={subHeadingRef}
+                  ref={urlTitle}
+                  value={createCaseStudyData?.urlTitle}
                   placeholder="Sub Heading"
                   style={{ height: "30px" }}
                   className={`w-full outline-0 border-0 resize-none overflow-hidden ${
@@ -45,7 +46,7 @@ const SectionOne = ({ref}) => {
                       : "text-[#000000] placeholder:text-[#000000]"
                   } text-[21px]`}
                   onInput={(e) => {
-                    autoResize(subHeadingRef)
+                    autoResize(urlTitle)
                     handleNewCaseStudyInputs(e)
                   }}
                 />
@@ -54,6 +55,7 @@ const SectionOne = ({ref}) => {
                 <textarea
                   ref={headingRef}
                   placeholder="Enter Heading"
+                  value={createCaseStudyData?.mainSubtitle}
                   name="mainSubtitle"
                   style={{ height: "40px" }}
                   className={`w-full outline-0 border-0 resize-none overflow-hidden ${

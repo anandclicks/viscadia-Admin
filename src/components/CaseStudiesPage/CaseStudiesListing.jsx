@@ -7,9 +7,9 @@ const CaseStudiesListing = () => {
   const [allCaseStudies,setAllCaseStudies] = useState([{}])
   useEffect(()=>{
     const getAllData = async()=>{
-      let res = await commonGetApiCall('/webinar')
+      let res = await commonGetApiCall('/casestudy')
       console.log(res);
-      setAllCaseStudies([...res?.webinars])
+      setAllCaseStudies([...res?.caseStudy])
     }
     getAllData()
   },[])
