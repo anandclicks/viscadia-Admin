@@ -9,7 +9,7 @@ const CaseStudiesListing = () => {
     const getAllData = async()=>{
       let res = await commonGetApiCall('/webinar')
       console.log(res);
-      setAllCaseStudies([...res])
+      setAllCaseStudies([...res?.webinars])
     }
     getAllData()
   },[])

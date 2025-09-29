@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { putCommonApiForEvnts } from "../../utils/reuseableFunctions";
 import { Link } from "react-router-dom";
 
 const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
   const [caseStatus, setCaseStatus] = useState(data?.status || "draft");
+  useEffect(() => {
+    setCaseStatus(data?.status || "draft");
+  }, [data?.status]);
+
   const handleActionMenu = (evt) => {
     evt.stopPropagation();
     onToggle(id);
   };
-  console.log(caseStatus);
-  
 
   const handleStatusApiCall = async (status) => {
-    onToggle(null); 
+    onToggle(null);
     let t = toast.loading("Status updating!");
     let res = await putCommonApiForEvnts(`/webinar/${data?.id}`, { status });
     if (res.success) {
@@ -42,9 +44,15 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
             <div className="w-full flex justify-between mb-2">
               <h2 className="text-[22px] font-semibold">{data?.title}</h2>
               <div className="relative flex gap-3 mb-2">
-                {caseStatus === "live" && <button className="Published">Published</button>}
-                {caseStatus === "draft" && <button className="draft">Draft</button>}
-                {caseStatus === "undraft" && <button className="opacity-0 draft">undraft</button>}
+                {caseStatus === "live" && (
+                  <button className="Published">Published</button>
+                )}
+                {caseStatus === "draft" && (
+                  <button className="draft">Draft</button>
+                )}
+                {caseStatus === "undraft" && (
+                  <button className="opacity-0 draft">undraft</button>
+                )}
 
                 <button
                   onClick={handleActionMenu}
@@ -54,7 +62,9 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
                 </button>
 
                 <div
-                  className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} min-h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
+                  className={`${
+                    isOpen ? "opacity-100 block" : "opacity-0 hidden"
+                  } min-h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Link to={`/edit/webinar/${data?.id}`}>
