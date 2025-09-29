@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 let payload = {
   subHeading: "",
@@ -18,6 +18,13 @@ let payload = {
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
+
+  useEffect(()=>{
+  let webinarData = localStorage.getItem("webinar")
+  webinarData = JSON.parse(webinarData)
+  setWebinarCreateData(webinarData)
+},[])
+
 
   const hanldeWebinarInputsChanges = async (evt) => {
     const { name, value, type, files } = evt.target;
@@ -82,6 +89,7 @@ export const WebinarContextProvider = ({ children }) => {
 
   const handleSubmit = (evt, type, id) => {
     evt.preventDefault();
+    localStorage.setItem("webinar",JSON.stringify(webinarCreateData))
     console.log(webinarCreateData);
     if (type) {
     } else {

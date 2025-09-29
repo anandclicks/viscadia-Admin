@@ -21,6 +21,8 @@ import { LeadershipContextProvider } from "../context/LeadershipContext";
 import Careers from "./components/careers/Careers";
 import NewsAndPress from "./components/NewsAndPress/NewsAndPress";
 import CreatePressReleases from "./pages/NewsAndPress/CreatePressReleases";
+import Webinar from './pages/preview/Webinar'
+
 
 function App() {
   return (
@@ -50,6 +52,7 @@ function App() {
             {/* Preview pages route  */}
             <Route>
               <Route path="/preview/event/:id" element={<Event/>}/>
+              <Route path="/preview/webinar/:id" element={<Webinar/>}/>
             </Route>
             {/* Edit pages route  */}
             <Route>
