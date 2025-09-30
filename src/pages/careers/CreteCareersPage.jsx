@@ -9,9 +9,14 @@ const CreteCareersPage = () => {
       const [activeSection, setActiveSection] = useState("sectionOne");
       const sectionOneRef = useRef(null);
       const sectionTwoRef = useRef(null);
+      const sectionThreeRef = useRef(null);
+      const sectionFourRef = useRef(null);
+      
       const sectionRef = [
         { ref: sectionOneRef, id: "sectionOne" },
         { ref: sectionTwoRef, id: "sectionTwo" },
+        { ref: sectionThreeRef, id: "sectionThree" },
+        { ref: sectionFourRef, id: "sectionFour" },
       ];
     
       useEffect(() => {
