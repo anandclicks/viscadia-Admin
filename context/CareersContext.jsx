@@ -1,8 +1,6 @@
 import { createContext, useContext } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 
-
-
 const payload = {
   heading: "",
   subHeading: "",
@@ -15,28 +13,30 @@ const payload = {
   keySkills: [{ subHeading: "", keyPoints: [""], status: 1 }],
 };
 
-export const CareersContext = createContext({...payload});
+export const CareersContext = createContext({ ...payload });
 export const CareersContextProvider = ({ children }) => {
   const [createCareerData, setCareerData] = useContext({});
 
-  const handleCareersInpust = async(evt)=>{
-    const {name,files,value,type} = evt.target
-    if(type === "file" && files && files[0]){
-      const url = await uploadSingleImage(files)
-      if(url){
-        setCareerData((prev)=> ({...prev,[name] :url}))
+  const handleCareersInpust = async (evt) => {
+    const { name, files, value, type } = evt.target;
+    if (type === "file" && files && files[0]) {
+      const url = await uploadSingleImage(files);
+      if (url) {
+        setCareerData((prev) => ({ ...prev, [name]: url }));
       }
-    }else {
-      setCareerData((prev)=> ({...prev,[name] : value}))
+    } else {
+      setCareerData((prev) => ({ ...prev, [name]: value }));
     }
-  }
+  };
   return (
-      <CareersContext.Provider value={{
+    <CareersContext.Provider
+      value={{
         createCareerData,
         setCareerData,
-        handleCareersInpust
-      }}>
-        {children}
-        </CareersContext.Provider>
+        handleCareersInpust,
+      }}
+    >
+      {children}
+    </CareersContext.Provider>
   );
 };
