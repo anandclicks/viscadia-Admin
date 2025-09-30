@@ -6,6 +6,7 @@ import SectionThree from "./SectionThree.jsx";
 import SectionFour from "./SectionFour.jsx";
 import Navbar from "../common/Navbar.jsx";
 import { WebinarContext } from "../../../context/WebinarPageContext.jsx";
+import { textareaAutoResize } from "../../utils/reuseableFunctions.js";
 
 const CreateWebinarPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,6 +76,14 @@ const CreateWebinarPage = () => {
       ({ ...prev, state: state });
     });
   };
+
+
+    // Effect to resize all textareas when data changes
+    useEffect(() => {
+      const textareas = document.querySelectorAll("textarea");
+      textareas.forEach((ta) => textareaAutoResize(ta));
+    }, [webinarCreateData]);
+  
 
   return (
     <div className="h-[100vh] w-full p-4">

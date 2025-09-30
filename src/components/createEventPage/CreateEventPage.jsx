@@ -95,16 +95,11 @@ const CreateEventPage = () => {
    }
   },[])
 
-
-  
-
   // Effect to resize all textareas when data changes
   useEffect(() => {
     const textareas = document.querySelectorAll("textarea");
     textareas.forEach((ta) => textareaAutoResize(ta));
   }, [createEventFormData]);
-
-
 
 
   return (

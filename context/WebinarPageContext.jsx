@@ -8,23 +8,17 @@ let payload = {
   webibarVideo: null,
   status: "draft",
   speaker: [
-    {
+    ...Array(4).fill({
       fullName: "",
       designation: "",
       image: null,
-    },
+      introduction : ""
+    },)
   ],
 };
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
-
-  useEffect(()=>{
-  let webinarData = localStorage.getItem("webinar")
-  webinarData = JSON.parse(webinarData)
-  setWebinarCreateData(webinarData)
-},[])
-
 
   const hanldeWebinarInputsChanges = async (evt) => {
     const { name, value, type, files } = evt.target;
@@ -51,7 +45,7 @@ export const WebinarContextProvider = ({ children }) => {
       let updatedSpeakerArr = prev.speaker;
       updatedSpeakerArr = [
         ...updatedSpeakerArr,
-        { fullName: "", designation: "", image: null },
+        { fullName: "", designation: "", image: null, introduction : "" },
       ];
       return { ...prev, speaker: updatedSpeakerArr };
     });
