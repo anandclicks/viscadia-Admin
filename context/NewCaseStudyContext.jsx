@@ -129,7 +129,6 @@ const handleSubmit = async (e, type, id) => {
     let res = await postCommonApi("casestudy", createCaseStudyData, "Case study");
 
     if (res?.success) {
-      toast.dismiss(t);
       toast.success("Created Successfully!");
       setTimeout(() => {
         navigate("/case-studies");

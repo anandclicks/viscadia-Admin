@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageBuildingLoader from "../../components/common/PageBuildingLoader";
 import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
 
 const CaseStudy = () => {
+  const navigate = useNavigate()
   const [caseStudyData, setCaseStudyData] = useState();
   const { id } = useParams();
   useEffect(() => {
@@ -14,6 +15,7 @@ const CaseStudy = () => {
         setCaseStudyData(toCamelCase(res?.caseStudy));
       } else {
         toast.error(res?.message || "Somethig went wrong!");
+        navigate('/case-studies')
       }
     };
     getData();
@@ -117,11 +119,13 @@ const CaseStudy = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-20">
                 {caseStudyData?.challenges?.map((el, index) => (
                   <div key={index} className="min-h-[220px]">
+                     {el?.img && <>
                     <img
                       className="h-[60px] object-cover"
                       src={el?.img}
                       alt="Logo"
                     />
+                    </>}
 
                     <h3 className="text-[23px] leading-[24px] mt-3 font-light mainColor">
                       {el?.title}
@@ -163,11 +167,13 @@ const CaseStudy = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-20">
                 {caseStudyData?.approach?.map((el, index) => (
                   <div key={index} className="min-h-[220px]">
+                    {el?.img && <>
                     <img
                       className="h-[60px] object-cover"
                       src={el?.img}
                       alt="Logo"
                     />
+                    </>}
 
                     <h3 className="text-[23px] leading-[24px] mt-3 font-light mainColor">
                       {el?.title}
@@ -209,11 +215,13 @@ const CaseStudy = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-20">
                 {caseStudyData?.outcomes?.map((el, index) => (
                   <div key={index} className="min-h-[220px]">
+                   {el?.img && <>
                     <img
                       className="h-[60px] object-cover"
                       src={el?.img}
                       alt="Logo"
                     />
+                    </>}
 
                     <h3 className="text-[23px] leading-[24px] mt-3 font-light mainColor">
                       {el?.title}

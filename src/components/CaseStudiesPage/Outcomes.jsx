@@ -37,7 +37,7 @@ const Outcomes = ({ ref }) => {
                 />
                 {el?.img ? (
                   <img
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-scale-down"
                     src={el?.img}
                     alt=""
                   />

@@ -22,7 +22,7 @@ const Chellenges = ({ref}) => {
               <div className="flex h-full w-full relative flex-col items-center justify-center">
                 <input className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20" type="file" name="img" onChange={(evt) => handleObjInpusChanges(evt, "challenges", mainIndex)} />
                 {el?.img ? (
-                  <img className="h-full w-full object-cover" src={el?.img} alt="" />
+                  <img className="h-full w-full object-scale-down" src={el?.img} alt="" />
                 ) : (
                   <div className="h-full w-full flex flex-col justify-center items-center">
                     <img src="/icons/upload.png" alt="" />
