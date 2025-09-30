@@ -6,7 +6,7 @@ import SectionFour from "./SectionFour";
 import SectionThree from "./SectionThree";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
-import { commonGetApiCall, eventPayload, toCamelCase } from "../../utils/reuseableFunctions";
+import { commonGetApiCall, eventPayload, textareaAutoResize, toCamelCase } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
@@ -94,6 +94,16 @@ const CreateEventPage = () => {
     setLoading(false)
    }
   },[])
+
+
+  
+
+  // Effect to resize all textareas when data changes
+  useEffect(() => {
+    const textareas = document.querySelectorAll("textarea");
+    textareas.forEach((ta) => textareaAutoResize(ta));
+  }, [createEventFormData]);
+
 
 
 

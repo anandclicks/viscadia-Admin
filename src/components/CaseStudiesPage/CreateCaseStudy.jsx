@@ -7,7 +7,7 @@ import Chellenges from "./Chellenges";
 import Apporach from "./Apporach";
 import Outcomes from "./Outcomes";
 import { NewCaseStudyContext } from "../../../context/NewCaseStudyContext";
-import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
+import { commonGetApiCall, textareaAutoResize, toCamelCase } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const CreateCaseStudy = () => {
@@ -88,6 +88,14 @@ const CreateCaseStudy = () => {
     };
     getData();
   }, [id]);
+
+
+  // Effect to resize all textareas when data changes
+  useEffect(() => {
+    const textareas = document.querySelectorAll("textarea");
+    textareas.forEach((ta) => textareaAutoResize(ta));
+  }, [createCaseStudyData]);
+
 
   return (
     <>

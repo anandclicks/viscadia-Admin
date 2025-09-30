@@ -62,6 +62,13 @@ export function sligGenerator(str) {
     .replace(/-{2,}/g, "-");
 }
 
+export const textareaAutoResize = (el) => {
+    if (el) {
+      el.style.height = "20px"; 
+      el.style.height = Math.max(el.scrollHeight, 20) + "px"; 
+    }
+};
+
 export function toSnakeCase(obj) {
   if (Array.isArray(obj)) {
     return obj.map(toSnakeCase);
