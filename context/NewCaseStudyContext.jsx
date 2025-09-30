@@ -143,6 +143,11 @@ const handleSubmit = async (e, type, id) => {
   }
 };
 
+useEffect(()=>{
+  console.log(createCaseStudyData);
+  
+},[createCaseStudyData])
+
 
   return (
     <NewCaseStudyContext.Provider

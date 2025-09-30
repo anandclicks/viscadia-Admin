@@ -164,7 +164,7 @@ const CreateCaseStudy = () => {
             <Chellenges ref={sectionThreeRef} />
             <Apporach ref={sectionFourRef} />
             <Outcomes ref={sectionFiveRef} />
-
+     
             {/* Action Buttons */}
             <div className="flex w-full justify-end gap-5 mt-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px]">Cancel</button>

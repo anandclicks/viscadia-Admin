@@ -2,22 +2,18 @@ import React, { useEffect, useState } from "react";
 import EventAndWebListingCard from "../common/EventAndWebListingCard";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
+import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const EventPage = () => {
   const [openCardId, setOpenCardId] = useState(null);
-  const [eventListData,setEventListData] = useState([])
+  const [eventListData,setEventListData] = useState(null)
 
   useEffect(() => {
   const getData = async () => {
-    const t = toast.loading("Loading events... Please wait.");
     const data = await commonGetApiCall("/getallevents");
-
     if (data.success) {
       setEventListData(data?.data || []);
-      toast.dismiss(t);
-      toast.success(data?.message || "Events loaded successfully.");
     } else {
-      toast.dismiss(t);
       toast.error(data?.message || "Unable to load events. Please try again.");
     }
   };
@@ -33,7 +29,8 @@ const EventPage = () => {
 
 
   return (
-    <div className="mt-5">
+   <>
+   {eventListData &&  <div className="mt-5">
       {eventListData?.map((data, index) => (
         <EventAndWebListingCard
           key={index}
@@ -43,7 +40,9 @@ const EventPage = () => {
           data={data}
         />
       ))}
-    </div>
+    </div>}
+   {!eventListData && <PageBuildingLoader/>}
+   </>
   );
 };
 

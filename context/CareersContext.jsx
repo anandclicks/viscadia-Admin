@@ -1,6 +1,7 @@
+import { createContext, useContext } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 
-const { createContext, useState, useContext } = require("react");
+
 
 const payload = {
   heading: "",

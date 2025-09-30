@@ -33,14 +33,14 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
       {data && (
         <div
           onClick={() => onToggle(null)}
-          className="w-full h-[240px] my-5 rounded-[30px] flex fsTwo shadow-[0px_0px_3px_#0000000f] border border-[#f1f1f1]"
+          className="w-full h-[200px] my-5 rounded-[30px] flex fsTwo shadow-[0px_0px_3px_#0000000f] border border-[#f1f1f1]"
         >
           <img
             className="w-[28%] h-full rounded-[30px]"
             src={data?.img}
             alt={data?.title || ""}
           />
-          <div className="w-[72%] h-full px-5 flex flex-col justify-center">
+          <div className="w-[72%] h-full px-5 flex flex-col justify-start pt-5">
             <div className="w-full flex justify-between mb-2">
               <h2 className="text-[22px] font-semibold">{data?.title}</h2>
               <div className="relative flex gap-3 mb-2">
