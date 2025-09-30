@@ -43,7 +43,7 @@ const CaseStudy = () => {
                     </div>
                     <div className="w-full">
                       <h1 className="text-[35px] text-[#ffffff] font-light uppercase">
-                        {caseStudyData?.urlTitle}
+                        {caseStudyData?.mainSubtitle}
                       </h1>
                     </div>
                   </div>
