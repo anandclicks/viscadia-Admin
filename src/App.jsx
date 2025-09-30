@@ -23,7 +23,7 @@ import NewsAndPress from "./components/NewsAndPress/NewsAndPress";
 import CreatePressReleases from "./pages/NewsAndPress/CreatePressReleases";
 import Webinar from './pages/preview/Webinar'
 import CaseStudy from "./pages/preview/CaseStudy";
-
+import CreteCareersPage from "./pages/careers/CreteCareersPage";
 
 function App() {
   return (
@@ -49,6 +49,7 @@ function App() {
               <Route path="/create/case-study" element={<CreateCaseStudy />} />
               <Route path="/create/leadership" element={<CreateLeadership />} />
               <Route path="/create/news-and-press-releases" element={<CreatePressReleases />} />
+              <Route path="/create/new-career" element={<CreteCareersPage/>} />
             </Route>
             {/* Preview pages route  */}
             <Route>
