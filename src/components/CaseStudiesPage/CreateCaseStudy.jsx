@@ -11,25 +11,13 @@ import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const CreateCaseStudy = () => {
-  const {createCaseStudyData,setCreateStudyData,handleSubmit} = useContext(NewCaseStudyContext)
+  const { createCaseStudyData, setCreateStudyData, handleSubmit } = useContext(NewCaseStudyContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [isEditingPage,setIsEditingPage] = useState(false)
-  const [loading,setLoading] = useState(true)
-  const redirect = useNavigate()
-  const toggleMenu = (evt) => {
-    evt.stopPropagation();
-    setIsOpen((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = () => setIsOpen(false);
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
+  const [isEditingPage, setIsEditingPage] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState(null);
+  const redirect = useNavigate();
+
   const sectionOneRef = useRef(null);
   const sectionTwoRef = useRef(null);
   const sectionThreeRef = useRef(null);
@@ -45,17 +33,22 @@ const CreateCaseStudy = () => {
   ];
 
   useEffect(() => {
+    const handleClickOutside = () => setIsOpen(false);
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const container = document.querySelector(".outletWrapper");
+    if (!container) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      {
-        threshold: 0.4,  
-      }
+      { root: container, threshold: 0.4 }
     );
 
     sectionRef.forEach(({ ref, id }) => {
@@ -65,117 +58,107 @@ const CreateCaseStudy = () => {
       }
     });
 
-    return () => {
-      sectionRef.forEach(({ ref }) => {
-        if (ref.current) observer.unobserve(ref.current);
-      });
-    };
-    
-  }, []);
+    // Set initial active section on mount
+    const firstVisible = sectionRef.find(({ ref }) => ref.current && container.getBoundingClientRect);
+    if (firstVisible) setActiveSection(firstVisible.id);
 
-   const handleScrolling = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return () => sectionRef.forEach(({ ref }) => ref.current && observer.unobserve(ref.current));
+  }, [loading]);
+
+  const handleScrolling = (ref) => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const handleStatusChange = (status) => {
+    setCreateStudyData((prev) => ({ ...prev, status }));
+    setIsOpen(false);
   };
 
+  const { id } = useParams();
+  useEffect(() => {
+    if (!id) return setLoading(false);
 
-  const handleStatusChange = (status)=>{
-    setCreateStudyData((prev)=> ({...prev,status : status}))
-    setIsOpen(false)
-  }
-
-  
-    // if this is a editing page 
-  const {id} = useParams()
-  useEffect(()=>{
-   if(id){
-     const getData = async()=>{
-      let response = await commonGetApiCall(`/casestudy/${id}`)
-      if(response.success){
-        let convertedData = toCamelCase(response?.caseStudy)
-        console.log(convertedData);
-        
-        setCreateStudyData(convertedData)
-        setIsEditingPage(true)
-        setLoading(false)
-      }else {
-        redirect("/events-and-webinars")
-        toast.error("Couldn't Fetch Event!")
-        setLoading(false)
+    const getData = async () => {
+      const response = await commonGetApiCall(`/casestudy/${id}`);
+      if (response.success) {
+        setCreateStudyData(toCamelCase(response.caseStudy));
+        setIsEditingPage(true);
+      } else {
+        redirect("/events-and-webinars");
       }
-    }
-    getData()
-   }else {
-    setLoading(false)
-   }
-  },[])
-
+      setLoading(false);
+    };
+    getData();
+  }, [id]);
 
   return (
     <>
-     {loading && <PageBuildingLoader/>}
-     {!loading && <div className="h-[100vh] w-full p-4">
-      <Navbar />
-      <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
-        {/* Header */}
-        <div className="h-[70px] px-4 flex items-center justify-between">
-          <h2 className="text-[23px] font-semibold">Events</h2>
-          <div className="h-full flex items-center gap-5">
-            <div className="relative">
-              <div
-                onClick={toggleMenu}
-                className="z-40 h-[45px] border capitalize min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
-              >
-                {createCaseStudyData?.status === "live" ? "Publish" : createCaseStudyData?.status} <img className="h-[10px]" src="/icons/aeroBottom.png" />
-              </div>
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-40 border rounded-xl border-[#0000001c] px-2`}
-              >
-                <button type="button" onClick={()=> handleStatusChange("draft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
-                <button type="button" onClick={()=> handleStatusChange("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
-                <button type="button" onClick={()=> handleStatusChange("undraft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
+      {loading && <PageBuildingLoader />}
+      {!loading && (
+        <div className="h-[100vh] w-full p-4">
+          <Navbar />
+          <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
+            {/* Header */}
+            <div className="h-[70px] px-4 flex items-center justify-between">
+              <h2 className="text-[23px] font-semibold">Events</h2>
+              <div className="h-full flex items-center gap-5">
+                <div className="relative">
+                  <div
+                    onClick={(e) => { e.stopPropagation(); setIsOpen((prev) => !prev); }}
+                    className="z-40 h-[45px] border capitalize min-w-[170px] hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
+                  >
+                    {createCaseStudyData?.status === "live" ? "Publish" : createCaseStudyData?.status}
+                    <img className="h-[10px]" src="/icons/aeroBottom.png" />
+                  </div>
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-0 mt-3 z-40 border rounded-xl border-[#0000001c] px-2`}
+                  >
+                    <button onClick={() => handleStatusChange("draft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
+                    <button onClick={() => handleStatusChange("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
+                    <button onClick={() => handleStatusChange("undraft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
+                  </div>
+                </div>
+                <Link to="/case-studies" className="h-[40px] w-[40px] rounded-full">
+                  <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
+                </Link>
               </div>
             </div>
-            <Link to={'/case-studies'} className="h-[40px] w-[40px] rounded-full">
-              <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
-            </Link>
-          </div>
-        </div>
 
-        {/* Main Content */}
-        <div className="flex gap-2 h-[calc(100%-70px)] pb-2">
-          {/* Sidebar */}
-          <div className="w-[18%] h-full bg-white border-r border-stone-300">
-            <ul>
-              <li onClick={() => handleScrolling(sectionOneRef)} className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === "sectionOne" ? "activeEventPageSection" : "text-stone-600"}`}>Banner</li>
-              <li onClick={() => handleScrolling(sectionTwoRef)} className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === "sectionTwo" ? "activeEventPageSection" : "text-stone-600"}`}>Section 2</li>
-              <li onClick={() => handleScrolling(sectionThreeRef)} className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === "sectionThree" ? "activeEventPageSection" : "text-stone-600"}`}>Challenges</li>
-              <li onClick={() => handleScrolling(sectionFourRef)} className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === "sectionFour" ? "activeEventPageSection" : "text-stone-600"}`}>Approach</li>
-              <li onClick={() => handleScrolling(sectionFiveRef)} className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === "sectionFive" ? "activeEventPageSection" : "text-stone-600"}`}>Outcomes</li>
-            </ul>
-          </div>
+            {/* Main Content */}
+            <div className="flex gap-2 h-[calc(100%-70px)] pb-2">
+              {/* Sidebar */}
+              <div className="w-[18%] h-full bg-white border-r border-stone-300">
+                <ul>
+                  {sectionRef.map(({ id, ref }, index) => (
+                    <li
+                      key={id}
+                      onClick={() => handleScrolling(ref)}
+                      className={`px-4 flex items-center text-[18px] h-[45px] cursor-pointer ${activeSection === id ? "activeEventPageSection" : "text-stone-600"}`}
+                    >
+                      {["Banner","Section 2","Challenges","Approach","Outcomes"][index]}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          {/* Scrollable Content */}
-          <form onSubmit={(e)=> {
-           handleSubmit(e,isEditingPage,id)}
-          } className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
-            <SectionOne ref={sectionOneRef} />
-            <SectionTwo ref={sectionTwoRef} />
-            <Chellenges ref={sectionThreeRef} />
-            <Apporach ref={sectionFourRef} />
-            <Outcomes ref={sectionFiveRef} />
-     
-            {/* Action Buttons */}
-            <div className="flex w-full justify-end gap-5 mt-5">
-              <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px]">Cancel</button>
-              <button type="sunmit"  className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px]">Save</button>
+              {/* Scrollable Content */}
+              <form onSubmit={(e) => handleSubmit(e, isEditingPage, id)} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+                <SectionOne ref={sectionOneRef} />
+                <SectionTwo ref={sectionTwoRef} />
+                <Chellenges ref={sectionThreeRef} />
+                <Apporach ref={sectionFourRef} />
+                <Outcomes ref={sectionFiveRef} />
+
+                {/* Action Buttons */}
+                <div className="flex w-full justify-end gap-5 mt-5">
+                  <button type="button" className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px]">Cancel</button>
+                  <button type="submit" className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px]">Save</button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>}
+      )}
     </>
-    
   );
 };
 

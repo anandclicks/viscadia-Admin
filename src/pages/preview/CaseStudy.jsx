@@ -63,7 +63,7 @@ const CaseStudy = () => {
             <div className="min-h-[330px] flex w-full bg-white shadow my-8 relative z-20">
               {/* Left Image Section */}
               <div className="w-[35%] bg-[#FFF8F8] relative">
-                <div className="flex h-full w-full relative border border-dashed border-[#BD2F2C] flex-col items-center justify-center">
+                <div className="flex h-full w-full relative flex-col items-center justify-center">
                   <img
                     className="h-full w-full object-cover"
                     src={caseStudyData?.img}
