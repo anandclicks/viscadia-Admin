@@ -10,9 +10,9 @@ const SectionTwo = ({ref}) => {
   };
 
   return (
-    <div ref={ref} className="relative h-[460px]">
-      <div className="h-[330px] flex w-full bg-white shadow my-8 relative z-20">
-        <div className="w-[35%] bg-[#FFF8F8] relative">
+    <div ref={ref} className="relative min-h-[460px]">
+      <div className="min-h-[330px] flex w-full bg-white shadow my-8 relative z-20">
+        <div className="max-h-[330px] w-[35%] bg-[#FFF8F8] relative">
           <div className="w-full absolute h-full left-0 top-0 z-20">
             <input onChange={handleNewCaseStudyInputs} className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20" type="file" name="img" />
           </div>
@@ -27,11 +27,11 @@ const SectionTwo = ({ref}) => {
             )}
           </div>
         </div>
-        <div className="w-[65%] h-full p-14">
+        <div className="w-[65%] h-full p-14 pt-2">
           <textarea placeholder="Enter Heading" value={createCaseStudyData?.title} className="w-full h-[45px] placeholder:text-black text-black outline-0 border-0 resize-none overflow-hidden text-[28px]" name="title" onInput={(e) => { handleNewCaseStudyInputs(e); autoResize(e); }} />
           <div className="flex flex-col min-h-[40px]">
             {createCaseStudyData?.texts?.map((data, index) => (
-              <div key={index} className="flex items-center gap-2">
+              <div key={index} className={`flex items-center gap-2 ${index > 0 && "mt-4"}`}>
                 <textarea value={data} onInput={(e) => { handleKeyPointsChange(e, index); autoResize(e); }} placeholder="Enter Sub Heading" className="w-[80%] outline-0 border-0 text-black placeholder:text-black text-[18px] font-light resize-none overflow-hidden" name="texts" />
               </div>
             ))}
