@@ -22,6 +22,7 @@ import Careers from "./components/careers/Careers";
 import NewsAndPress from "./components/NewsAndPress/NewsAndPress";
 import CreatePressReleases from "./pages/NewsAndPress/CreatePressReleases";
 import Webinar from './pages/preview/Webinar'
+import CaseStudy from "./pages/preview/CaseStudy";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
             <Route>
               <Route path="/preview/event/:id" element={<Event/>}/>
               <Route path="/preview/webinar/:id" element={<Webinar/>}/>
+              <Route path="/preview/case-study/:id" element={<CaseStudy/>}/>
             </Route>
             {/* Edit pages route  */}
             <Route>
