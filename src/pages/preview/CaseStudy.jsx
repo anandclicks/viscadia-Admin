@@ -129,12 +129,14 @@ const CaseStudy = () => {
 
                     <ul className="list-disc ps-5">
                       {el?.texts?.map((el, index) => (
-                        <li
+                        <>
+                        {el !== "" && <li
                           key={index}
                           className="my-3 text-stone-500 font-light"
                         >
                           {el}
-                        </li>
+                        </li>}
+                        </>
                       ))}
                     </ul>
                   </div>
@@ -173,12 +175,14 @@ const CaseStudy = () => {
 
                     <ul className="list-disc ps-5">
                       {el?.texts?.map((el, index) => (
-                        <li
+                        <>
+                        {el !== "" && <li
                           key={index}
                           className="my-3 text-stone-500 font-light"
                         >
                           {el}
-                        </li>
+                        </li>}
+                        </>
                       ))}
                     </ul>
                   </div>
@@ -217,12 +221,14 @@ const CaseStudy = () => {
 
                     <ul className="list-disc ps-5">
                       {el?.texts?.map((el, index) => (
-                        <li
+                        <>
+                        {el !== "" && <li
                           key={index}
                           className="my-3 text-stone-500 font-light"
                         >
                           {el}
-                        </li>
+                        </li>}
+                        </>
                       ))}
                     </ul>
                   </div>
