@@ -30,7 +30,7 @@ const SectionFour = ({ ref }) => {
       </div>
       <h2 className="text-center text-[27px] my-10 font-light">Our Forecasting Specialists at the Event</h2>
       <div className="w-full flex justify-end mb-4">
-        <button type="button" onClick={addNewForcastingSection} type="button" className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">
+        <button type="button" onClick={addNewForcastingSection} className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5">
           <i className="ri-add-line"></i> Add More
         </button>
       </div>
