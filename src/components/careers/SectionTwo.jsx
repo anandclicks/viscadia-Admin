@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CareersContext } from '../../../context/CareersContext'
 
 const SectionTwo = () => {
-   
+     const {handleCareersInpust,createCareerData} = useContext(CareersContext)
   return (
     <div className='my-10 bg-[#F1F0F1] h-[290px] p-5 pt-7 relative'>
         <div className="px-10 flex justify-end gap-2 items-center absolute right-0 top-0 mt-5">
@@ -12,10 +13,10 @@ const SectionTwo = () => {
       </div>
         <h2 className='text-[30px] text-center text-[#BD2F2C]'>Principal, Integrated Insights</h2>
         <div className='w-full flex justify-center'>
-            <textarea name="" placeholder='Enter Country' className='placeholder:text-[21px] text-[21px] generalCssForInputs' id=""></textarea>
+            <textarea onInput={handleCareersInpust} value={createCareerData?.country} name="country" placeholder='Enter Country' className='placeholder:text-[21px] placeholder:text-center text-[21px] generalCssForInputs' id=""></textarea>
         </div>
          <div className=''>
-            <textarea name="" placeholder='Enter Sub Heading' className='placeholder:text-[21px] text-[21px] generalCssForInputs' id=""></textarea>
+            <textarea onInput={handleCareersInpust} value={createCareerData?.sectionTwoSubHeading} name="sectionTwoSubHeading" placeholder='Enter Sub Heading' className='placeholder:text-[21px] text-[21px] generalCssForInputs' id=""></textarea>
         </div>
     </div>
   )

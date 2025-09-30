@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 
 const payload = {
@@ -13,9 +13,9 @@ const payload = {
   keySkills: [{ subHeading: "", keyPoints: [""], status: 1 }],
 };
 
-export const CareersContext = createContext({ ...payload });
+export const CareersContext = createContext({});
 export const CareersContextProvider = ({ children }) => {
-  const [createCareerData, setCareerData] = useContext({});
+  const [createCareerData, setCareerData] = useState({...payload});
 
   const handleCareersInpust = async (evt) => {
     const { name, files, value, type } = evt.target;
@@ -28,6 +28,10 @@ export const CareersContextProvider = ({ children }) => {
       setCareerData((prev) => ({ ...prev, [name]: value }));
     }
   };
+
+  useEffect(()=>{
+    console.log(createCareerData);
+  },[createCareerData])
   return (
     <CareersContext.Provider
       value={{

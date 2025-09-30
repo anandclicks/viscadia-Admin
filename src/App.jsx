@@ -24,11 +24,13 @@ import CreatePressReleases from "./pages/NewsAndPress/CreatePressReleases";
 import Webinar from './pages/preview/Webinar'
 import CaseStudy from "./pages/preview/CaseStudy";
 import CreteCareersPage from "./pages/careers/CreteCareersPage";
+import { CareersContextProvider } from "../context/CareersContext";
 
 function App() {
   return (
     <div className=" overflow-hidden">
       <BrowserRouter>
+      <CareersContextProvider>
       <NewCaseStudyContextProvider>
       <LeadershipContextProvider>
       <WebinarContextProvider>
@@ -68,6 +70,7 @@ function App() {
       </WebinarContextProvider>
       </LeadershipContextProvider>
       </NewCaseStudyContextProvider>
+      </CareersContextProvider>
      </BrowserRouter>
       <ToastContainer />
       <Toaster/>
