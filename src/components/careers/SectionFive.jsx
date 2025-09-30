@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SectionThree = () => {
+const SectionFive = () => {
   return (
     <div className='min-h-[350px] bg-[#fff] flex-col flex justify-between w-full shadow relative p-5'>
        <div className="px-10 flex justify-end gap-2 items-center absolute right-0 top-0 mt-5">
@@ -10,8 +10,8 @@ const SectionThree = () => {
         </button>
       </div>
       <div className='flex justify-center flex-col items-center'>
-        <img className='h-[70px]' src="/careers/imgeThree.png" alt="" />
-        <h2 className='text-[#BD2F2C] text-[28px] mt-2'>ROLES AND RESPONSIBILITIES</h2>
+        <img className='h-[70px]' src="/careers/imgeTwo.png" alt="" />
+        <h2 className='text-[#BD2F2C] text-[28px] mt-2'>KEY SKILLS</h2>
       </div>
       <div className='flex flex-col justify-center items-center'>
         <div className='flex flex-col justify-center items-center'>
@@ -31,4 +31,4 @@ const SectionThree = () => {
   )
 }
 
-export default SectionThree
+export default SectionFive

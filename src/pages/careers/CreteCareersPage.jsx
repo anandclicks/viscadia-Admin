@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import SectionOne from '../../components/careers/SectionOne';
 import SectionTwo from '../../components/careers/SectionTwo';
 import SectionThree from '../../components/careers/SectionThree';
+import SectionFour from '../../components/careers/SectionFour';
+import SectionFive from '../../components/careers/SectionFive';
 
 const CreteCareersPage = () => {
      const [isOpen, setIsOpen] = useState(false);
@@ -71,10 +73,12 @@ const CreteCareersPage = () => {
             <SectionOne/>
             <SectionTwo/>
             <SectionThree/>
-            {/* <div className="flex w-full justify-end gap-5">
+            <SectionFour/>
+            <SectionFive/>
+            <div className="flex w-full justify-end gap-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
               <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
-            </div> */}
+            </div>
           </form>
         </div>
       </div>
