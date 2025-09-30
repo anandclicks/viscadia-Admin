@@ -40,7 +40,7 @@ const Chellenges = ({ref}) => {
                     <textarea name="text" value={text} onInput={autoResize} onChange={(e) => handleTextsChange(e, "challenges", mainIndex, index)} placeholder="Key Points" className="h-[24px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#000] text-[#000] text-[14px]" />
                   </div>
                 ))}
-                <button onClick={() => addKeyPointsInArray("challenges", mainIndex)} className="bg-[#BD2F2C] text-[#fff] p-[4px] rounded-full font-medium px-4 text-[13px]">
+                <button type="button" onClick={() => addKeyPointsInArray("challenges", mainIndex)} className="bg-[#BD2F2C] text-[#fff] p-[4px] rounded-full font-medium px-4 text-[13px]">
                   <i className="ri-add-line"></i> Add More
                 </button>
               </div>
@@ -49,7 +49,7 @@ const Chellenges = ({ref}) => {
         ))}
       </div>
       <div className="flex justify-center w-full">
-        <button onClick={() => addObjsInSections("challenges")} className="bg-[#BD2F2C] text-[#fff] p-[6px] rounded-full font-medium px-4 text-[17px]">
+        <button type="button" onClick={() => addObjsInSections("challenges")} className="bg-[#BD2F2C] text-[#fff] p-[6px] rounded-full font-medium px-4 text-[17px]">
           <i className="ri-add-line"></i> Add More
         </button>
       </div>

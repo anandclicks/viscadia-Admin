@@ -113,7 +113,7 @@ const handleSubmit = async (e, type, id) => {
     let t = toast.loading("Updating!");
     let res = await putCommonApiForEvnts(`/casestudy/${id}`, createCaseStudyData);
 
-    if (res.success) {
+    if (res?.success) {
       toast.dismiss(t);
       toast.success(res.message || "Updated successfully!");
       setTimeout(() => {
@@ -126,10 +126,9 @@ const handleSubmit = async (e, type, id) => {
     }
   } else {
     // Creating new case study
-    let t = toast.loading("Creating!");
     let res = await postCommonApi("casestudy", createCaseStudyData, "Case study");
 
-    if (res.success) {
+    if (res?.success) {
       toast.dismiss(t);
       toast.success("Created Successfully!");
       setTimeout(() => {
@@ -137,16 +136,10 @@ const handleSubmit = async (e, type, id) => {
         setCreateStudyData({ ...payload });
       }, 500);
     } else {
-      toast.dismiss(t);
       toast.error("Couldn't Create!");
     }
   }
 };
-
-useEffect(()=>{
-  console.log(createCaseStudyData);
-  
-},[createCaseStudyData])
 
 
   return (

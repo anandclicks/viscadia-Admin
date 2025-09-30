@@ -9,7 +9,7 @@ const LeadershipCard = ({isOpen,onToggle,index}) => {
         <img className="w-full mb-10" src="/leader.jpg" alt="" />
       </div>
       <div className="h-[30%] w-full  flex flex-col pt-3 items-center relative">
-        <button onClick={(e)=> {
+        <button type="button" onClick={(e)=> {
             e.stopPropagation()
             onToggle(index)
         }} className="hover:text-[#BD2F2C] absolute end-0 text-[30px] top-0">

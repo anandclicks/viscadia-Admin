@@ -123,10 +123,9 @@ export const postCommonApi = async(endPont,data,msgPoint)=>{
       data
     );
     toast.dismiss(t);
-    return res.data;
+    return res?.data;
   } catch (e) {
     toast.dismiss(t);
-    return res.errors;
   }
 }
 
@@ -171,7 +170,7 @@ export const createEventApiCall = async (data) => {
       data
     );
     toast.dismiss(t);
-    return res.data;
+    return res?.data;
   } catch (e) {
     toast.dismiss(t);
     return e;

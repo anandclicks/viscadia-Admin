@@ -70,7 +70,7 @@ const SectionTwo = ({ref}) => {
             </div>
           ))}
         </div>
-        <button onClick={()=> addKeysInObjs('company')} className="bg-[#BD2F2C] text-[#fff] w-fit p-[4px] rounded-full font-medium px-4 text-[13px]">
+        <button type="button" onClick={()=> addKeysInObjs('company')} className="bg-[#BD2F2C] text-[#fff] w-fit p-[4px] rounded-full font-medium px-4 text-[13px]">
           <i className="ri-add-line"></i> Add More
         </button>
       </div>

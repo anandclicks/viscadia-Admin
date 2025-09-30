@@ -9,7 +9,7 @@ const SectionFour = ({ref}) => {
     <div ref={ref}  className="h-[400px] w-full mt-10 pt-5 shadow mb-8">
       <div className="px-10  flex justify-end gap-2 items-center">
         <p>{!speakerStatus ? "Unhide" : "Hide"}</p>
-        <button onClick={()=> setSpeakerStatus((prev)=> !prev)} className={`w-[80px] transition-all duration-200 grediantBg h-full rounded-full p-1 cursor-pointer flex items-center`}>
+        <button type="button" onClick={()=> setSpeakerStatus((prev)=> !prev)} className={`w-[80px] transition-all duration-200 grediantBg h-full rounded-full p-1 cursor-pointer flex items-center`}>
           <div className={`h-[30px] w-[30px] transition-all bg-white rounded-full  ${speakerStatus ? "translate-x-0" : " translate-x-10"}`}></div>
         </button>
       </div>
@@ -60,7 +60,7 @@ const SectionFour = ({ref}) => {
           
           </div>
           <div>
-             <button onClick={functionForAddingSpeakers} className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5" >
+             <button type="button" onClick={functionForAddingSpeakers} className="grediantBg text-white p-2 rounded-full font-medium px-8 text-[15px] mt-5" >
             <i className="ri-add-line"></i> Add More
           </button>
           </div>

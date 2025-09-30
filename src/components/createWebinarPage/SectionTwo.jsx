@@ -44,7 +44,7 @@ const SectionTwo = ({ref}) => {
             </div>
            ))}
             
-            <button onClick={functionForAddingPoints} className="bg-white text-black p-2 rounded-full font-medium px-8 text-[13px] mt-5">
+            <button type="button" onClick={functionForAddingPoints} className="bg-white text-black p-2 rounded-full font-medium px-8 text-[13px] mt-5">
           <i className="ri-add-line"></i> Add More
         </button>
            </div>
