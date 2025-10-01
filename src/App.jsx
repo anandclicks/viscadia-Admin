@@ -30,7 +30,7 @@ import Users from "./pages/usersPage/Users";
 
 function App() {
   return (
-    <div className=" overflow-hidden">
+    <div className="overflow-hidden">
       <BrowserRouter>
       <CareersContextProvider>
       <NewCaseStudyContextProvider>

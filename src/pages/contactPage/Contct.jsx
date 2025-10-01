@@ -25,10 +25,7 @@ const Contact = () => {
             <p className="text-[14px] font-semibold">Export to Excel</p>
         </button>
       </div>
-
       <Table/>
-     
-
     </div>
   );
 };

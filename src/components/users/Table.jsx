@@ -51,20 +51,17 @@ const Table = () => {
               <td className="px-4 py-4 text-[14px] font-medium text-black">{el?.phone}</td>
               <td className="px-4 py-4 text-[14px] font-medium text-black capitalize">{el?.role}</td>
               <td className="px-4 py-4 text-[14px] font-medium text-black">
-                <div
-                  className="truncate block max-w-[150px] relative"
-                >
-                  <div className="relative">
-        <button type="button"  className={`w-[60px] transition-all duration-200 ${el?.active ? "grediantBg" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
-          <div className={`h-[20px] w-[20px] transition-all bg-white rounded-full ${el?.active ? "translate-x-0" : "translate-x-8"}`}></div>
-        </button>
-      </div>
+              <div className="truncate block max-w-[150px] relative">
+             <div className="relative">
+                 <button type="button"  className={`w-[60px] transition-all duration-200 ${el?.active ? "grediantBg" : 'bg-gray-400'} h-full rounded-full p-1 cursor-pointer flex items-center`}>
+                    <div className={`h-[20px] w-[20px] transition-all bg-white rounded-full ${el?.active ? "translate-x-0" : "translate-x-8"}`}></div>
+                </button>
                 </div>
-              </td>
+             </div>
+             </td>
             </tr>
-                ))}
+        ))}
           
-            {/* Repeat the rows as needed */}
           </tbody>
         </table>
       </div>
