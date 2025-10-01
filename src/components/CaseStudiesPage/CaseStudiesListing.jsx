@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CaseStudyAndWhitePaperCard from "../common/CaseStudyAndWhitePaperCard";
+import CaseStudyCard from "../common/CaseStudyCard";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from '../common/PageBuildingLoader'
 
@@ -26,7 +26,7 @@ const CaseStudiesListing = () => {
   return (
     <div className="mt-5">
       {allCaseStudies?.map((data, index) => (
-        <CaseStudyAndWhitePaperCard
+        <CaseStudyCard
           key={index}
           id={index}
           data={data}

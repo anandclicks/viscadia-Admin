@@ -4,14 +4,16 @@ import toast from "react-hot-toast";
 
 const AddWhitePaperModal = ({ setIsOpen }) => {
   const [pdf, setPdf] = useState(null);
-  const [whitePaperData, setWhitePaperData] = useState({ heading: "", subHeading: "", pdf: null });
+  const [whitePaperData, setWhitePaperData] = useState({ heading: "", subHeading: "", pdf: null,img : "" });
   const fileInputRef = useRef(null);
 
   const handleInputs = async (evt) => {
     const { type, name, files, value } = evt.target;
     if (type === "file" && files && files[0]) {
       const file = files[0];
-      setPdf(file);
+      if(name === "pdf"){
+        setPdf(file)
+      }
       try {
         const url = await uploadSingleImage(files);
         setWhitePaperData(prev => ({ ...prev, [name]: url }));
@@ -46,7 +48,7 @@ const AddWhitePaperModal = ({ setIsOpen }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#00000034] bg-opacity-30">
-      <div onClick={e => e.stopPropagation()} className="bg-white rounded-[20px] shadow-lg min-h-[400px] w-[50%] p-6 relative">
+      <div onClick={e => e.stopPropagation()} className="bg-white rounded-[20px] shadow-lg min-h-[600px] w-[50%] p-6 relative">
         <div className="border-b-[1px] border-stone-400 pb-4 flex w-full justify-between">
           <h2 className="text-[22px] font-medium text-black">Add New White Paper</h2>
           <button type="button" onClick={() => setIsOpen(false)}>
@@ -84,6 +86,21 @@ const AddWhitePaperModal = ({ setIsOpen }) => {
               </label>
               {pdf && <button type="button" onClick={() => handleClearInput("pdf")} className="ml-2"><img className="h-[20px] w-[20px]" src="./closeDarkBtn.png" alt="Clear" /></button>}
             </div>
+          </div>
+
+          <div className="min-h-[50px] w-[40%] mt-0">
+           <div className="flex bg-[#bd2e2c11] border-dashed border-[1px] h-[200px] w-full relative flex-col items-center justify-center">
+                <input onChange={handleInputs} className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20" type="file" name="img" 
+                 />
+                {whitePaperData?.img ? (
+                  <img className="h-[200px] w-full object-scale-down" src={whitePaperData?.img} alt="" />
+                ) : (
+                  <div className="h-full w-full flex flex-col justify-center items-center">
+                    <img className="h-[20%] w-[20%] object-contain" src="/icons/upload.png" alt="" />
+                    <h3 className="text-[#BD2F2C] mt-2 text-[13px]">Upload Image</h3>
+                  </div>
+                )}
+              </div>
           </div>
 
           <div className="flex w-full justify-end gap-5">

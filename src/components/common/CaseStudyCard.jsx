@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { putCommonApiForEvnts } from "../../utils/reuseableFunctions";
 import { Link } from "react-router-dom";
 
-const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
+const CaseStudyCard = ({ id, isOpen, onToggle, data }) => {
   const [caseStatus, setCaseStatus] = useState(data?.status || "draft");
   useEffect(() => {
     setCaseStatus(data?.status || "draft");
@@ -145,4 +145,4 @@ const CaseStudyAndWhitePaperCard = ({ id, isOpen, onToggle, data }) => {
   );
 };
 
-export default CaseStudyAndWhitePaperCard;
+export default CaseStudyCard;
