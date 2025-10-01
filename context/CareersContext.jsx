@@ -19,7 +19,6 @@ const payload = {
 export const CareersContext = createContext({});
 export const CareersContextProvider = ({ children }) => {
   const [createCareerData, setCareerData] = useState({...payload});
-
   const handleCareersInpust = async (evt) => {
     const { name, files, value, type } = evt.target;
     if (type === "file" && files && files[0]) {
@@ -85,9 +84,6 @@ export const CareersContextProvider = ({ children }) => {
   const functionForToggleStatus = (keyname)=>{
     setCareerData((prev)=> ({...prev,[keyname] : Number(!prev[keyname])}))
   }
-  useEffect(()=>{
-    console.log(createCareerData);
-  },[createCareerData])
   return (
     <CareersContext.Provider
       value={{

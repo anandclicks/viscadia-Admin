@@ -91,9 +91,6 @@ export const LeadershipContextProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    console.log(createLeadershipData);
-  }, [createLeadershipData]);
   return (
     <>
       <LeadershipContext.Provider
