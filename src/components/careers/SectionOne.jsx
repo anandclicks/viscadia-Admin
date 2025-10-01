@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { CareersContext } from '../../../context/CareersContext'
 
-const SectionOne = () => {
+const SectionOne = ({ref}) => {
   const {handleCareersInpust,createCareerData} = useContext(CareersContext)
   return (
-    <div className="h-[260px] w-full bg-[#FFF8F8]">
+    <div ref={ref} className="h-[260px] w-full bg-[#FFF8F8]">
       <div className="h-full w-full relative">
         <div className={`bg-[#BD2F2C] px-10 z-0 h-full w-full relative top-0 left-0 flex justify-between items-center`}>
           <div className="flex h-full w-full relative z-10">

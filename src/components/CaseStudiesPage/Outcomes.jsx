@@ -39,7 +39,7 @@ const Outcomes = ({ ref }) => {
               </div>
             </div>
             <div className="mt-3">
-              <textarea className="h-[40px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#960000] text-[#960000] text-[20px]" placeholder="Heading" name="title" value={el?.title} onInput={autoResize} onChange={(evt) => handleObjInpusChanges(evt, "challenges", mainIndex)} />
+              <textarea className="h-[40px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#960000] text-[#960000] text-[20px]" placeholder="Heading" name="title" value={el?.title} onInput={autoResize} onChange={(evt) => handleObjInpusChanges(evt, "outcomes", mainIndex)} />
               <div>
                 {createCaseStudyData?.outcomes[mainIndex]?.texts?.map((text, index) => (
                   <div key={index} className={`flex items-start gap-2 ${index > 0 && 'mt-4'}`}>
@@ -60,6 +60,7 @@ const Outcomes = ({ ref }) => {
       </div>
       <div className="flex justify-center w-full mt-10">
         <button
+        type="button"
           onClick={() => addObjsInSections("outcomes")}
           className="bg-[#BD2F2C] text-[#fff] p-[6px] rounded-full font-medium px-4 text-[17px]"
         >

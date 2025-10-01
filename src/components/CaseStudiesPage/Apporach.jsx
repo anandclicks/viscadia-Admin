@@ -32,7 +32,7 @@ const Apporach = ({ref}) => {
               </div>
             </div>
             <div className="mt-3">
-              <textarea className="h-[40px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#960000] text-[#960000] text-[20px]" placeholder="Heading" name="title" value={el?.title} onInput={autoResize} onChange={(evt) => handleObjInpusChanges(evt, "challenges", mainIndex)} />
+              <textarea className="h-[40px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#960000] text-[#960000] text-[20px]" placeholder="Heading" name="title" value={el?.title} onInput={autoResize} onChange={(evt) => handleObjInpusChanges(evt, "approach", mainIndex)} />
               <div>
                 {createCaseStudyData?.approach[mainIndex]?.texts?.map((text, index) => (
                   <div key={index} className={`flex items-start gap-2 ${index > 0 && 'mt-4'}`}>

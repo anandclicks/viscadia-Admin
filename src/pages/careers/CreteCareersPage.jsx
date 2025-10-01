@@ -16,12 +16,14 @@ const CreteCareersPage = () => {
       const sectionTwoRef = useRef(null);
       const sectionThreeRef = useRef(null);
       const sectionFourRef = useRef(null);
+      const sectionFiveRef = useRef(null);
 
       const sectionRef = [
         { ref: sectionOneRef, id: "sectionOne" },
         { ref: sectionTwoRef, id: "sectionTwo" },
         { ref: sectionThreeRef, id: "sectionThree" },
         { ref: sectionFourRef, id: "sectionFour" },
+        { ref: sectionFiveRef, id: "sectionFive" },
       ];
     
       useEffect(() => {
@@ -64,17 +66,18 @@ const CreteCareersPage = () => {
           <div className="w-[18%] h-full bg-white border-r border-stone-300">
             <ul>
               <li onClick={() => handleScrolling(sectionOneRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionOne" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Banner</button></li>
-              <li className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Principal, Integrated...</button></li>
-              <li className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Roles and Responsi...</button></li>
-              <li className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Key Skills</button></li>
+              <li onClick={() => handleScrolling(sectionTwoRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Principal, Integrated...</button></li>
+              <li onClick={() => handleScrolling(sectionThreeRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Roles and Responsi...</button></li>
+              <li onClick={() => handleScrolling(sectionFourRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Quilifications</button></li>
+              <li onClick={() => handleScrolling(sectionFiveRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFive" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Key Skills</button></li>
             </ul>
           </div>
           <form className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
-            <SectionOne/>
-            <SectionTwo/>
-            <SectionThree/>
-            <SectionFour/>
-            <SectionFive/>
+            <SectionOne ref={sectionOneRef}/>
+            <SectionTwo ref={sectionTwoRef}/>
+            <SectionThree ref={sectionThreeRef}/>
+            <SectionFour ref={sectionFourRef}/>
+            <SectionFive ref={sectionFiveRef}/>
             <div className="flex w-full justify-end gap-5">
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
               <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
