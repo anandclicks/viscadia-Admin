@@ -8,7 +8,6 @@ const SectionOne = ({ ref }) => {
 
   return (
     <div ref={ref} className="min-h-[500px] w-full shadow my-3">
-      
       <div className="p-5">
         <div className="w-full">
           <textarea

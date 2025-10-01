@@ -33,6 +33,9 @@ button {
 .mainBg {
   background-color: #BD2F2C;
 }
+.scrollbrNone::-webkit-scrollbar {
+  display: none;
+}
 
 .activeTabs {
   background: linear-gradient(to left top, #BD2F2C, #BD2F2C);

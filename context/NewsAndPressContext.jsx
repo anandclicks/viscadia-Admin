@@ -10,7 +10,8 @@ const payload = {
   aboutViscadia: "",
   sectionTwoDetailsTwo: "",
   sectionThreeDetails: "",
-  // rest
+  sectionThreeDetails : "",
+  
 };
 
 export const NewsAndPressContext = createContext({});

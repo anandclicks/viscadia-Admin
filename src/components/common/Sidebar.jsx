@@ -41,10 +41,23 @@ const Sidebar = () => {
       icon: "careers",
       whiteIcon: "careersWhite",
     },
+    {
+      to: "/contacts",
+      label: "Contacts",
+      icon: "contacts",
+      whiteIcon: "contactsWhite",
+    },
+    {
+      to: "/users",
+      label: "User’s",
+      icon: "users",
+      whiteIcon: "usersWhite",
+    },
+  
   ];
 
   return (
-    <div className="h-full w-full px-2 pe-4 flex flex-col justify-between bg-[#F4F1F2]">
+    <div className="h-full overflow-scroll scrollbrNone w-full px-2 pe-4 flex flex-col justify-between bg-[#F4F1F2]">
       <div className="w-full pt-3">
         <div className="space-y-1">
           {links.map(({ to, label, icon, whiteIcon, extraActiveRoutes = [] }) => (
@@ -56,13 +69,12 @@ const Sidebar = () => {
               {({ isActive }) => {
                 const isExtraActive = extraActiveRoutes.includes(location.pathname);
                 const isTabActive = isActive || isExtraActive;
-
                 return (
                   <>
-                    <div className={`${isTabActive ? "activeTabs" : "bg-white opacity-70"} rounded-full h-[55px] w-[55px] flex justify-center items-center shadowcus1`}>
+                    <div className={`${isTabActive ? "activeTabs" : "bg-white "} rounded-full h-[55px] w-[55px] flex justify-center items-center shadowcus1`}>
                       <img
                         src={`../icons/${isTabActive ? whiteIcon : icon}.png`}
-                        className="h-[30px] w-[30px]"
+                        className="h-[30px] w-[30px] object-contain"
                         alt={label}
                       />
                     </div>
