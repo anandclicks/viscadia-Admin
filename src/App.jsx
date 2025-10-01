@@ -25,6 +25,8 @@ import Webinar from './pages/preview/Webinar'
 import CaseStudy from "./pages/preview/CaseStudy";
 import CreteCareersPage from "./pages/careers/CreteCareersPage";
 import { CareersContextProvider } from "../context/CareersContext";
+import Contact from "./pages/contactPage/Contct";
+import Users from "./pages/usersPage/Users";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
               <Route path="/leadership" element={<LeadershipPage />}/>
               <Route path="/careers" element={<Careers/>}/>
               <Route path="/news-and-press-releases" element={<NewsAndPress/>}/>
+              <Route path="/contacts" element={<Contact/>}/>
+              <Route path="/users" element={<Users/>}/>
             </Route>
             <Route>
               <Route path="/create/event" element={<CreateEventPage />} />
