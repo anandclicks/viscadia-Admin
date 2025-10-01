@@ -102,7 +102,7 @@ export function toCamelCase(obj) {
 export const commonGetApiCall = async (endpoint) => {
   try {
     const res = await axios.get(
-      `http://54.219.242.41:4005/api/admin${endpoint}`
+      `http://192.168.0.193:4005/api/admin${endpoint}`
     );
     return res.data;
   } catch (error) {
@@ -113,7 +113,7 @@ export const commonGetApiCall = async (endpoint) => {
 export const putCommonApiForEvnts = async (endPoint, data) => {
   try {
     const res = await axios.put(
-      `http://54.219.242.41:4005/api/admin${endPoint}`,
+      `http://192.168.0.193:4005/api/admin${endPoint}`,
       data
     );
     return res.data;
@@ -126,7 +126,7 @@ export const postCommonApi = async(endPont,data,msgPoint)=>{
   let t = toast.loading(`Creating ${msgPoint}..!`);
   try {
     const res = await axios.post(
-      `http://54.219.242.41:4005/api/admin/${endPont}`,
+      `http://192.168.0.193:4005/api/admin/${endPont}`,
       data
     );
     toast.dismiss(t);
@@ -147,7 +147,7 @@ export const uploadSingleImage = async (files) => {
       files[0]
     );
     const res = await axios.post(
-      `http://54.219.242.41:4005/api/upload/${endPoint}`,
+      `http://192.168.0.193:4005/api/upload/${endPoint}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -173,7 +173,7 @@ export const createEventApiCall = async (data) => {
   let t = toast.loading("Creating Event..!");
   try {
     const res = await axios.post(
-      "http://54.219.242.41:4005/api/admin/events",
+      "http://192.168.0.193:4005/api/admin/events",
       data
     );
     toast.dismiss(t);

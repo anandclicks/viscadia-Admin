@@ -10,7 +10,7 @@ const EventPage = () => {
 
   useEffect(() => {
   const getData = async () => {
-    const data = await commonGetApiCall("/getallevents");
+    const data = await commonGetApiCall("/events");
     if (data.success) {
       setEventListData(data?.data || []);
     } else {

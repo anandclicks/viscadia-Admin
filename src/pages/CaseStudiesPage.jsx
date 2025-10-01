@@ -8,7 +8,7 @@ const CaseStudiesPage = () => {
   return (
     <div>
       <CaseStudiesAndWhitePaperFilter active={active} setActive={setActive}/>
-        {active ?  <CaseStudiesListing/> : <>Not Found</>}
+        {active ?  <CaseStudiesListing/> : <WhitePaperListing/>}
     </div>
   )
 }

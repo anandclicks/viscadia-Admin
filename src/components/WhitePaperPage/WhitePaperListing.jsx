@@ -7,6 +7,8 @@ const WhitePaperListing = () => {
   const handleToggle = (id) => {
     setOpenCardId((prev) => (prev === id ? null : id));
   };
+
+  
   return (
     <div className="mt-5">
       {[...Array(3)].map((_, index) => (

@@ -12,7 +12,7 @@ const CaseStudiesListing = () => {
       let res = await commonGetApiCall('/casestudy')
       console.log(res);
       if(res.success){
-        setAllCaseStudies([...res?.caseStudy])
+        setAllCaseStudies([...res?.data])
       }
       else{
         toast.error(data?.message || "Unable to load Case study. Please try again.");
