@@ -100,11 +100,6 @@ export const WebinarContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(()=>{
-    console.log(webinarCreateData);
-    
-  },[webinarCreateData])
-
   return (
     <>
       <WebinarContext.Provider

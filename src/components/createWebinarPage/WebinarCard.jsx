@@ -38,7 +38,7 @@ const WebinarCard = ({ id, isOpen, onToggle, data }) => {
           />
           <div className="w-[72%] h-full px-5 flex flex-col pt-5">
             <div className="w-full flex justify-between mb-2">
-              <h2 className="text-[22px] font-semibold ">{data?.heading || "Working on it"}</h2>
+              <h2 className="text-[22px] font-semibold ">{data?.headingOne || "Working on it"}</h2>
               <div className="relative flex gap-3 mb-2">
                 {eventStatus === "live" && (
                   <button className="Published">Published</button>
