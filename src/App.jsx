@@ -68,6 +68,7 @@ function App() {
               <Route path="/edit/event/:id" element={<CreateEventPage/>}/>
               <Route path="/edit/case-study/:id" element={<CreateCaseStudy/>}/>
               <Route path="/edit/webinar/:id" element={<CreateWebinarPage/>}/>
+              <Route path="/edit/career/:id" element={<CreteCareersPage/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>

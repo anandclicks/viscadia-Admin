@@ -1,14 +1,23 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState,useRef, useContext } from 'react'
 import Navbar from '../../components/common/Navbar'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SectionOne from '../../components/careers/SectionOne';
 import SectionTwo from '../../components/careers/SectionTwo';
 import SectionThree from '../../components/careers/SectionThree';
 import SectionFour from '../../components/careers/SectionFour';
 import SectionFive from '../../components/careers/SectionFive';
+import { CareersContext } from '../../../context/CareersContext';
+import { commonGetApiCall, textareaAutoResize, toCamelCase } from '../../utils/reuseableFunctions';
+import PageBuildingLoader from '../../components/common/PageBuildingLoader';
 
 const CreteCareersPage = () => {
-     const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+  const [isEditingPage,setIsEditingPage] = useState(false)
+  const [loading,setLoading] = useState(true)
+  const redirect = useNavigate()
+  
+
+  const {handleSubmit,createCareerData,setCareerData} = useContext(CareersContext)
       const toggleMenu = (evt) => { evt.stopPropagation(); setIsOpen((prev) => !prev); };
     
       const [activeSection, setActiveSection] = useState("sectionOne");
@@ -39,8 +48,40 @@ const CreteCareersPage = () => {
     
       const handleScrolling = (ref) => { ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }); };
     
+
+       // Effect to resize all textareas when data changes
+        useEffect(() => {
+          const textareas = document.querySelectorAll("textarea");
+          textareas.forEach((ta) => textareaAutoResize(ta));
+        }, [createCareerData]);
+
+         // if this is a editing page 
+  const {id} = useParams()
+  useEffect(()=>{
+   if(id){
+     const getData = async()=>{
+      let response = await commonGetApiCall(`/career/${id}`)
+      if(response.success){
+        let convertedData = toCamelCase(response?.data)
+        setCareerData(convertedData)
+        setIsEditingPage(true)
+        setLoading(false)
+      }else {
+        redirect("/events-and-webinars")
+        toast.error("Couldn't Fetch Event!")
+        setLoading(false)
+      }
+    }
+    getData()
+   }else {
+    setLoading(false)
+   }
+  },[])
+      
   return (
-      <div className="h-[100vh] w-full p-4">
+   <>
+   {loading && <PageBuildingLoader/>}
+   {!loading  &&  <div className="h-[100vh] w-full p-4">
       <Navbar />
       <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
         <div className="h-[70px] px-4 flex mb-2 items-center justify-between border-b-[1px] border-stone-200">
@@ -58,7 +99,7 @@ const CreteCareersPage = () => {
               </div>
             </div>
             <Link to={"/careers"} className="h-[40px] w-[40px] rounded-full">
-              <img className="h-full w-full rounded-full object-cover" src="../icons/close.png" alt="" />
+              <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
             </Link>
           </div>
         </div>
@@ -68,24 +109,25 @@ const CreteCareersPage = () => {
               <li onClick={() => handleScrolling(sectionOneRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionOne" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Banner</button></li>
               <li onClick={() => handleScrolling(sectionTwoRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionTwo" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Principal, Integrated...</button></li>
               <li onClick={() => handleScrolling(sectionThreeRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Roles and Responsi...</button></li>
-              <li onClick={() => handleScrolling(sectionFourRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Quilifications</button></li>
+              <li onClick={() => handleScrolling(sectionFourRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFour" ? "font-bold activeEventPageSection text-black" : ""}`}><button>qualifications</button></li>
               <li onClick={() => handleScrolling(sectionFiveRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionFive" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Key Skills</button></li>
             </ul>
           </div>
-          <form className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+          <form onSubmit={(evt)=> handleSubmit(evt,isEditingPage,id)} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
             <SectionOne ref={sectionOneRef}/>
             <SectionTwo ref={sectionTwoRef}/>
             <SectionThree ref={sectionThreeRef}/>
             <SectionFour ref={sectionFourRef}/>
             <SectionFive ref={sectionFiveRef}/>
             <div className="flex w-full justify-end gap-5">
-              <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
-              <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
+              <button type='button' className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
+              <button  className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    </div>}
+   </>
   )
 }
 
