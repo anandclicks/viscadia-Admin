@@ -37,7 +37,7 @@ const SectionFour = ({ ref }) => {
                   )}
                   {!el?.image && (
                     <div className="relative flex flex-col justify-center items-center bg-[#FFF5F5] h-full w-full">
-                      <img src="../icons/upload.png" alt="" />
+                      <img src="/icons/upload.png" alt="" />
                       <h3 className="text-[#BD2F2C] mt-2">Upload Image</h3>
                     </div>
                   )}
@@ -84,6 +84,7 @@ const SectionFour = ({ ref }) => {
       </div>
       <div className="flex justify-center w-full mt-10">
         <button
+        type="button"
           onClick={functionForAddingSpeakers}
           className="bg-[#BD2F2C] text-[#fff] p-[6px] rounded-full font-medium px-4 text-[17px]"
         >

@@ -12,13 +12,13 @@ const SectionTwo = ({ref}) => {
   return (
     <div ref={ref}  className="h-[270px] w-full shadow relative flex mt-10 overflow-hidden">
       <div className="EventPagesectionOne w-full h-[101%] object-cover absolute z-10">
-        <img className="h-full w-full object-cover" src="../images/sectionTwo.png" alt="" />
+        <img className="h-full w-full object-cover" src="/images/sectionTwo.png" alt="" />
       </div>
       <div className="w-[45%] h-full flex flex-col gap-10 relative">
         <div className="w-[100%] h-full">
           <div className="h-full w-full bg-amber-200 relative">
             <div className="absolute border border-dashed border-[#BD2F2C] left-0 top-0 h-full w-full bg-[#FFF5F5] flex justify-center items-center flex-col">
-              <img src="../icons/upload.png" alt="" />
+              <img src="/icons/upload.png" alt="" />
               <h3 className="text-[#BD2F2C]  mt-2">Upload Logo</h3>
             </div>
             {webinarCreateData?.imageTwo && (
@@ -39,7 +39,7 @@ const SectionTwo = ({ref}) => {
            <div>
              {webinarCreateData?.keyPoints.map((data,index)=>(
              <div key={index} className="h-[30px] flex items-center gap-2 my-1">
-             <img className="h-[80%] object-cover" src="../icons/keyPoints.png" alt="" />
+             <img className="h-[80%] object-cover" src="/icons/keyPoints.png" alt="" />
              <input value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[18px] font-light" name="keyPoint" type="text" />
             </div>
            ))}

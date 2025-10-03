@@ -11,6 +11,7 @@ function SectionThree({ref}) {
       <div className="px-10 h-[40px] w-[40%] flex justify-end gap-2 items-center">
         <p>{!speakerStatus ? "Unhide" : "Hide"}</p>
         <button
+        type="button"
           onClick={() => setSpeakerStatus((prev) => !prev)}
           className={`w-[80px] transition-all duration-200 grediantBg h-full rounded-full p-1 cursor-pointer flex items-center`}
         >
@@ -25,7 +26,7 @@ function SectionThree({ref}) {
      <div className="w-full h-[270px] flex justify-center items-center">
           <div className="h-[130px] w-[240px] bg-amber-200 relative">
             <div className="absolute border border-dashed border-[#BD2F2C] left-0 top-0 h-full w-full bg-[#FFF5F5] flex justify-center items-center flex-col">
-              <img src="../icons/upload.png" alt="" />
+              <img src="/icons/upload.png" alt="" />
               <h3 className="text-[#BD2F2C]  mt-2">Upload Video</h3>
             </div>
             {webinarCreateData?.webibarVideo && (

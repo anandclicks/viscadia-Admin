@@ -60,7 +60,7 @@ const WebinarCard = ({ id, isOpen, onToggle, data }) => {
                     isOpen ? "opacity-100 block" : "opacity-0 hidden"
                   } min-h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
                 >
-                  <Link to={`/edit/event/${data?.id}`} className="">
+                  <Link to={`/edit/webinar/${data?.id}`} className="">
                     <button className="h-[40px] w-full my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                       Edit
                     </button>
@@ -115,7 +115,7 @@ const WebinarCard = ({ id, isOpen, onToggle, data }) => {
                   )}
 
                   <button className="">
-                    <Link to={`/preview/event/${data?.id}`} className="">
+                    <Link to={`/preview/webinar/${data?.id}`} className="">
                       <button className="w-[170px] h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                         Preview
                       </button>

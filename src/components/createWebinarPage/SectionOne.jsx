@@ -8,20 +8,20 @@ const SectionOne = ({ref}) => {
   return (
     <div ref={ref} className="h-[340px] w-full shadow relative flex">
       <div className="EventPagesectionOne w-full h-[340px] object-cover absolute z-10">
-        <img className="h-full w-full object-cover" src="../images/SectionOneBg.png" alt="" />
+        <img className="h-full w-full object-cover" src="/images/SectionOneBg.png" alt="" />
       </div> 
       <div className="w-[60%] pt-10 h-full px-7 flex flex-col gap-10 relative z-20">
         <div className="">
           <div className="h-[40px] w-full">
             <input onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.headingOne}  placeholder="Enter Heading" className="w-full h-full outline-0 border-0 text-[#000000] placeholder:text-[#000000]  text-[30px]" type="text" name="headingOne" id="" />
           </div>
-            <textarea  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeadingOne} placeholder="Enter Heading" className="w-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
-          <button className="grediantBg cursor-pointer text-white p-2 rounded-none px-8 text-[16px] ">View Webinar</button>
+            <textarea  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeading} placeholder="Enter Heading" className="w-full h-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
+          <button type="button" className="grediantBg cursor-pointer text-white p-2 rounded-none px-8 text-[16px] ">View Webinar</button>
         </div>
       </div>
       <div className="w-[42%] border-dashed border-[#BD2F2C] border h-full rightSide  bg-amber-400 z-0 flex justify-end relative">
         <div className="absolute left-0 top-0 h-full w-full bg-[#FFF8F8] flex justify-center items-center flex-col">
-          <img src="../icons/upload.png" alt="" />
+          <img src="/icons/upload.png" alt="" />
           <h3 className="text-[#BD2F2C]  mt-2">Upload Image</h3>
         </div>
         {webinarCreateData?.imageOne && (

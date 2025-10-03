@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { postCommonApi, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { postCommonApi, putCommonApiForEvnts, toSnakeCase, uploadSingleImage } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 let payload = {
@@ -87,7 +87,12 @@ export const WebinarContextProvider = ({ children }) => {
 
   const handleSubmit = async(evt, type, id) => {
     evt.preventDefault();
-    const res = await postCommonApi('webinar', webinarCreateData)
+    let res = null
+    if(type){
+      res = await putCommonApiForEvnts(`/webinar/${id}`, toSnakeCase(webinarCreateData))
+    }else {
+      res = await postCommonApi(`/webinar`, webinarCreateData)
+    }
     if(res?.success){
       toast.success("Webinar Created succesfully!")
       navigate("/events-and-webinars")
@@ -95,9 +100,6 @@ export const WebinarContextProvider = ({ children }) => {
       toast.error(res?.message || "couldn't Create!")
     }
     console.log(webinarCreateData);
-    if (type) {
-    } else {
-    }
   };
 
   return (
