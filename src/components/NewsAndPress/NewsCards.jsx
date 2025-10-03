@@ -9,7 +9,7 @@ const NewsCards = ({ id, isOpen, onToggle }) => {
   return (
     <div
       onClick={() => onToggle(null)}
-      className="w-full h-[240px] my-5  rounded-[30px] flex fsTwo shadow-[0px_0px_3px_#0000000f] border border-[#f1f1f1]"
+      className="w-full h-[220px] my-5  rounded-[30px] flex fsTwo shadow-[0px_0px_3px_#0000000f] border border-[#f1f1f1]"
     >
       <img
         className="w-[28%] h-full rounded-[30px]"

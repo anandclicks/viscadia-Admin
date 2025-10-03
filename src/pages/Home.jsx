@@ -84,7 +84,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="min-h-[240px] flex gap-6 mt-5">
+      <div className="min-h-[220px] flex gap-6 mt-5">
         <div className="min-h-full w-[70%] overflow-hidden rounded-[30px] shadow-[0px_0px_3px_#0000000f] border border-[#E8E8E8] flex items-center">
           <HomePageChart />
         </div>

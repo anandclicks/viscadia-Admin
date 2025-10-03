@@ -33,7 +33,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
         >
           <img
             className="w-[28%] h-full rounded-[30px] object-cover"
-            src={data?.image}
+            src={data?.image || "/imagePlaceholder.jpg"}
             alt=""
           />
           <div className="w-[72%] h-full px-5 flex flex-col justify-center">

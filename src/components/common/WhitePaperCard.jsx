@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { putCommonApiForEvnts } from "../../utils/reuseableFunctions";
+import { putCommonApiForEvnts, toCamelCase } from "../../utils/reuseableFunctions";
 import { Link } from "react-router-dom";
 
-const WhitePaperCard = ({ id, isOpen, onToggle, data }) => {
+const WhitePaperCard = ({ id, isOpen, onToggle, data,setWhitePaperData }) => {
   const [caseStatus, setCaseStatus] = useState(data?.status || "draft");
   useEffect(() => {
     setCaseStatus(data?.status || "draft");
@@ -67,11 +67,14 @@ const WhitePaperCard = ({ id, isOpen, onToggle, data }) => {
                   } min-h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <Link to={`/edit/case-study/${data?.id}`}>
+                  <button onClick={()=> {
+                    setWhitePaperData(toCamelCase(data))
+                    onToggle(null)
+                  }} type="button">
                     <button className="h-[40px] w-full my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                       Edit
                     </button>
-                  </Link>
+                  </button>
 
                   {caseStatus === "live" && (
                     <>
@@ -141,6 +144,9 @@ const WhitePaperCard = ({ id, isOpen, onToggle, data }) => {
           <h2 className="text-center">No Data Found!</h2>
         </div>
       )}
+
+
+
     </>
   );
 };

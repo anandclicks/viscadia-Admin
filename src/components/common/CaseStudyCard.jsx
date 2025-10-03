@@ -37,7 +37,7 @@ const CaseStudyCard = ({ id, isOpen, onToggle, data }) => {
         >
           <img
             className="w-[28%] h-full rounded-[30px]"
-            src={data?.img}
+            src={data?.img || "/imagePlaceholder.jpg"}
             alt={data?.title || ""}
           />
           <div className="w-[72%] h-full px-5 flex flex-col justify-start pt-5">
