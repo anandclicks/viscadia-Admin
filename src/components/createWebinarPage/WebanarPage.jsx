@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import EventAndWebListingCard from "../common/EventAndWebListingCard";
+import React, { useEffect, useState } from "react";
+import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
+import PageBuildingLoader from "../common/PageBuildingLoader";
+import WebinarCard from "./WebinarCard";
 
 const WebanarPage = () => {
   const [openCardId, setOpenCardId] = useState(null);
@@ -7,17 +9,31 @@ const WebanarPage = () => {
   const handleToggle = (id) => {
     setOpenCardId((prev) => (prev === id ? null : id));
   };
+
+  const [allWebinarData,setWebinarData] = useState(null)
+
+  useEffect(()=>{
+    const getData = async ()=>{
+      const res = await commonGetApiCall('/webinar')
+      setWebinarData(toCamelCase(res?.data))
+    }
+    getData()
+  },[])
   return (
-    <div className="mt-5">
-      {[...Array(1)].map((_, index) => (
-        <EventAndWebListingCard
+  <>
+  {allWebinarData &&   <div className="mt-5">
+      {allWebinarData?.map((data, index) => (
+        <WebinarCard
           key={index}
           id={index}
+          data={data}
           isOpen={openCardId === index}
           onToggle={handleToggle}
         />
       ))}
-    </div>
+    </div>}
+    {!allWebinarData && <PageBuildingLoader/>}
+  </>
   );
 };
 

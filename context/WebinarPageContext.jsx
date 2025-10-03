@@ -1,23 +1,27 @@
-import { createContext, useState } from "react";
-import { uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { createContext, useEffect, useState } from "react";
+import { postCommonApi, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 let payload = {
   subHeading: "",
+  headingOne : "",
+  headingTwo : "",
   imageOne: null,
   imageTwo: null,
   keyPoints: [""],
   webibarVideo: null,
   status: "draft",
-  speaker: [
-    ...Array(4).fill({
+  speaker: [{
       fullName: "",
       designation: "",
       image: null,
       introduction : ""
-    },)
+    }
   ],
 };
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
+  const navigate = useNavigate()
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
 
   const hanldeWebinarInputsChanges = async (evt) => {
@@ -81,14 +85,25 @@ export const WebinarContextProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = (evt, type, id) => {
+  const handleSubmit = async(evt, type, id) => {
     evt.preventDefault();
-    localStorage.setItem("webinar",JSON.stringify(webinarCreateData))
+    const res = await postCommonApi('webinar', webinarCreateData)
+    if(res?.success){
+      toast.success("Webinar Created succesfully!")
+      navigate("/events-and-webinars")
+    }else {
+      toast.error(res?.message || "couldn't Create!")
+    }
     console.log(webinarCreateData);
     if (type) {
     } else {
     }
   };
+
+  useEffect(()=>{
+    console.log(webinarCreateData);
+    
+  },[webinarCreateData])
 
   return (
     <>
@@ -101,6 +116,7 @@ export const WebinarContextProvider = ({ children }) => {
           handleKeyPointsChange,
           handleSpeakersChnages,
           handleSubmit,
+          setWebinarCreateData
         }}
       >
         {children}

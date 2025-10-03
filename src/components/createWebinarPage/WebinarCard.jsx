@@ -3,7 +3,7 @@ import { putCommonApiForEvnts } from "../../utils/reuseableFunctions";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
+const WebinarCard = ({ id, isOpen, onToggle, data }) => {
   const [eventStatus, setEventStatus] = useState(data?.status);
   const handleActionMenu = (evt) => {
     evt.stopPropagation();
@@ -13,7 +13,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
   const handleStausApiCall = async (status) => {
     let t = toast.loading("Status updating!");
     let id = data?.id;
-    let res = await putCommonApiForEvnts(`/events/${id}`, { status: status });
+    let res = await putCommonApiForEvnts(`/webinar/${id}`, { status: status });
     if (res.success) {
       toast.dismiss(t);
       toast.success("Statsu Updated Successfully");
@@ -33,12 +33,12 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
         >
           <img
             className="w-[28%] h-full rounded-[30px] object-cover"
-            src={data?.image || "/imagePlaceholder.jpg"}
+            src={data?.imageOne !== "" ? data?.imageOne : "/imagePlaceholder.jpg"}
             alt=""
           />
-          <div className="w-[72%] h-full px-5 flex flex-col justify-center">
+          <div className="w-[72%] h-full px-5 flex flex-col pt-5">
             <div className="w-full flex justify-between mb-2">
-              <h2 className="text-[22px] font-semibold ">{data?.title}</h2>
+              <h2 className="text-[22px] font-semibold ">{data?.heading || "Working on it"}</h2>
               <div className="relative flex gap-3 mb-2">
                 {eventStatus === "live" && (
                   <button className="Published">Published</button>
@@ -124,7 +124,7 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
                 </div>
               </div>
             </div>
-            <p className="text-[15px] leading-[20px]">{data?.sub_heading}</p>
+            <p className="text-[15px] leading-[20px]">{data?.subHeading}</p>
           </div>
         </div>
       )}
@@ -137,4 +137,4 @@ const EventAndWebListingCard = ({ id, isOpen, onToggle, data }) => {
   );
 };
 
-export default EventAndWebListingCard;
+export default WebinarCard;

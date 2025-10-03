@@ -24,7 +24,7 @@ const CreateWebinarPage = () => {
   }, []);
 
   // Golbale function for handling submit event
-  const { handleSubmit, setCreateEventFormData, webinarCreateData } =
+  const { handleSubmit, setWebinarCreateData, webinarCreateData } =
     useContext(WebinarContext);
 
   // Function for handle scrolling
@@ -72,8 +72,9 @@ const CreateWebinarPage = () => {
   };
 
   const handleWebinarStatus = (state) => {
-    setCreateEventFormData((prev) => {
-      ({ ...prev, state: state });
+    setWebinarCreateData((prev) => {
+      setIsOpen(null)
+     return { ...prev, status: state }
     });
   };
 
@@ -97,7 +98,7 @@ const CreateWebinarPage = () => {
                 onClick={toggleMenu}
                 className="z-40 h-[45px] border min-w-[170px] capitalize hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer"
               >
-                {webinarCreateData?.status}{" "}
+                {webinarCreateData?.status === "live"? "Publsh" : webinarCreateData?.status}{" "}
                 <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div
@@ -106,9 +107,6 @@ const CreateWebinarPage = () => {
                   isOpen ? "opacity-100 block" : "opacity-0 hidden"
                 } h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
               >
-                <button className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">
-                  Edit
-                </button>
                 <button
                   onClick={() => handleWebinarStatus("draft")}
                   className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]"

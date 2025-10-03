@@ -34,7 +34,7 @@ const SectionTwo = ({ref}) => {
         <div className="w-[100%] relative z-10 flex justify-end">
           <div className="w-[80%]">
             <div className="h-[60px]">
-              <input placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="heading" type="text" />
+              <input onInput={(e)=> hanldeWebinarInputsChanges(e)} value={webinarCreateData?.headingTwo} placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="headingTwo" type="text" />
             </div>
            <div>
              {webinarCreateData?.keyPoints.map((data,index)=>(

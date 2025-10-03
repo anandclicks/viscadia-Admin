@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EventAndWebListingCard from "../common/EventAndWebListingCard";
+import EventCard from "./EventCard";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import PageBuildingLoader from "../common/PageBuildingLoader";
@@ -32,7 +32,7 @@ const EventPage = () => {
    <>
    {eventListData &&  <div className="mt-5">
       {eventListData?.map((data, index) => (
-        <EventAndWebListingCard
+        <EventCard
           key={index}
           id={index}
           isOpen={openCardId === index}
