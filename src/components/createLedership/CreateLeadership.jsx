@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import Navbar from "../common/Navbar.jsx";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SectionOne from "./SectionOne.jsx";
 import SectionTwo from "./SectionTwo.jsx";
 import SectionThree from "./SectionThree.jsx";
+import { LeadershipContext } from "../../../context/LeadershipContext.jsx";
 
-const CreateLeadership = () => {
+const CreateLeadership = () => {``
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (evt) => { evt.stopPropagation(); setIsOpen((prev) => !prev); };
+  const {handleSubmit} = useContext(LeadershipContext)
 
   const [activeSection, setActiveSection] = useState(null);
   const sectionOneRef = useRef(null);
@@ -63,7 +65,7 @@ const CreateLeadership = () => {
               <li onClick={() => handleScrolling(sectionThreeRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Section Three</button></li>
             </ul>
           </div>
-          <div className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+          <form onSubmit={handleSubmit} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
             <div ref={sectionOneRef}><SectionOne /></div>
             <div ref={sectionTwoRef}><SectionTwo /></div>
             <div ref={sectionThreeRef}><SectionThree /></div>
@@ -71,7 +73,7 @@ const CreateLeadership = () => {
               <button className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
               <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

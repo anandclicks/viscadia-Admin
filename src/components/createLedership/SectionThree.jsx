@@ -67,6 +67,7 @@ const SectionThree = ({ref}) => {
 
               {/* Button kept for UI consistency, but no functionality */}
               <button
+              type="button"
                 onClick={() => addKeysInObjsTwo("sectionThree", index)}
                 className="bg-[#BD2F2C] mt-2 text-[#fff] p-[4px] rounded-full font-medium px-4 text-[13px]"
               >

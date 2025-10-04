@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import { uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { postCommonApi, putCommonApiForEvnts, sligGenerator, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import toast from "react-hot-toast";
 const payload = {
   bannerHeading: "",
   designation: "",
@@ -93,6 +94,31 @@ export const LeadershipContextProvider = ({ children }) => {
     });
   };
 
+
+
+  const handleSubmit = async(evt,type,id)=>{
+   evt.preventDefault();
+    let t = toast.loading("Creating Ledadership!")
+    let res = null;
+    let finalData = {...createLeadershipData, slug : sligGenerator(createLeadershipData?.bannerHeading)}
+    
+    if (type) {
+      res = await putCommonApiForEvnts(`/leadership/${id}`, finalData);
+    } else {
+      res = await postCommonApi(`leadership`, finalData);
+    }
+     if(res?.success){
+      toast.dismiss(t)
+      toast.success(res.message || "Updated successsfuly!")
+      setTimeout(() => {
+      navigate("/leadership")
+      setCareerData({...payload})
+    }, 500);
+    }else {
+      toast.dismiss(t)
+      toast.error("couldn't Create!")
+    }
+  }
   return (
     <>
       <LeadershipContext.Provider
@@ -104,6 +130,7 @@ export const LeadershipContextProvider = ({ children }) => {
           handleCopanyNameInputs,
           handleSectionThreeObjInputs,
           handlePointsInputOfObjs,
+          handleSubmit
         }}
       >
         {children}
