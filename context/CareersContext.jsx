@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import {
   postCommonApi,
   putCommonApiForEvnts,
-  sligGenerator,
   uploadSingleImage,
 } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";

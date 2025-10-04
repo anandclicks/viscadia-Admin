@@ -55,7 +55,7 @@ export let webinarPayload = {
 
 export function sligGenerator(str) {
   return str
-    .toString()
+    ?.toString()
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createEventApiCall, putCommonApiForEvnts, sligGenerator, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
+import { createEventApiCall, putCommonApiForEvnts, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -42,7 +42,6 @@ export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
   let navigate = useNavigate()
   const [createEventFormData, setCreateEventFormData] = useState({...payload});
-
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
@@ -151,6 +150,12 @@ export const EventPageContextProvider = ({ children }) => {
    }
    }
   };
+
+
+  useEffect(()=>{
+    console.log(createEventFormData);
+    
+  },[createEventFormData])
 
   
   return (

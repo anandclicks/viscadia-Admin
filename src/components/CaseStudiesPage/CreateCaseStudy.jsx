@@ -11,7 +11,7 @@ import { commonGetApiCall, textareaAutoResize, toCamelCase } from "../../utils/r
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
 const CreateCaseStudy = () => {
-  const { createCaseStudyData, setCreateStudyData, handleSubmit } = useContext(NewCaseStudyContext);
+  const { createCaseStudyData, setCreateStudyData, handleSubmit,handleNewCaseStudyInputs } = useContext(NewCaseStudyContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditingPage, setIsEditingPage] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -156,6 +156,25 @@ const CreateCaseStudy = () => {
                 <Apporach ref={sectionFourRef} />
                 <Outcomes ref={sectionFiveRef} />
 
+            <div>
+              <div className="min-h-[50px] min-w-[500px] py-10">
+                <p>Enter Page url</p>
+             <div className="flex items-center h-full">
+               <input 
+              required
+              value={"https://viscadia.com/casestudy/"}
+              readOnly
+              placeholder="https://viscadia.com/casestudy/"
+              type="text" className="text-[15px] w-[228px] border-r-0 text-black outline-0 border-[1px] py-2 pe-0 px-2 border-stone-300 placeholder:text-[#000]" name="slug" id="" />
+              <input 
+              required
+              placeholder="page-url-endpoint"
+              value={createCaseStudyData?.slug}
+              onInput={handleNewCaseStudyInputs}
+              type="text" className="text-[15px] lowercase border-l-0 w-[400px] ps-0 text-black outline-0 border-[1px] py-2 px-2 border-stone-300 placeholder:text-[#a7a7a7]" name="slug" id="" />
+             </div>
+              </div>
+            </div>
                 {/* Action Buttons */}
                 <div className="flex w-full justify-end gap-5 mt-5">
                   <button type="button" className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px]">Cancel</button>

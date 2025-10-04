@@ -6,7 +6,7 @@ import SectionFour from "./SectionFour";
 import SectionThree from "./SectionThree";
 import Navbar from "../common/Navbar";
 import { EventPageContext } from "../../../context/EventPageContext";
-import { commonGetApiCall, eventPayload, textareaAutoResize, toCamelCase } from "../../utils/reuseableFunctions";
+import { commonGetApiCall, eventPayload, sligGenerator, textareaAutoResize, toCamelCase } from "../../utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
@@ -30,7 +30,7 @@ const CreateEventPage = () => {
   }, []);
 
   // function for handling submit 
-  const { handleSubmit,setCreateEventFormData,createEventFormData } = useContext(EventPageContext);
+  const { handleSubmit,setCreateEventFormData,createEventFormData ,handleEventInputfiledsChanges} = useContext(EventPageContext);
 
   // function for handling scrolling by button click 
   const [activeSection,setActiveSection] = useState(null)
@@ -148,7 +148,26 @@ const CreateEventPage = () => {
             <SectionTwo ref={sectionTwoRef} />
             <SectionThree ref={sectionThreeRef} />
             <SectionFour ref={sectionFourRef} />
-            <div className="flex w-full justify-end gap-5">
+            <div>
+              <div className="min-h-[50px] min-w-[500px] py-10">
+                <p>Enter Page url</p>
+             <div className="flex items-center h-full">
+               <input 
+              required
+              value={"https://viscadia.com/events/"}
+              readOnly
+              placeholder="https://viscadia.com/events/"
+              type="text" className="text-[15px] w-[203px] border-r-0 text-black outline-0 border-[1px] py-2 pe-0 px-2 border-stone-300 placeholder:text-[#000]" name="slug" id="" />
+               <input 
+              required
+              placeholder="page-url-endpoint"
+              value={createEventFormData?.slug}
+              onInput={handleEventInputfiledsChanges}
+              type="text" className="text-[15px] lowercase border-l-0 w-[400px] ps-0 text-black outline-0 border-[1px] py-2 px-2 border-stone-300 placeholder:text-[#a7a7a7]" name="slug" id="" />
+             </div>
+              </div>
+            </div>
+            <div className="flex w-[auto] justify-end gap-5">
               <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
               <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
             </div>

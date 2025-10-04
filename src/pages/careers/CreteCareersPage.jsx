@@ -17,7 +17,7 @@ const CreteCareersPage = () => {
   const redirect = useNavigate()
   
 
-  const {handleSubmit,createCareerData,setCareerData} = useContext(CareersContext)
+  const {handleSubmit,createCareerData,setCareerData,handleCareersInpust} = useContext(CareersContext)
       const toggleMenu = (evt) => { evt.stopPropagation(); setIsOpen((prev) => !prev); };
     
       const [activeSection, setActiveSection] = useState("sectionOne");
@@ -119,6 +119,25 @@ const CreteCareersPage = () => {
             <SectionThree ref={sectionThreeRef}/>
             <SectionFour ref={sectionFourRef}/>
             <SectionFive ref={sectionFiveRef}/>
+             <div>
+              <div className="min-h-[50px] min-w-[500px] py-10">
+                <p>Enter Page url</p>
+             <div className="flex items-center h-full">
+               <input 
+              required
+              value={"https://viscadia.com/career/"}
+              readOnly
+              placeholder="https://viscadia.com/career/"
+              type="text" className="text-[15px] w-[202px] border-r-0 text-black outline-0 border-[1px] py-2 pe-0 px-2 border-stone-300 placeholder:text-[#000]" name="slug" id="" />
+              <input 
+              required
+              placeholder="page-url-endpoint"
+              value={createCareerData?.slug}
+              onInput={handleCareersInpust}
+              type="text" className="text-[15px] lowercase border-l-0 w-[400px] ps-0 text-black outline-0 border-[1px] py-2 px-2 border-stone-300 placeholder:text-[#a7a7a7]" name="slug" id="" />
+             </div>
+              </div>
+            </div>
             <div className="flex w-full justify-end gap-5">
               <button type='button' className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</button>
               <button  className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>

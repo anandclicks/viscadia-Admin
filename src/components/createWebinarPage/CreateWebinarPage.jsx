@@ -27,7 +27,7 @@ const CreateWebinarPage = () => {
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
 
-  const { handleSubmit, setWebinarCreateData, webinarCreateData } = useContext(WebinarContext);
+  const { handleSubmit, setWebinarCreateData, webinarCreateData,hanldeWebinarInputsChanges } = useContext(WebinarContext);
 
   const [activeSection, setActiveSection] = useState(null);
   const sectionOneRef = useRef(null);
@@ -164,6 +164,25 @@ const CreateWebinarPage = () => {
                 <SectionTwo ref={sectionTwoRef} />
                 <SectionThree ref={sectionThreeRef} />
                 <SectionFour ref={sectionFourRef} />
+                 <div>
+              <div className="min-h-[50px] min-w-[500px] py-10">
+                <p>Enter Page url</p>
+             <div className="flex items-center h-full">
+               <input 
+              required
+              value={"https://viscadia.com/webinar/"}
+              readOnly
+              placeholder="https://viscadia.com/webinar/"
+              type="text" className="text-[15px] w-[211px] border-r-0 text-black outline-0 border-[1px] py-2 pe-0 px-2 border-stone-300 placeholder:text-[#000]" name="slug" id="" />
+               <input 
+              required
+              placeholder="page-url-endpoint"
+              value={CreateWebinarPage?.slug}
+              onInput={hanldeWebinarInputsChanges}
+              type="text" className="text-[15px] lowercase border-l-0 w-[400px] ps-0 text-black outline-0 border-[1px] py-2 px-2 border-stone-300 placeholder:text-[#a7a7a7]" name="slug" id="" />
+             </div>
+              </div>
+            </div>
                 <div className="flex w-full justify-end gap-5">
                   <button type="button" className="bg-[#FFFFFF] border border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancel</button>
                   <button className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5">Save</button>

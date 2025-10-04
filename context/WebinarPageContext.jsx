@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { postCommonApi, putCommonApiForEvnts, sligGenerator, toSnakeCase, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import { postCommonApi, putCommonApiForEvnts, toSnakeCase, uploadSingleImage } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 let payload = {
