@@ -1,5 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
+import * as XLSX from 'xlsx';
+
 
 // variable
 export const eventPayload = {
@@ -98,6 +100,14 @@ export function toCamelCase(obj) {
   }
   return obj;
 }
+
+export const excelGenerator = (jsonData, filePath = 'output.xlsx') => {
+  const worksheet = XLSX.utils.json_to_sheet(jsonData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'contacts-test');
+  XLSX.writeFile(workbook, filePath);
+  console.log(`Excel file saved as ${filePath}`);
+};
 
 export const commonGetApiCall = async (endpoint) => {
   try {

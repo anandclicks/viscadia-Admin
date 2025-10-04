@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function PageBuildingLoader() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30">
       <div role="status" aria-live="polite" aria-busy="true" className="relative">
         <div className="spinner" aria-hidden="false">
           <svg
@@ -34,8 +34,12 @@ export default function PageBuildingLoader() {
             />
           </svg>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-4 h-4 bg-[#BD2F2C] rounded-full animate-pulse-glow" />
+        <div className="absolute  inset-0 flex items-center justify-center">
+          <img
+            src="/icons/favicon.ico"
+            alt="Logo"
+            className="w-8 h-8 rounded-full "
+          />
         </div>
         <span className="sr-only">Loading...</span>
       </div>
@@ -61,12 +65,12 @@ export default function PageBuildingLoader() {
           0%, 100% {
             opacity: 0.6;
             transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(189, 47, 44, 0.4);
+            filter: drop-shadow(0 0 0 rgba(189, 47, 44, 0.4));
           }
           50% {
             opacity: 1;
-            transform: scale(1.2);
-            box-shadow: 0 0 8px 2px rgba(189, 47, 44, 0.6);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(189, 47, 44, 0.6));
           }
         }
 

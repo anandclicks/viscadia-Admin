@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { commonGetApiCall } from "../../utils/reuseableFunctions";
+import { commonGetApiCall, excelGenerator } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from "../common/PageBuildingLoader";
 
-const Table = () => {
+const Table = ({setJsonData}) => {
   const [tableData, setTableData] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(""); // State to store search input
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   useEffect(() => {
     const getData = async () => {
@@ -13,8 +13,7 @@ const Table = () => {
     };
     getData();
   }, []);
-
-  // Filter the table data based on search query
+  
   const filteredData = tableData?.filter((el) => {
     const fullName = `${el?.form_data?.name || ""} ${el?.form_data?.first_name || ""} ${el?.form_data?.last_name || ""}`.toLowerCase();
     const email = el?.form_data?.email?.toLowerCase();
@@ -22,6 +21,14 @@ const Table = () => {
     
     return fullName.includes(query) || email.includes(query); // Check if query is in full name or email
   });
+
+  const handleExcelExport = ()=>{
+   let filteredData = tableData?.map((el)=> el?.form_data)
+   console.log(filteredData);
+   excelGenerator(filteredData)
+    console.log("pdf i think generated!");
+    
+  }
 
   return (
     <>
@@ -37,10 +44,10 @@ const Table = () => {
             placeholder="Search by Name or Email..."
             className="h-full w-full pl-10 pr-4 rounded-full text-[16px] bg-white outline-0 placeholder-gray-400 transition-all duration-200"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+            onChange={(e) => setSearchQuery(e.target.value)} 
           />
         </div>
-        <button className="h-[40px] flex px-4 gap-2 items-center w-fit border-[1px] border-stone-200 rounded-full">
+        <button onClick={handleExcelExport} className="h-[40px] flex px-4 gap-2 items-center w-fit border-[1px] border-stone-200 rounded-full">
           <img className="h-[25px] object-contain" src="/icons/excel.png" alt="" />
           <p className="text-[14px] font-semibold">Export to Excel</p>
         </button>
