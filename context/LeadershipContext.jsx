@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { uploadSingleImage } from "../src/utils/reuseableFunctions";
 const payload = {
   bannerHeading: "",
@@ -9,6 +9,8 @@ const payload = {
   experience: "",
   experienceSubheading: "",
   title: "",
+  status: "",
+  hyperLink : "",
   company: [""],
   sectionThree: Array.from({ length: 3 }, () => ({
     img: "",
