@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [notificationTab, setNotificationTab] = useState(false)
+  document.addEventListener("click",()=>{
+    setNotificationTab(false)
+  })
   return (
     <div className='h-18 w-full flex justify-between items-center bg-[#F4F1F2] '>
      <div className='flex items-center gap-5'>
@@ -19,8 +22,32 @@ const Navbar = () => {
       </div>
      </div>
        <div className='flex gap-4 items-center'>
-        <button className='h-[50px] w-[50px] bg-white flex justify-center items-center rounded-full'>
+        <button onClick={(e) => {e.stopPropagation(); setNotificationTab((prev) => !prev)}} className='h-[50px] w-[50px] bg-white relative flex justify-center items-center rounded-full'>
           <img src="/icons/notificationIcon.png" alt="" />
+
+          <div
+          onClick={(e)=> e.stopPropagation()}
+            className={`${
+              notificationTab ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+            } min-h-[350px] w-80 bg-white shadow-lg absolute right-0 top-12 transition-all duration-200 rounded-xl border border-gray-100 p-4 z-90`}
+          >
+            <div className='w-full flex justify-end items-center mb-4'>
+            </div>
+            <div className='flex flex-col gap-3'>
+              <div className='p-3 bg-gray-50 rounded-lg'>
+                <p className='text-sm font-medium'>Event is now live</p>
+                <p className='text-xs text-gray-500'>5 minutes ago</p>
+              </div>
+              <div className='p-3 bg-gray-50 rounded-lg'>
+                <p className='text-sm font-medium'>New user logged in</p>
+                <p className='text-xs text-gray-500'>30 minutes ago</p>
+              </div>
+              <div className='p-3 bg-gray-50 rounded-lg'>
+                <p className='text-sm font-medium'>User A deleted event 2</p>
+                <p className='text-xs text-gray-500'>1 hour ago</p>
+              </div>
+            </div>
+          </div>
         </button>
         <button className='h-[50px] w-[50px] bg-white flex justify-center items-center rounded-full'>
           <img src="/icons/settingIcon.png" alt="" />
