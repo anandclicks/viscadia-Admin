@@ -35,6 +35,7 @@ let payload = {
       introduction: "",
     },
   ],
+  slug :""
 };
 
 export const EventPageContext = createContext({});
@@ -129,8 +130,7 @@ export const EventPageContextProvider = ({ children }) => {
     evt.preventDefault();
    if(type){
     let t = toast.loading("Updating!")
-    let finalData = {...createEventFormData, slug : sligGenerator(createEventFormData?.title)}
-    let res = await putCommonApiForEvnts(`/events/${id}`,finalData)
+    let res = await putCommonApiForEvnts(`/events/${id}`,createEventFormData)
     if(res.success){
       toast.dismiss(t)
       toast.success(res.message || "Updated successsfuly!")
@@ -142,7 +142,7 @@ export const EventPageContextProvider = ({ children }) => {
       toast.error("couldn't Update!")
     }
    }else {
-    let res = await createEventApiCall(finalData)
+    let res = await createEventApiCall(createEventFormData)
    if(res.success){
     setTimeout(() => {
       navigate("/events-and-webinars")

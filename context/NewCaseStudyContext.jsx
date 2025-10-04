@@ -15,6 +15,7 @@ const payload = {
   outcomes: [...Array(3).fill({ img: "", title: "", texts: [""] })],
   pdf: "",
   status: "draft",
+  slug : ""
 };
 
 export const NewCaseStudyContext = createContext({});
@@ -111,8 +112,7 @@ const handleSubmit = async (e, type, id) => {
   if (type) {
     // Updating existing case study
     let t = toast.loading("Updating!");
-    let finalData = {...createCaseStudyData, slug : createCaseStudyData?.title}
-    let res = await putCommonApiForEvnts(`/casestudy/${id}`, finalData);
+    let res = await putCommonApiForEvnts(`/casestudy/${id}`, createCaseStudyData);
 
     if (res?.success) {
       toast.dismiss(t);
@@ -127,7 +127,7 @@ const handleSubmit = async (e, type, id) => {
     }
   } else {
     // Creating new case study
-    let res = await postCommonApi("casestudy", finalData, "Case study");
+    let res = await postCommonApi("casestudy", createCaseStudyData, "Case study");
 
     if (res?.success) {
       toast.success("Created Successfully!");

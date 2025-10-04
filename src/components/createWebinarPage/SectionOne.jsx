@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { WebinarContext } from "../../../context/WebinarPageContext";
-import { ImagePreviewContext } from "../../../context/ImagePreveiw";
 
 const SectionOne = ({ref}) => {
   const {hanldeWebinarInputsChanges,webinarCreateData} = useContext(WebinarContext)

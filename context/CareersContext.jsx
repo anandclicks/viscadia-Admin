@@ -21,6 +21,8 @@ const payload = {
   qualificationsStatus: true,
   keySkills: [{ subHeading: "", keyPoints: [""] }],
   keySkillsStatus: true,
+  slug : "",
+  status : "draft"
 };
 
 export const CareersContext = createContext({});
@@ -101,11 +103,10 @@ export const CareersContextProvider = ({ children }) => {
     evt.preventDefault();
     let t = toast.loading("Creating career!")
     let res = null;
-    let finalData = {...createCareerData, slug : sligGenerator(createCareerData?.heading)}
     if (type) {
-      res = await putCommonApiForEvnts(`/career/${id}`, finalData);
+      res = await putCommonApiForEvnts(`/career/${id}`, createCareerData);
     } else {
-      res = await postCommonApi(`career`, finalData);
+      res = await postCommonApi(`career`, createCareerData);
     }
      if(res.success){
       toast.dismiss(t)

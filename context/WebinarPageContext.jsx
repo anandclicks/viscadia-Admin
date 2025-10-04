@@ -18,6 +18,7 @@ let payload = {
       introduction : ""
     }
   ],
+  slug : ""
 };
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
@@ -88,11 +89,10 @@ export const WebinarContextProvider = ({ children }) => {
   const handleSubmit = async(evt, type, id) => {
     evt.preventDefault();
     let res = null
-    let finalData = {...webinarCreateData, slug : sligGenerator(webinarCreateData?.headingOne)}
     if(type){
-      res = await putCommonApiForEvnts(`/webinar/${id}`, toSnakeCase(finalData))
+      res = await putCommonApiForEvnts(`/webinar/${id}`, toSnakeCase(webinarCreateData))
     }else {
-      res = await postCommonApi(`/webinar`, finalData)
+      res = await postCommonApi(`/webinar`, webinarCreateData)
     }
     if(res?.success){
       toast.success("Webinar Created succesfully!")
