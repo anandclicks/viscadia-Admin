@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import {
   postCommonApi,
   putCommonApiForEvnts,
+  sligGenerator,
   uploadSingleImage,
 } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
@@ -100,10 +101,11 @@ export const CareersContextProvider = ({ children }) => {
     evt.preventDefault();
     let t = toast.loading("Creating career!")
     let res = null;
+    let finalData = {...createCareerData, slug : sligGenerator(createCareerData?.heading)}
     if (type) {
-      res = await putCommonApiForEvnts(`/career/${id}`, createCareerData);
+      res = await putCommonApiForEvnts(`/career/${id}`, finalData);
     } else {
-      res = await postCommonApi(`career`, createCareerData);
+      res = await postCommonApi(`career`, finalData);
     }
      if(res.success){
       toast.dismiss(t)

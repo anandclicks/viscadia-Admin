@@ -111,7 +111,8 @@ const handleSubmit = async (e, type, id) => {
   if (type) {
     // Updating existing case study
     let t = toast.loading("Updating!");
-    let res = await putCommonApiForEvnts(`/casestudy/${id}`, createCaseStudyData);
+    let finalData = {...createCaseStudyData, slug : createCaseStudyData?.title}
+    let res = await putCommonApiForEvnts(`/casestudy/${id}`, finalData);
 
     if (res?.success) {
       toast.dismiss(t);
@@ -126,7 +127,7 @@ const handleSubmit = async (e, type, id) => {
     }
   } else {
     // Creating new case study
-    let res = await postCommonApi("casestudy", createCaseStudyData, "Case study");
+    let res = await postCommonApi("casestudy", finalData, "Case study");
 
     if (res?.success) {
       toast.success("Created Successfully!");

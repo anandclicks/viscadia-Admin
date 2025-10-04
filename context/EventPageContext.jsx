@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createEventApiCall, putCommonApiForEvnts, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
+import { createEventApiCall, putCommonApiForEvnts, sligGenerator, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -129,7 +129,8 @@ export const EventPageContextProvider = ({ children }) => {
     evt.preventDefault();
    if(type){
     let t = toast.loading("Updating!")
-    let res = await putCommonApiForEvnts(`/events/${id}`,createEventFormData)
+    let finalData = {...createEventFormData, slug : sligGenerator(createEventFormData?.title)}
+    let res = await putCommonApiForEvnts(`/events/${id}`,finalData)
     if(res.success){
       toast.dismiss(t)
       toast.success(res.message || "Updated successsfuly!")
@@ -141,7 +142,7 @@ export const EventPageContextProvider = ({ children }) => {
       toast.error("couldn't Update!")
     }
    }else {
-    let res = await createEventApiCall(createEventFormData)
+    let res = await createEventApiCall(finalData)
    if(res.success){
     setTimeout(() => {
       navigate("/events-and-webinars")
