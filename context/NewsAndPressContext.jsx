@@ -10,8 +10,8 @@ const payload = {
   aboutViscadia: "",
   sectionTwoDetailsTwo: "",
   sectionThreeDetails: "",
-  sectionThreeDetails : "",
-  
+  sectionThreeDetails: "",
+  status: "draft",
 };
 
 export const NewsAndPressContext = createContext({});
@@ -20,20 +20,22 @@ export const NewsAndPressContextProvider = ({ children }) => {
     ...payload,
   });
 
-  const handlePaperAndPressInputs = async(evt)=>{
-    const {name,value,files,type} = evt.target
-    if(type === "file" && files && files[0]){
-        const url = await uploadSingleImage(files)
-        setCreatePaperAndPressData((prev)=> ({...prev,[name] : url}))
-    }else {
-        setCreatePaperAndPressData((prev)=> ({...prev,[name] : value}))
+  const handlePaperAndPressInputs = async (evt) => {
+    const { name, value, files, type } = evt.target;
+    if (type === "file" && files && files[0]) {
+      const url = await uploadSingleImage(files);
+      setCreatePaperAndPressData((prev) => ({ ...prev, [name]: url }));
+    } else {
+      setCreatePaperAndPressData((prev) => ({ ...prev, [name]: value }));
     }
-  }
+  };
   return (
-    <NewsAndPressContext.Provider value={{
+    <NewsAndPressContext.Provider
+      value={{
         createPaperAndPressData,
-        handlePaperAndPressInputs
-    }}>
+        handlePaperAndPressInputs,
+      }}
+    >
       {children}
     </NewsAndPressContext.Provider>
   );

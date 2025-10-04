@@ -1,10 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-import { createEventApiCall, putCommonApiForEvnts, uploadSingleImage } from "../src/utils/reuseableFunctions.js";
+import {
+  createEventApiCall,
+  putCommonApiForEvnts,
+  uploadSingleImage,
+} from "../src/utils/reuseableFunctions.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 let payload = {
-  logo: "", 
+  logo: "",
   title: "",
   date: "",
   location: "",
@@ -35,13 +39,15 @@ let payload = {
       introduction: "",
     },
   ],
-  slug :""
+  slug: "",
 };
 
 export const EventPageContext = createContext({});
 export const EventPageContextProvider = ({ children }) => {
-  let navigate = useNavigate()
-  const [createEventFormData, setCreateEventFormData] = useState({...payload});
+  let navigate = useNavigate();
+  const [createEventFormData, setCreateEventFormData] = useState({
+    ...payload,
+  });
   const handleEventInputfiledsChanges = async (evt) => {
     const { name, type, value, files } = evt.target;
     if (type === "file" && files && files[0]) {
@@ -100,7 +106,7 @@ export const EventPageContextProvider = ({ children }) => {
       return { ...prev, speaker: speakers };
     });
   };
-  
+
   const handleSpeakersInputsChanges = async (evt, i) => {
     const { name, files, value } = evt.target;
     if (files && files[0]) {
@@ -125,39 +131,39 @@ export const EventPageContextProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = async(evt,type,id) => {
+  const handleSubmit = async (evt, type, id) => {
     evt.preventDefault();
-   if(type){
-    let t = toast.loading("Updating!")
-    let res = await putCommonApiForEvnts(`/events/${id}`,createEventFormData)
-    if(res.success){
-      toast.dismiss(t)
-      toast.success(res.message || "Updated successsfuly!")
-      setTimeout(() => {
-      navigate("/events-and-webinars")
-      setCreateEventFormData({...payload})
-    }, 500);
-    }else {
-      toast.error("couldn't Update!")
+    if (type) {
+      let t = toast.loading("Updating!");
+      let res = await putCommonApiForEvnts(
+        `/events/${id}`,
+        createEventFormData
+      );
+      if (res.success) {
+        toast.dismiss(t);
+        toast.success(res.message || "Updated successsfuly!");
+        setTimeout(() => {
+          navigate("/events-and-webinars");
+          setCreateEventFormData({ ...payload });
+        }, 500);
+      } else {
+        toast.error("couldn't Update!");
+      }
+    } else {
+      let res = await createEventApiCall(createEventFormData);
+      if (res.success) {
+        setTimeout(() => {
+          navigate("/events-and-webinars");
+          setCreateEventFormData({ ...payload });
+        }, 500);
+      }
     }
-   }else {
-    let res = await createEventApiCall(createEventFormData)
-   if(res.success){
-    setTimeout(() => {
-      navigate("/events-and-webinars")
-      setCreateEventFormData({...payload})
-    }, 500);
-   }
-   }
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log(createEventFormData);
-    
-  },[createEventFormData])
+  }, [createEventFormData]);
 
-  
   return (
     <EventPageContext.Provider
       value={{

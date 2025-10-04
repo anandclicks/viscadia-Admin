@@ -20,13 +20,13 @@ const payload = {
   qualificationsStatus: true,
   keySkills: [{ subHeading: "", keyPoints: [""] }],
   keySkillsStatus: true,
-  slug : "",
-  status : "draft"
+  slug: "",
+  status: "draft",
 };
 
 export const CareersContext = createContext({});
 export const CareersContextProvider = ({ children }) => {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const [createCareerData, setCareerData] = useState({ ...payload });
   const handleCareersInpust = async (evt) => {
     const { name, files, value, type } = evt.target;
@@ -100,22 +100,22 @@ export const CareersContextProvider = ({ children }) => {
 
   const handleSubmit = async (evt, type, id) => {
     evt.preventDefault();
-    let t = toast.loading("Creating career!")
+    let t = toast.loading("Creating career!");
     let res = null;
     if (type) {
       res = await putCommonApiForEvnts(`/career/${id}`, createCareerData);
     } else {
       res = await postCommonApi(`career`, createCareerData);
     }
-     if(res.success){
-      toast.dismiss(t)
-      toast.success(res.message || "Updated successsfuly!")
+    if (res.success) {
+      toast.dismiss(t);
+      toast.success(res.message || "Updated successsfuly!");
       setTimeout(() => {
-      navigate("/careers")
-      setCareerData({...payload})
-    }, 500);
-    }else {
-      toast.error("couldn't Update!")
+        navigate("/careers");
+        setCareerData({ ...payload });
+      }, 500);
+    } else {
+      toast.error("couldn't Update!");
     }
   };
 

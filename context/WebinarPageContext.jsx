@@ -1,28 +1,34 @@
 import { createContext, useEffect, useState } from "react";
-import { postCommonApi, putCommonApiForEvnts, toSnakeCase, uploadSingleImage } from "../src/utils/reuseableFunctions";
+import {
+  postCommonApi,
+  putCommonApiForEvnts,
+  toSnakeCase,
+  uploadSingleImage,
+} from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 let payload = {
   subHeading: "",
-  headingOne : "",
-  headingTwo : "",
+  headingOne: "",
+  headingTwo: "",
   imageOne: null,
   imageTwo: null,
   keyPoints: [""],
   webibarVideo: null,
   status: "draft",
-  speaker: [{
+  speaker: [
+    {
       fullName: "",
       designation: "",
       image: null,
-      introduction : ""
-    }
+      introduction: "",
+    },
   ],
-  slug : ""
+  slug: "",
 };
 export const WebinarContext = createContext({});
 export const WebinarContextProvider = ({ children }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [webinarCreateData, setWebinarCreateData] = useState({ ...payload });
 
   const hanldeWebinarInputsChanges = async (evt) => {
@@ -50,7 +56,7 @@ export const WebinarContextProvider = ({ children }) => {
       let updatedSpeakerArr = prev.speaker;
       updatedSpeakerArr = [
         ...updatedSpeakerArr,
-        { fullName: "", designation: "", image: null, introduction : "" },
+        { fullName: "", designation: "", image: null, introduction: "" },
       ];
       return { ...prev, speaker: updatedSpeakerArr };
     });
@@ -86,19 +92,22 @@ export const WebinarContextProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = async(evt, type, id) => {
+  const handleSubmit = async (evt, type, id) => {
     evt.preventDefault();
-    let res = null
-    if(type){
-      res = await putCommonApiForEvnts(`/webinar/${id}`, toSnakeCase(webinarCreateData))
-    }else {
-      res = await postCommonApi(`/webinar`, webinarCreateData)
+    let res = null;
+    if (type) {
+      res = await putCommonApiForEvnts(
+        `/webinar/${id}`,
+        toSnakeCase(webinarCreateData)
+      );
+    } else {
+      res = await postCommonApi(`/webinar`, webinarCreateData);
     }
-    if(res?.success){
-      toast.success("Webinar Created succesfully!")
-      navigate("/events-and-webinars")
-    }else {
-      toast.error(res?.message || "couldn't Create!")
+    if (res?.success) {
+      toast.success("Webinar Created succesfully!");
+      navigate("/events-and-webinars");
+    } else {
+      toast.error(res?.message || "couldn't Create!");
     }
     console.log(webinarCreateData);
   };
@@ -114,7 +123,7 @@ export const WebinarContextProvider = ({ children }) => {
           handleKeyPointsChange,
           handleSpeakersChnages,
           handleSubmit,
-          setWebinarCreateData
+          setWebinarCreateData,
         }}
       >
         {children}
