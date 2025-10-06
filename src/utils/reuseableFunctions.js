@@ -112,7 +112,7 @@ export const excelGenerator = (jsonData, filePath = 'output.xlsx') => {
 export const commonGetApiCall = async (endpoint) => {
   try {
     const res = await axios.get(
-      `http://192.168.0.193:4005/api/admin${endpoint}`
+      `http://192.168.0.193:4005/api/admin${endpoint}`, {withCredentials : true}
     );
     return res.data;
   } catch (error) {
@@ -124,7 +124,7 @@ export const putCommonApiForEvnts = async (endPoint, data) => {
   try {
     const res = await axios.put(
       `http://192.168.0.193:4005/api/admin${endPoint}`,
-      data
+      data,{withCredentials : true}
     );
     return res.data;
   } catch (error) {
@@ -137,7 +137,7 @@ export const postCommonApi = async(endPont,data,msgPoint)=>{
   try {
     const res = await axios.post(
       `http://192.168.0.193:4005/api/admin/${endPont}`,
-      data
+      data,{withCredentials : true}
     );
     toast.dismiss(t);
     return res?.data;
@@ -158,7 +158,7 @@ export const uploadSingleImage = async (files) => {
     );
     const res = await axios.post(
       `http://192.168.0.193:4005/api/upload/${endPoint}`,
-      formData,
+      formData,{withCredentials : true},
       {
         headers: { "Content-Type": "multipart/form-data" },
       }
@@ -184,7 +184,7 @@ export const createEventApiCall = async (data) => {
   try {
     const res = await axios.post(
       "http://192.168.0.193:4005/api/admin/events",
-      data
+      data, {withCredentials : true}
     );
     toast.dismiss(t);
     return res?.data;

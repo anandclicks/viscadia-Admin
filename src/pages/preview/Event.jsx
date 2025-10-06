@@ -18,6 +18,7 @@ const Event = () => {
       }else {
         toast.error("Couldn't Load ! Please Try Again.")
         redirect("/events-and-webinars")
+        setloading(false)
       }
     };
     getData();

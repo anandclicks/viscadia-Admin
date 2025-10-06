@@ -47,7 +47,6 @@ const Login = () => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % adminOptions.length);
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -59,7 +58,6 @@ const Login = () => {
       "http://192.168.0.193:4005/v1/auth/login",
       { email, password }
     );
-
     const data = res.data; 
     if (data.success) {
       toast.dismiss(toastId)
