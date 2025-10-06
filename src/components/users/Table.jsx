@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { commonGetApiCall, putCommonApiForEvnts } from "../../utils/reuseableFunctions";
+import toast from "react-hot-toast";
 
 const Table = () => {
   const data = [
@@ -17,12 +19,37 @@ const Table = () => {
     setPopup({ show: true, index, name: user.fullName, newState: user.active ? 0 : 1 });
   };
 
-  const confirmToggle = () => {
-    const updatedData = [...tableData];
+  const confirmToggle = async() => {
+    let t = toast.loading("Changing Account Status..!")
+    setPopup({ show: false, index: null, name: "", newState: null });
+    const res = await putCommonApiForEvnts(`users/${popup?.index}`,{status : popup?.newState})
+    if(res?.success){
+      toast.dismiss(t)
+      toast.success("User Account Status changed Successfuly!")
+     const updatedData = [...tableData];
     updatedData[popup.index].active = popup.newState;
     setTableData(updatedData);
-    setPopup({ show: false, index: null, name: "", newState: null });
+    }else {
+      toast.dismiss(t)
+      toast.error("Couldn't change Account Status!")
+    }
+   
   };
+
+
+  useEffect(()=>{
+    const getData = async ()=>{
+      const res = await commonGetApiCall('getallusers')
+      if(res.success){
+        console.log(res);
+      }else {
+        console.log(`soemthing web wrong check in response`, res)
+      }
+    }
+    getData()
+  },[])
+
+  
 
   return (
     <div className="border-[1px] border-stone-200 rounded-[20px] fsTwo relative">
