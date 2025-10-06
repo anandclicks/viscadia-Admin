@@ -24,7 +24,6 @@ const Navbar = () => {
        <div className='flex gap-4 items-center'>
         <button onClick={(e) => {e.stopPropagation(); setNotificationTab((prev) => !prev)}} className='h-[50px] w-[50px] bg-white relative flex justify-center items-center rounded-full'>
           <img src="/icons/notificationIcon.png" alt="" />
-
           <div
           onClick={(e)=> e.stopPropagation()}
             className={`${
@@ -52,14 +51,14 @@ const Navbar = () => {
         <button className='h-[50px] w-[50px] bg-white flex justify-center items-center rounded-full'>
           <img src="/icons/settingIcon.png" alt="" />
         </button>
-        <button className='h-[50px] w-[50px] border-[2px] border-[#c50000] rounded-full relative'>
+        <Link to={'/profile'} className='h-[50px] w-[50px] border-[2px] border-[#c50000] rounded-full relative'>
          <img
             className='h-[100%] w-[100%] object-cover rounded-full'
             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UjosF-j3Ss0503ak8hGQb-PX4DjCRAQGbg&s'
             alt='Profile'
           />
           <div className='h-[15px] w-[15px] rounded-full bg-green-500 border border-white absolute bottom-[-2px] right-[0px]'></div>
-       </button>
+       </Link>
        </div>
     </div>
   )

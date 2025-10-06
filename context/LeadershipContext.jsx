@@ -2,7 +2,6 @@ import { createContext, useState } from "react";
 import {
   postCommonApi,
   putCommonApiForEvnts,
-  sligGenerator,
   uploadSingleImage,
 } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
@@ -103,15 +102,10 @@ export const LeadershipContextProvider = ({ children }) => {
     evt.preventDefault();
     let t = toast.loading("Creating Ledadership!");
     let res = null;
-    let finalData = {
-      ...createLeadershipData,
-      slug: sligGenerator(createLeadershipData?.bannerHeading),
-    };
-
     if (type) {
-      res = await putCommonApiForEvnts(`/leadership/${id}`, finalData);
+      res = await putCommonApiForEvnts(`/leadership/${id}`, createLeadershipData);
     } else {
-      res = await postCommonApi(`leadership`, finalData);
+      res = await postCommonApi(`/leadership`, createLeadershipData);
     }
     if (res?.success) {
       toast.dismiss(t);

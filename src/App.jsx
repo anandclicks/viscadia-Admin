@@ -27,6 +27,8 @@ import CreteCareersPage from "./pages/careers/CreteCareersPage";
 import { CareersContextProvider } from "../context/CareersContext";
 import Contact from "./pages/contactPage/Contct";
 import Users from "./pages/usersPage/Users";
+import ProfilePage from './pages/profile/PorfilePage';
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
       <EventPageContextProvider>
       <NewCaseStudyContextProvider>
           <Routes>
+           <Route path="/login" element={<Login />} />
             <Route path="/" element={<MainLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/events-and-webinars" element={<EventAndWebenar />}/>
@@ -48,6 +51,7 @@ function App() {
               <Route path="/news-and-press-releases" element={<NewsAndPress/>}/>
               <Route path="/contacts" element={<Contact/>}/>
               <Route path="/users" element={<Users/>}/>
+              <Route path="/profile" element={<ProfilePage/>}/>
             </Route>
             <Route>
               <Route path="/create/event" element={<CreateEventPage />} />
