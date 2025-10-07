@@ -22,8 +22,7 @@ const Navbar = () => {
       </div>
      </div>
        <div className='flex gap-4 items-center'>
-         <div className={`z-10 cursor-pointer h-[45px] border-1  min-w-[170px]  bg-white flex justify-center items-center gap-2 border-[#E8E8E8]  transition-all rounded-full`}>
-          <img className='h-[15px]' src='./icons/plus.png'/> Add New User</div>
+        
         <button onClick={(e) => {e.stopPropagation(); setNotificationTab((prev) => !prev)}} className='h-[50px] w-[50px] bg-white relative flex justify-center items-center rounded-full'>
           <img src="/icons/notificationIcon.png" alt="" />
           <div

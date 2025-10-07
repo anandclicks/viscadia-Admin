@@ -9,7 +9,7 @@ import { LeadershipContext } from "../../../context/LeadershipContext.jsx";
 const CreateLeadership = () => {``
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (evt) => { evt.stopPropagation(); setIsOpen((prev) => !prev); };
-  const {handleSubmit} = useContext(LeadershipContext)
+  const {handleSubmit,setCreateLeadershipData} = useContext(LeadershipContext)
 
   const [activeSection, setActiveSection] = useState(null);
   const sectionOneRef = useRef(null);
@@ -34,6 +34,13 @@ const CreateLeadership = () => {``
 
   const handleScrolling = (ref) => { ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }); };
 
+
+
+    const handleLeadershipStatus = (state) => {
+    setCreateLeadershipData((prev) => ({ ...prev, status: state }));
+    setIsOpen(false);
+  };
+
   return (
     <div className="h-[100vh] w-full p-4">
       <Navbar />
@@ -47,9 +54,9 @@ const CreateLeadership = () => {``
                 <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div onClick={(e) => e.stopPropagation()} className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}>
-                <button type="button" onClick={() => handleWebinarStatus("draft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
-                <button type="button" onClick={() => handleWebinarStatus("undraft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
-                <button type="button" onClick={() => handleWebinarStatus("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
+                <button type="button" onClick={() => handleLeadershipStatus("draft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Mark as Draft</button>
+                <button type="button" onClick={() => handleLeadershipStatus("undraft")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Undraft</button>
+                <button type="button" onClick={() => handleLeadershipStatus("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
               </div>
             </div>
             <Link to={"/leadership"} className="h-[40px] w-[40px] rounded-full">

@@ -2,6 +2,21 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import * as XLSX from 'xlsx';
 
+// Axios instance with token
+const API = axios.create({
+  baseURL: "http://192.168.0.193:4005/api/admin",
+});
+
+API.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 // variable
 export const eventPayload = {
@@ -37,6 +52,7 @@ export const eventPayload = {
     },
   ],
 };
+
 export let webinarPayload = {
   subHeading: "",
   imageOne: null,
@@ -65,16 +81,15 @@ export function sligGenerator(str) {
 }
 
 export const textareaAutoResize = (el) => {
-    if (el) {
-      el.style.height = "20px"; 
-      el.style.height = Math.max(el.scrollHeight, 20) + "px"; 
-    }
+  if (el) {
+    el.style.height = "20px"; 
+    el.style.height = Math.max(el.scrollHeight, 20) + "px"; 
+  }
 };
 
 export function toSnakeCase(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(toSnakeCase);
-  } else if (obj !== null && typeof obj === "object") {
+  if (Array.isArray(obj)) return obj.map(toSnakeCase);
+  else if (obj !== null && typeof obj === "object") {
     const newObj = {};
     for (const key in obj) {
       const snakeKey = key.replace(/([A-Z])/g, "_$1").toLowerCase();
@@ -86,14 +101,11 @@ export function toSnakeCase(obj) {
 }
 
 export function toCamelCase(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(toCamelCase);
-  } else if (obj !== null && typeof obj === "object") {
+  if (Array.isArray(obj)) return obj.map(toCamelCase);
+  else if (obj !== null && typeof obj === "object") {
     const newObj = {};
     for (const key in obj) {
-      const camelKey = key.replace(/_([a-z])/g, (_, char) =>
-        char.toUpperCase()
-      );
+      const camelKey = key.replace(/_([a-z])/g, (_, char) => char.toUpperCase());
       newObj[camelKey] = toCamelCase(obj[key]);
     }
     return newObj;
@@ -106,14 +118,11 @@ export const excelGenerator = (jsonData, filePath = 'output.xlsx') => {
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'contacts-test');
   XLSX.writeFile(workbook, filePath);
-  console.log(`Excel file saved as ${filePath}`);
 };
 
 export const commonGetApiCall = async (endpoint) => {
   try {
-    const res = await axios.get(
-      `http://192.168.0.193:4005/api/admin${endpoint}`, {withCredentials : true}
-    );
+    const res = await API.get(endpoint);
     return res.data;
   } catch (error) {
     return error;
@@ -122,29 +131,24 @@ export const commonGetApiCall = async (endpoint) => {
 
 export const putCommonApiForEvnts = async (endPoint, data) => {
   try {
-    const res = await axios.put(
-      `http://192.168.0.193:4005/api/admin${endPoint}`,
-      data,{withCredentials : true}
-    );
+    const res = await API.put(endPoint, data);
     return res.data;
   } catch (error) {
     return error;
   }
 };
 
-export const postCommonApi = async(endPont,data,msgPoint)=>{
+export const postCommonApi = async (endPont, data, msgPoint) => {
   let t = toast.loading(`Creating ${msgPoint}..!`);
   try {
-    const res = await axios.post(
-      `http://192.168.0.193:4005/api/admin/${endPont}`,
-      data,{withCredentials : true}
-    );
+    const res = await API.post(endPont, data);
     toast.dismiss(t);
     return res?.data;
   } catch (e) {
     toast.dismiss(t);
+    return e;
   }
-}
+};
 
 export const uploadSingleImage = async (files) => {
   if (!files?.length) return "";
@@ -156,13 +160,11 @@ export const uploadSingleImage = async (files) => {
       files[0].type === "video/mp4" ? "additional_files" : "file",
       files[0]
     );
-    const res = await axios.post(
-      `http://192.168.0.193:4005/api/upload/${endPoint}`,
-      formData,{withCredentials : true},
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
+
+    const res = await axios.post(`http://192.168.0.193:4005/api/upload/${endPoint}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
     toast.dismiss(t);
     if (res.data?.success) {
       toast.success("File uploaded successfully!");
@@ -182,10 +184,7 @@ export const uploadSingleImage = async (files) => {
 export const createEventApiCall = async (data) => {
   let t = toast.loading("Creating Event..!");
   try {
-    const res = await axios.post(
-      "http://192.168.0.193:4005/api/admin/events",
-      data, {withCredentials : true}
-    );
+    const res = await API.post("/events", data);
     toast.dismiss(t);
     return res?.data;
   } catch (e) {

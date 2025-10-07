@@ -29,6 +29,8 @@ import Contact from "./pages/contactPage/Contct";
 import Users from "./pages/usersPage/Users";
 import ProfilePage from './pages/profile/PorfilePage';
 import Login from "./pages/Login";
+import Leadership from "./pages/preview/leadership";
+
 
 function App() {
   return (
@@ -66,6 +68,7 @@ function App() {
               <Route path="/preview/event/:id" element={<Event/>}/>
               <Route path="/preview/webinar/:id" element={<Webinar/>}/>
               <Route path="/preview/case-study/:id" element={<CaseStudy/>}/>
+              <Route path="/preview/leadership/:id" element={<Leadership/>}/>
             </Route>
             {/* Edit pages route  */}
             <Route>

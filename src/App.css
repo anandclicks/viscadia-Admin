@@ -99,6 +99,16 @@ button {
   width: fit-content;
   padding: 0 25px;
 }
+.publishTwo {
+  background-color: #ffffff;
+    color: #4ec019;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 13px;
+    height: 31px;
+    width: fit-content;
+    padding: 0 16px;
+}
 
 .draft {
   background-color: #be302b2a;
@@ -109,6 +119,16 @@ button {
   height: 40px;
   width: fit-content;
   padding: 0 25px;
+}
+.draftTwo {
+     background-color: #ffffff;
+    color: #BD2F2C;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 13px;
+    height: 31px;
+    width: fit-content;
+    padding: 0 16px;
 }
 
 .activeEventPageSection {

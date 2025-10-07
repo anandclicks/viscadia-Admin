@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -50,7 +51,7 @@ const Login = () => {
     return () => clearInterval(interval);
   }, []);
 
- const handleLogin = async (e) => {
+const handleLogin = async (e) => {
   e.preventDefault();
   const toastId = toast.loading("Logging in...");
   try {
@@ -58,20 +59,25 @@ const Login = () => {
       "http://192.168.0.193:4005/v1/auth/login",
       { email, password }
     );
-    const data = res.data; 
-    if (data.success) {
-      toast.dismiss(toastId)
+
+    const data = res.data;
+    console.log("Login response:", data);
+
+    if (data.success && data.token) {
+      toast.dismiss(toastId);
       toast.success("Logged in successfully!");
-      navigate('/')
+      navigate("/");
+      localStorage.setItem("token",data.token)
     } else {
-      toast.dismiss(toastId)
+      toast.dismiss(toastId);
       toast.error(data.message || "Something went wrong!");
     }
   } catch (error) {
-    toast.dismiss(toastId)
+    toast.dismiss(toastId);
     toast.error(error.response?.data?.message || "Something went wrong!");
-  } 
+  }
 };
+
 
 
   return (

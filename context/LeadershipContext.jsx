@@ -14,7 +14,7 @@ const payload = {
   experience: "",
   experienceSubheading: "",
   title: "",
-  hyperLink: "",
+  hyperLink: "http://localhost:5173/create/leadership",
   company: [""],
   sectionThree: Array.from({ length: 3 }, () => ({
     img: "",
@@ -131,6 +131,7 @@ export const LeadershipContextProvider = ({ children }) => {
           handleSectionThreeObjInputs,
           handlePointsInputOfObjs,
           handleSubmit,
+          setCreateLeadershipData
         }}
       >
         {children}

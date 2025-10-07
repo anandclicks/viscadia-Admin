@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CaseStudyCard from "../common/CaseStudyCard";
 import { commonGetApiCall } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from '../common/PageBuildingLoader'
+import toast from "react-hot-toast";
 
 
 const CaseStudiesListing = () => {
