@@ -66,8 +66,10 @@ const handleLogin = async (e) => {
     if (data.success && data.token) {
       toast.dismiss(toastId);
       toast.success("Logged in successfully!");
-      navigate("/");
       localStorage.setItem("token",data.token)
+      setTimeout(() => {
+        navigate("/");
+      }, 400);
     } else {
       toast.dismiss(toastId);
       toast.error(data.message || "Something went wrong!");

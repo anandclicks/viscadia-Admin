@@ -30,12 +30,15 @@ import Users from "./pages/usersPage/Users";
 import ProfilePage from './pages/profile/PorfilePage';
 import Login from "./pages/Login";
 import Leadership from "./pages/preview/leadership";
+import { PorfileContextProvider } from "../context/ProfileDetailsContext";
+import AddUser from "./pages/AddUser";
 
 
 function App() {
   return (
     <div className="overflow-hidden">
       <BrowserRouter>
+      <PorfileContextProvider>
       <CareersContextProvider>
       <NewCaseStudyContextProvider>
       <LeadershipContextProvider>
@@ -54,6 +57,7 @@ function App() {
               <Route path="/contacts" element={<Contact/>}/>
               <Route path="/users" element={<Users/>}/>
               <Route path="/profile" element={<ProfilePage/>}/>
+              <Route path="/add-user" element={<AddUser/>}/>
             </Route>
             <Route>
               <Route path="/create/event" element={<CreateEventPage />} />
@@ -76,6 +80,7 @@ function App() {
               <Route path="/edit/case-study/:id" element={<CreateCaseStudy/>}/>
               <Route path="/edit/webinar/:id" element={<CreateWebinarPage/>}/>
               <Route path="/edit/career/:id" element={<CreteCareersPage/>}/>
+              <Route path="/edit/leadership/:id" element={<CreateLeadership/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>
@@ -84,6 +89,7 @@ function App() {
       </LeadershipContextProvider>
       </NewCaseStudyContextProvider>
       </CareersContextProvider>
+      </PorfileContextProvider>
      </BrowserRouter>
       <ToastContainer />
       <Toaster/>

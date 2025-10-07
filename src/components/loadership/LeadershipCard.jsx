@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { putCommonApiForEvnts } from "../../utils/reuseableFunctions"; // assuming same API util
-import { toast } from "react-hot-toast";
+import { putCommonApiForEvnts } from "../../utils/reuseableFunctions"; 
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const LeadershipCard = ({ isOpen, onToggle, index, data }) => {
   const [status, setStatus] = useState(data?.status);
@@ -29,14 +29,12 @@ const LeadershipCard = ({ isOpen, onToggle, index, data }) => {
         {status === "draft" && <button className="draftTwo absolute top-0 end-0 m-1">Draft</button>}
         {status === "undraft" && <button className="opacity-0 draft absolute top-0 end-0 m-1">undraft</button>}
         <img
-          className="w-full mb-10"
+          className="w-full h-full object-cover  mb-10"
           src={data?.banner_image || "/images/userPlceholder.webp"}
           alt=""
         />
       </div>
       <div className="h-[30%] w-full flex flex-col pt-3 items-center relative">
-        
-
         <button
           type="button"
           onClick={(e) => {
@@ -54,9 +52,11 @@ const LeadershipCard = ({ isOpen, onToggle, index, data }) => {
             isOpen ? "opacity-100 block" : "opacity-0 hidden"
           } h-[200px] w-[170px] bg-white shadow-lg absolute right-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}
         >
-          <button className="w-full h-[20%] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
+           <Link to={`/edit/leadership/${data?.id}`} className="">
+           <button className="w-full h-[20%] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
             Edit
-          </button>
+           </button>
+          </Link>
           {status === "live" && (
             <>
               <button

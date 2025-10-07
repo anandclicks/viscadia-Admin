@@ -2,9 +2,11 @@ import { createContext, useState } from "react";
 import {
   postCommonApi,
   putCommonApiForEvnts,
+  toCamelCase,
   uploadSingleImage,
 } from "../src/utils/reuseableFunctions";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const payload = {
   bannerHeading: "",
   designation: "",
@@ -25,6 +27,7 @@ const payload = {
 };
 export const LeadershipContext = createContext({});
 export const LeadershipContextProvider = ({ children }) => {
+  const navigate = useNavigate()
   const [createLeadershipData, setCreateLeadershipData] = useState({
     ...payload,
   });
@@ -98,27 +101,32 @@ export const LeadershipContextProvider = ({ children }) => {
     });
   };
 
-  const handleSubmit = async (evt, type, id) => {
-    evt.preventDefault();
-    let t = toast.loading("Creating Ledadership!");
-    let res = null;
-    if (type) {
-      res = await putCommonApiForEvnts(`/leadership/${id}`, createLeadershipData);
-    } else {
-      res = await postCommonApi(`/leadership`, createLeadershipData);
-    }
-    if (res?.success) {
-      toast.dismiss(t);
-      toast.success(res.message || "Updated successsfuly!");
-      setTimeout(() => {
-        navigate("/leadership");
-        setCareerData({ ...payload });
-      }, 500);
-    } else {
-      toast.dismiss(t);
-      toast.error("couldn't Create!");
-    }
-  };
+ const handleSubmit = async (evt, type, id) => {
+  evt.preventDefault();
+  let t = toast.loading(type === 'edit' ? "Updating Leadership!" : "Creating Leadership!");
+  let res = null;
+
+  if (type) {
+    res = await putCommonApiForEvnts(`/leadership/${id}`, toCamelCase(createLeadershipData));
+  } else {
+    res = await postCommonApi(`/leadership`, toCamelCase(createLeadershipData));
+  }
+
+  if (res?.success) {
+    toast.dismiss(t);
+    toast.success(res.message || (type ? "Updated successfully!" : "Created successfully!"));
+
+    // Redirect and reset state on successful creation/update
+    setTimeout(() => {
+      navigate("/leadership");
+      setCreateLeadershipData({ ...payload });
+    }, 500);
+  } else {
+    toast.dismiss(t);
+    toast.error(res?.message || "Couldn't create/update!");
+  }
+};
+
   return (
     <>
       <LeadershipContext.Provider

@@ -120,6 +120,12 @@ export const excelGenerator = (jsonData, filePath = 'output.xlsx') => {
   XLSX.writeFile(workbook, filePath);
 };
 
+
+export function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
 export const commonGetApiCall = async (endpoint) => {
   try {
     const res = await API.get(endpoint);

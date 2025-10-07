@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { PorfileContext } from '../../../context/ProfileDetailsContext'
 
 const Navbar = () => {
   const [notificationTab, setNotificationTab] = useState(false)
+  const {loggedInUser} = useContext(PorfileContext)
   document.addEventListener("click",()=>{
     setNotificationTab(false)
   })
@@ -55,7 +57,7 @@ const Navbar = () => {
         <Link to={'/profile'} className='h-[50px] w-[50px] border-[2px] border-[#c50000] rounded-full relative'>
          <img
             className='h-[100%] w-[100%] object-cover rounded-full'
-            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UjosF-j3Ss0503ak8hGQb-PX4DjCRAQGbg&s'
+            src={loggedInUser?.profile_picture || "/images/userPlceholder.webp"}
             alt='Profile'
           />
           <div className='h-[15px] w-[15px] rounded-full bg-green-500 border border-white absolute bottom-[-2px] right-[0px]'></div>

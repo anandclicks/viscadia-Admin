@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { commonGetApiCall, toCamelCase } from "../../utils/reuseableFunctions";
-import { Link, useParams } from "react-router-dom";
+import { data, Link, useParams } from "react-router-dom";
+import PageBuildingLoader from "../../components/common/PageBuildingLoader";
  
 const Leadership = () => {
   const { id } = useParams();
   const [leader, setLeader] = useState(null);
-  const [loading, setLoading] = useState(true);
  
   useEffect(() => {
     const fetchLeader = async () => {
@@ -21,35 +21,15 @@ const Leadership = () => {
           "Error fetching leader:",
           err.response?.data || err.message
         );
-      } finally {
-        setLoading(false);
       }
     };
     if (id) fetchLeader();
   }, [id]);
  
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen py-20">
-        <img
-          src="/__Iphone-spinner-1.gif"
-          alt="Loading..."
-          className="w-16 h-16"
-        />
-      </div>
-    );
-  }
- 
-  if (!leader) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-red-600 text-lg">No leader data found.</p>
-      </div>
-    );
-  }
- 
   return (
-    <section className="bg-white mt-[60px] md:mt-[80px] text-gray-900 md:py-12">
+   <>
+   {!leader && <PageBuildingLoader/>}
+   {leader &&  <section className="bg-white mt-[60px] md:mt-[80px] text-gray-900 md:py-12">
       <div className="max-w-[1028px] mx-auto">
         <div className="xl:px-0 pb-15 pt-5 sm:pt-0 sm:pb-6 md:pb-16 px-3 md:px-2">
           <Link href="/leadership">
@@ -143,7 +123,8 @@ const Leadership = () => {
           </div>
         ))}
       </div>
-    </section>
+    </section>}
+   </>
   );
 };
  

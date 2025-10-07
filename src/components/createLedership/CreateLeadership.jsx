@@ -1,15 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../common/Navbar.jsx";
 import { useContext, useEffect, useRef, useState } from "react";
 import SectionOne from "./SectionOne.jsx";
 import SectionTwo from "./SectionTwo.jsx";
 import SectionThree from "./SectionThree.jsx";
 import { LeadershipContext } from "../../../context/LeadershipContext.jsx";
+import { commonGetApiCall, textareaAutoResize, toCamelCase } from "../../utils/reuseableFunctions.js";
+import PageBuildingLoader from "../common/PageBuildingLoader.jsx";
 
-const CreateLeadership = () => {``
+const CreateLeadership = () => {
+  const [isEditingPage,setIsEditingPage] = useState(false)
+  const [loading,setLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (evt) => { evt.stopPropagation(); setIsOpen((prev) => !prev); };
-  const {handleSubmit,setCreateLeadershipData} = useContext(LeadershipContext)
+  const {handleSubmit,setCreateLeadershipData,createLeadershipData} = useContext(LeadershipContext)
 
   const [activeSection, setActiveSection] = useState(null);
   const sectionOneRef = useRef(null);
@@ -34,15 +38,46 @@ const CreateLeadership = () => {``
 
   const handleScrolling = (ref) => { ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }); };
 
-
-
-    const handleLeadershipStatus = (state) => {
+  const handleLeadershipStatus = (state) => {
     setCreateLeadershipData((prev) => ({ ...prev, status: state }));
     setIsOpen(false);
   };
 
+    // Effect to resize all textareas when data changes
+    useEffect(() => {
+      const textareas = document.querySelectorAll("textarea");
+      textareas.forEach((ta) => textareaAutoResize(ta));
+    }, [createLeadershipData]);
+
+     // if this is a editing page 
+  const {id} = useParams()
+  useEffect(()=>{
+   if(id){
+     const getData = async()=>{
+      let response = await commonGetApiCall(`/leadership/${id}`)
+      if(response.success){
+        let convertedData = toCamelCase(response?.data)
+        setCreateLeadershipData(convertedData)
+        setIsEditingPage(true)
+        setLoading(false)
+      }else {
+        redirect("/events-and-webinars")
+        toast.error("Couldn't Fetch Event!")
+        setLoading(false)
+      }
+    }
+    getData()
+   }else {
+    setLoading(false)
+   }
+  },[])
+
+
+
   return (
-    <div className="h-[100vh] w-full p-4">
+    <>
+    {loading && <PageBuildingLoader/>}
+    {!loading && <div className="h-[100vh] w-full p-4">
       <Navbar />
       <div className="h-[calc(100%-70px)] w-full shadow bg-white rounded-[30px] overflow-hidden">
         <div className="h-[70px] px-4 flex items-center justify-between">
@@ -50,7 +85,7 @@ const CreateLeadership = () => {``
           <div className="h-full flex items-center gap-5">
             <div className="relative">
               <div onClick={toggleMenu} className="z-40 h-[45px] border min-w-[170px] capitalize hover:bg-[#e8e8e85e] flex justify-center items-center gap-2 border-[#E8E8E8] relative transition-all rounded-full cursor-pointer">
-                Draft
+                {createLeadershipData?.status === "live" ? "Publish" : createLeadershipData?.status}
                 <img className="h-[10px]" src="/icons/aeroBottom.png" />
               </div>
               <div onClick={(e) => e.stopPropagation()} className={`${isOpen ? "opacity-100 block" : "opacity-0 hidden"} h-[150px] w-[170px] bg-white shadow-lg absolute left-[0px] mt-3 z-20 border rounded-xl border-[#0000001c] px-2`}>
@@ -72,7 +107,7 @@ const CreateLeadership = () => {``
               <li onClick={() => handleScrolling(sectionThreeRef)} className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${activeSection === "sectionThree" ? "font-bold activeEventPageSection text-black" : ""}`}><button>Section Three</button></li>
             </ul>
           </div>
-          <form onSubmit={handleSubmit} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
+          <form onSubmit={(evt)=> handleSubmit(evt,isEditingPage,id)} className="w-[82%] h-full overflow-scroll p-3 outletWrapper">
             <div ref={sectionOneRef}><SectionOne /></div>
             <div ref={sectionTwoRef}><SectionTwo /></div>
             <div ref={sectionThreeRef}><SectionThree /></div>
@@ -83,7 +118,8 @@ const CreateLeadership = () => {``
           </form>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

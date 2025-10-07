@@ -5,7 +5,7 @@ const LeadershipFilterHeader = ({ active = false, setActive }) => {
   return (
     <div className="h-[80px] w-full fsTwo flex  justify-between border-b border-[#E8E8E8]">
       <div className="h-full flex gap-10 items-center">
-        <h2 className="text-[22px] font-semibold">Events & Webinars</h2>
+        <h2 className="text-[22px] font-semibold">Leadership</h2>
       </div>
       <div className="h-full flex items-center gap-3">
         <Link
