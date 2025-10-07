@@ -32,12 +32,14 @@ import Login from "./pages/Login";
 import Leadership from "./pages/preview/leadership";
 import { PorfileContextProvider } from "../context/ProfileDetailsContext";
 import AddUser from "./pages/AddUser";
+import { NewsAndPressContextProvider } from "../context/NewsAndPressContext";
 
 
 function App() {
   return (
     <div className="overflow-hidden">
       <BrowserRouter>
+      <NewsAndPressContextProvider>
       <PorfileContextProvider>
       <CareersContextProvider>
       <NewCaseStudyContextProvider>
@@ -90,6 +92,7 @@ function App() {
       </NewCaseStudyContextProvider>
       </CareersContextProvider>
       </PorfileContextProvider>
+      </NewsAndPressContextProvider>
      </BrowserRouter>
       <ToastContainer />
       <Toaster/>

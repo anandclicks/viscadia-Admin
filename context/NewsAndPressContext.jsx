@@ -7,10 +7,10 @@ const payload = {
   type: "",
   duration: "",
   sectionTwoDetails: "",
+  sectionOneStatus : "",
+  sectionOneImage : "",
   aboutViscadia: "",
-  sectionTwoDetailsTwo: "",
-  sectionThreeDetails: "",
-  sectionThreeDetails: "",
+  links : [{name: "", link: ""},{name: "", link: ""},{name: "", link: ""},],
   status: "draft",
 };
 
@@ -34,6 +34,7 @@ export const NewsAndPressContextProvider = ({ children }) => {
       value={{
         createPaperAndPressData,
         handlePaperAndPressInputs,
+        setCreatePaperAndPressData
       }}
     >
       {children}

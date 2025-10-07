@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Navbar from "../../components/common/Navbar";
 import SectionOne from "../../components/NewsAndPress/SectionOne";
 import SectionTwo from "../../components/NewsAndPress/SectionTwo";
+import { NewsAndPressContext } from "../../../context/NewsAndPressContext";
 
 const CreatePressReleases = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,8 @@ const CreatePressReleases = () => {
   }, []);
 
   const handleScrolling = (ref) => { ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }); };
+
+ 
 
   return (
     <div className="h-[100vh] w-full p-4">
