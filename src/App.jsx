@@ -33,6 +33,7 @@ import Leadership from "./pages/preview/leadership";
 import { PorfileContextProvider } from "../context/ProfileDetailsContext";
 import AddUser from "./pages/AddUser";
 import { NewsAndPressContextProvider } from "../context/NewsAndPressContext";
+import CareerPreveiw from "./pages/preview/Career";
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
               <Route path="/preview/webinar/:id" element={<Webinar/>}/>
               <Route path="/preview/case-study/:id" element={<CaseStudy/>}/>
               <Route path="/preview/leadership/:id" element={<Leadership/>}/>
+              <Route path="/preview/career/:id" element={<CareerPreveiw/>}/>
             </Route>
             {/* Edit pages route  */}
             <Route>

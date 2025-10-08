@@ -92,7 +92,7 @@ const ListingRows = ({ id, isOpen, onToggle, data, onAction }) => {
           )}
 
           <button className="">
-            <Link to={`/preview/event/${data?.id}`} className="">
+            <Link to={`/preview/career/${data?.id}`} className="">
               <button className="w-[170px] h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                 Preview
               </button>

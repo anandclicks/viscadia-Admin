@@ -15,15 +15,15 @@ const SectionThree = ({ref}) => {
         <img className='h-[70px]' src="/careers/imgeThree.png" alt="" />
         <h2 className='text-[#BD2F2C] text-[28px] mt-2'>ROLES AND RESPONSIBILITIES</h2>
       </div>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center items-center w-full'>
         {createCareerData?.responsibilities?.map((el,minIndex)=>(
-          <div key={minIndex} className='flex flex-col justify-center items-center'>
-            <textarea name="subHeading" value={el?.subHeading} onInput={(e)=> handleObjInpusChanges(e,"responsibilities", minIndex)} placeholder='Enter Sub Heading' className='placeholder:text-[21px] text-[21px] h-[40px] placeholder:text-black placeholder:text-center generalCssForInputs' id=""></textarea>
-          <div>
+          <div key={minIndex} className='flex flex-col justify-center items-center w-full'>
+            <textarea name="subHeading" value={el?.subHeading} onInput={(e)=> handleObjInpusChanges(e,"responsibilities", minIndex)} placeholder='Enter Sub Heading' className='placeholder:text-[21px] w-full text-start text-[21px] h-[40px] placeholder:text-black placeholder:text-start generalCssForInputs' id=""></textarea>
+          <div className='w-full flex flex-col justify-center items-start'>
            {el?.keyPoints?.map((text,index)=>(
-             <div key={index} className='flex gap-2'>
+             <div key={index} className='flex justify-start gap-2 w-full'>
                <img src="/caseStudy/dot.png" className="mt-1 h-[10px] w-[10px] object-contain" alt="" />
-                <textarea name="text" value={text} onInput={(e)=> handleTextsChange(e,"responsibilities",minIndex,index)}  placeholder="Key Points" className="h-[24px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#000] text-[#000] text-[14px]" />
+                <textarea name="text" value={text} onInput={(e)=> handleTextsChange(e,"responsibilities",minIndex,index)}  placeholder="Key Points" className="h-[24px] w-[95%] outline-0 border-0 resize-none overflow-hidden placeholder:text-[#000] text-[#000] text-[14px]" />
             </div>  
            ))}
             <button type='button' onClick={()=> addKeyPointsInArray('responsibilities', minIndex)} className='bg-[#BD2F2C] text-[#fff] p-[4px] rounded-full font-medium px-4 mt-2 mb-7 text-[13px]'>Add More</button>
