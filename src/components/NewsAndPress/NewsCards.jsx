@@ -117,11 +117,11 @@ const NewsCards = ({ id, isOpen, onToggle, data }) => {
                     </>
                   )}
 
-                  <Link to={`/preview/news-and-press-releases/${data?.id}`} className="">
+                  {/* <Link to={`/preview/news-and-press-releases/${data?.id}`} className="">
                     <button className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]">
                       Preview
                     </button>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
