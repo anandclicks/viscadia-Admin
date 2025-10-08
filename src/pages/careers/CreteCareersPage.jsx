@@ -45,36 +45,81 @@ const CreteCareersPage = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        let highestRatio = 0;
+        let activeId = "sectionOne";
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
+          if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
+            highestRatio = entry.intersectionRatio;
+            activeId = entry.target.id;
+          }
         });
+        if (highestRatio > 0) {
+          setActiveSection(activeId);
+        }
       },
-      { threshold: 0.1 }  // More sensitive threshold
+      { threshold: [0.2, 0.4, 0.6, 0.8], rootMargin: "0px 0px -20% 0px" } 
     );
-    sectionRef.forEach(({ ref, id }) => {
-      if (ref.current) {
-        ref.current.id = id;
-        observer.observe(ref.current);
-      }
-    });
-    return () => {
-      sectionRef.forEach(({ ref }) => {
-        if (ref.current) observer.unobserve(ref.current);
+
+    const observeSections = () => {
+      sectionRef.forEach(({ ref, id }) => {
+        if (ref.current) {
+          ref.current.id = id;
+          observer.observe(ref.current);
+        }
       });
     };
-  }, []);
+
+    const checkInitialVisibility = () => {
+      let found = false;
+      for (const { ref, id } of sectionRef) {
+        if (ref.current) {
+          const rect = ref.current.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          if (
+            rect.top >= 0 &&
+            rect.top <= viewportHeight * 0.6 &&
+            rect.height > 0 
+          ) {
+            setActiveSection(id);
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found) {
+        setActiveSection("sectionOne");
+      }
+    };
+
+    if (!loading) {
+      const timer = setTimeout(() => {
+        observeSections();
+        checkInitialVisibility();
+      }, 300);
+
+      window.addEventListener("scroll", checkInitialVisibility);
+      window.addEventListener("resize", checkInitialVisibility);
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("scroll", checkInitialVisibility);
+        window.removeEventListener("resize", checkInitialVisibility);
+        sectionRef.forEach(({ ref }) => {
+          if (ref.current) observer.unobserve(ref.current);
+        });
+      };
+    }
+  }, [loading]);
 
   const handleScrolling = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Effect to resize all textareas when data changes
   useEffect(() => {
     const textareas = document.querySelectorAll("textarea");
     textareas.forEach((ta) => textareaAutoResize(ta));
   }, [createCareerData]);
 
-  // if this is an editing page
   const { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -95,7 +140,7 @@ const CreteCareersPage = () => {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [id]);
 
   const handleCareerStatus = (state) => {
     setCareerData((prev) => ({ ...prev, status: state }));
@@ -226,10 +271,10 @@ const CreteCareersPage = () => {
                 <SectionFour ref={sectionFourRef} />
                 <SectionFive ref={sectionFiveRef} />
 
-                  <div className="flex w-[auto] justify-end gap-5">
-              <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
-              <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
-            </div>
+                <div className="flex w-[auto] justify-end gap-5">
+                  <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
+                  <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
+                </div>
               </form>
             </div>
           </div>

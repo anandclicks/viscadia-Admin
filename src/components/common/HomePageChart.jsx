@@ -20,53 +20,54 @@ Chart.register(
   Tooltip
 );
 
-export default function HomePageChart() {
+const monthMap = {
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
+  "10": "Oct",
+  "11": "Nov",
+  "12": "Dec",
+};
+
+export default function HomePageChart({ data = [] }) {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
   useEffect(() => {
     const ctx = chartRef.current.getContext("2d");
 
-    // Gradient 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(0, 123, 255, 0.6)");
     gradient.addColorStop(0.4, "rgba(0, 123, 255, 0)");
     gradient.addColorStop(0.7, "rgba(0, 123, 255, 0)");
     gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
 
-    if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
-    }
+    if (chartInstanceRef.current) chartInstanceRef.current.destroy();
+
+    // Prepare labels and dataset
+    const labels = data.map((el) => monthMap[el.month] || el.month);
+    const datasetData = data.map((el) => el.users);
 
     chartInstanceRef.current = new Chart(ctx, {
       type: "line",
       data: {
-        // Horizontal lables 
-        labels: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        labels,
         datasets: [
           {
-            // Vertical lables 
-            data: [150, 250, 600, 750, 800, 200, 300, 400, 600, 800, 900, 1000],
+            data: datasetData,
             fill: true,
             backgroundColor: gradient,
             borderColor: "#0096FF",
             borderWidth: 2,
             pointBackgroundColor: "#0096FF",
-            pointRadius: 0, 
-            pointHoverRadius: 6, 
+            pointRadius: 0,
+            pointHoverRadius: 6,
           },
         ],
       },
@@ -84,10 +85,7 @@ export default function HomePageChart() {
         scales: {
           y: {
             beginAtZero: true,
-            min: 0,
-            max: 1000,
             ticks: {
-              stepSize: 200,
               padding: 20,
               font: { size: 17, weight: "500" },
               color: "#000",
@@ -120,7 +118,6 @@ export default function HomePageChart() {
               const topY = chart.scales.y.top;
               const bottomY = chart.scales.y.bottom;
 
-              // Draw dashed vertical line
               ctx.save();
               ctx.beginPath();
               ctx.setLineDash([5, 5]);
@@ -136,12 +133,8 @@ export default function HomePageChart() {
       ],
     });
 
-    return () => {
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
-      }
-    };
-  }, []);
+    return () => chartInstanceRef.current?.destroy();
+  }, [data]);
 
   return (
     <div

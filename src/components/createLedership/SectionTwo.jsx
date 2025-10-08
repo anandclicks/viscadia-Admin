@@ -13,19 +13,7 @@ const SectionTwo = ({ref}) => {
   return (
     <div ref={ref} className="min-h-[250px] w-full bg-[#ECECEC] shadow mt-20 mb-10 pb-10 flex ">
       <div className="min-h-[250px] w-[50%] flex flex-col justify-center ps-7">
-        <div className="w-full">
-          <textarea
-            placeholder="Experience"
-            name="experience"
-            value={createLeadershipData?.experience}
-            style={{ height: "30px" }}
-            className={`w-full outline-0 placeholder:text-black text-black border-0 resize-none overflow-hidden text-[21px]`}
-            onInput={(e) => {
-              autoResize(e);
-              handleLeadershipInputs(e);
-            }}
-          />
-        </div>
+     <h3 className="text-black border-0 resize-none overflow-hidden text-[21px] mb-3">Experience</h3>
         <div className="w-full">
           <textarea
             placeholder="Enter Sub Heading"
@@ -44,7 +32,7 @@ const SectionTwo = ({ref}) => {
         <div className="w-full pt-20">
           <textarea
             placeholder="Enter Title"
-            value={handleLeadershipInputs?.title}
+            value={createLeadershipData?.title}
             style={{ height: "30px" }}
             name="title"
             className={`w-full outline-0 placeholder:text-stone-600 text-stone-600 border-0 resize-none overflow-hidden text-[21px]`}

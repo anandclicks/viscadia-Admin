@@ -13,7 +13,7 @@ const payload = {
   bannerSubHeading: "",
   bannerImage: "",
   logo: "",
-  experience: "",
+  experience: "na",
   experienceSubheading: "",
   title: "",
   hyperLink: "http://localhost:5173/create/leadership",
