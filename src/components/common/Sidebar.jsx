@@ -151,12 +151,6 @@ const Sidebar = () => {
       whiteIcon: "eventWhite",
       extraActiveRoutes: ["/create/event"],
     },
-    {
-      to: "/contacts",
-      label: "Contacts",
-      icon: "contacts",
-      whiteIcon: "contactsWhite",
-    },
   ];
 
   const finalObjsForRender = loggedInUser?.role === "Super Admin" 

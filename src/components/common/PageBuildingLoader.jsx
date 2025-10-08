@@ -5,7 +5,7 @@ export default function PageBuildingLoader() {
   const { loggedInUser } = useContext(PorfileContext);
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm ${loggedInUser ? 'bg-black/30' : 'bg-white/80'}`}>
+    <div className={`fixed inset-0 flex items-center justify-center z-50 ${loggedInUser ? 'bg-black/30' : 'bg-white/80'}`}>
       <div role="status" aria-live="polite" aria-busy="true" className="relative flex items-center justify-center">
         <svg
           viewBox="0 0 64 64"

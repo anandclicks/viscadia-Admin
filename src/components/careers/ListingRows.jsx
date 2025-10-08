@@ -14,6 +14,7 @@ const ListingRows = ({ id, isOpen, onToggle, data, onAction }) => {
     onToggle(id);
   };
 
+
   return (
     <div className="flex w-full justify-between items-center border-b border-stone-200 py-3">
       <p className="font-semibold text-[19px]">{data?.heading}</p>
@@ -44,13 +45,13 @@ const ListingRows = ({ id, isOpen, onToggle, data, onAction }) => {
           {careerStatus === "live" && (
             <>
               <button
-                onClick={() => handleStausApiCall("draft")}
+                onClick={() => setCareerStatus("draft")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Mark as Draft
               </button>
               <button
-                onClick={() => handleStausApiCall("undraft")}
+                onClick={() => setCareerStatus("undraft")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Undraft
@@ -60,13 +61,13 @@ const ListingRows = ({ id, isOpen, onToggle, data, onAction }) => {
           {careerStatus === "draft" && (
             <>
               <button
-                onClick={() => handleStausApiCall("undraft")}
+                onClick={() => setCareerStatus("undraft")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Undraft
               </button>
               <button
-                onClick={() => handleStausApiCall("live")}
+                onClick={() => setCareerStatus("live")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Publish
@@ -76,13 +77,13 @@ const ListingRows = ({ id, isOpen, onToggle, data, onAction }) => {
           {careerStatus === "undraft" && (
             <>
               <button
-                onClick={() => handleStausApiCall("draft")}
+                onClick={() => setCareerStatus("draft")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Mark as Draft
               </button>
               <button
-                onClick={() => handleStausApiCall("live")}
+                onClick={() => setCareerStatus("live")}
                 className="w-full h-[40px] my-1 hover:bg-stone-50 hover:text-black font-semibold text-start px-2 border-b border-[#f8f8f8]"
               >
                 Publish

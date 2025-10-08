@@ -6,12 +6,14 @@ const payload = {
   date: "",
   type: "",
   duration: "",
-  sectionTwoDetails: "",
   sectionOneStatus : "",
   sectionOneImage : "",
+  sectionTwoDetails: "",
   aboutViscadia: "",
+  sectionThreeDetails : "",
   links : [{name: "", link: ""},{name: "", link: ""},{name: "", link: ""},],
   status: "draft",
+  infoEmail : "",
 };
 
 export const NewsAndPressContext = createContext({});

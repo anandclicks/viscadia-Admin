@@ -225,6 +225,11 @@ const CreteCareersPage = () => {
                 <SectionThree ref={sectionThreeRef} />
                 <SectionFour ref={sectionFourRef} />
                 <SectionFive ref={sectionFiveRef} />
+
+                  <div className="flex w-[auto] justify-end gap-5">
+              <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
+              <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
+            </div>
               </form>
             </div>
           </div>
