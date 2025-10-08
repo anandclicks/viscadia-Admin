@@ -147,14 +147,17 @@ const Home = () => {
           <div className="mt-3">
             {devices.map((el, index) => (
               <div key={index} className="flex w-full justify-between">
-                <p className="text-[18px] font-[400] flex items-center gap-2">
-                  <img
+                <div className="flex items-center gap-2"> <img
                     className="h-[20px]"
-                    src={`./deviceLogo/${el.device}.png`}
+                    src={`/deviceLogo/${el.device}.png`}
                     alt=""
                   />{" "}
+                  <p className="text-[18px] font-[400] capitalize ">
+                 
                   {el.device}
                 </p>
+                  </div>
+                
                 <p className="text-[20px] font-[500]">{el.number}</p>
               </div>
             ))}
