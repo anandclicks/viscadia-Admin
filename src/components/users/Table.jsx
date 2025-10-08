@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import PageBuildingLoader from "../common/PageBuildingLoader";
+import NoDataFound from "../common/NoDataFound";
 
 const Table = () => {
   const [tableData, setTableData] = useState(null);
@@ -29,28 +30,31 @@ const Table = () => {
         toast.dismiss(t);
         toast.error("Couldn't change Account Status!");
       }
-    } catch (err) {
+    } catch {
       toast.dismiss(t);
       toast.error("Error changing status!");
-      console.error(err);
     }
   };
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://192.168.0.193:4005/v1/auth/allusers", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      if (res?.data?.success) setTableData(res.data?.users);
-      else console.log("Something went wrong in response");
+      try {
+        const res = await axios.get("http://192.168.0.193:4005/v1/auth/allusers", {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        if (res?.data?.success) setTableData(res.data?.users || []);
+        else setTableData([]);
+      } catch {
+        setTableData([]);
+      }
     };
     getData();
   }, []);
 
   return (
     <>
-      {!tableData && <PageBuildingLoader />}
-      {tableData && (
+      {tableData === null && <PageBuildingLoader />}
+      {tableData?.length > 0 && (
         <div className="border-[1px] border-stone-200 rounded-[20px] fsTwo relative">
           <div className="overflow-x-auto">
             <table className="min-w-full rounded-lg">
@@ -66,7 +70,7 @@ const Table = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((el, index) => (
+                {tableData.map((el, index) => (
                   <tr key={index} className="border-t border-gray-200">
                     <td className="px-4 py-4 text-[14px] font-medium text-black"><input type="checkbox" className="h-[20px] w-[20px]" /></td>
                     <td className="px-4 py-4 text-[14px] font-medium text-black">{index + 1}</td>
@@ -94,8 +98,7 @@ const Table = () => {
             <div className="fixed inset-0 bg-[#00000028] bg-opacity-40 flex items-center justify-center z-50">
               <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
                 <p className="text-[16px] font-medium mb-4">
-                  Do you want to {popup.newState ? "activate" : "inactivate"}{" "}
-                  <span className="font-semibold">{popup.name}</span>?
+                  Do you want to {popup.newState ? "activate" : "inactivate"} <span className="font-semibold">{popup.name}</span>?
                 </p>
                 <div className="flex justify-center gap-4">
                   <button onClick={confirmToggle} className="px-4 py-2 rounded-lg bg-[#BD2F2C] text-white hover:bg-[#b11d1b]">Yes</button>
@@ -106,6 +109,7 @@ const Table = () => {
           )}
         </div>
       )}
+      {tableData?.length === 0 && <NoDataFound message="No users found"/>}
     </>
   );
 };

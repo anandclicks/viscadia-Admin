@@ -1,58 +1,55 @@
 import React, { useEffect, useRef, useState } from "react";
-import CaseStudyAndWhitePaperCard from "../common/CaseStudyCard";
 import WhitePaperCard from "../common/WhitePaperCard";
 import { commonGetApiCall, putCommonApiForEvnts, toCamelCase, uploadSingleImage } from "../../utils/reuseableFunctions";
-import { data } from "react-router-dom";
 import PageBuildingLoader from "../common/PageBuildingLoader";
+import NoDataFound from "../common/NoDataFound";
 import toast from "react-hot-toast";
 
 const WhitePaperListing = () => {
   const [openCardId, setOpenCardId] = useState(null);
- const [allWhitePaper,setAllWhitePaper] = useState(null)
-
-  const handleToggle = (id) => {
-    setOpenCardId((prev) => (prev === id ? null : id));
-  };
-  useEffect(()=>{
-      const getAllData = async()=>{
-        let res = await commonGetApiCall('/whitepaper')
-        if(res.success){
-          setAllWhitePaper([...res?.data])
-        }
-        else{
-          toast.error(data?.message || "Unable to load White Paper. Please try again.");
-        }
-      }
-      getAllData()
-    },[])
-
-
-    // functions for edit 
-
+  const [allWhitePaper, setAllWhitePaper] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pdf, setPdf] = useState(null);
   const [whitePaperData, setWhitePaperData] = useState(null);
   const fileInputRef = useRef(null);
+
+  const handleToggle = (id) => setOpenCardId((prev) => (prev === id ? null : id));
+
+  useEffect(() => {
+    const getAllData = async () => {
+      try {
+        setLoading(true);
+        const res = await commonGetApiCall("/whitepaper");
+        if (res?.success && res?.data?.length) setAllWhitePaper(res.data);
+        else setAllWhitePaper([]);
+      } catch {
+        toast.error("Unable to load White Papers. Please try again.");
+        setAllWhitePaper([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getAllData();
+  }, []);
 
   const handleInputs = async (evt) => {
     const { type, name, files, value } = evt.target;
     if (type === "file" && files && files[0]) {
       const file = files[0];
-      if(name === "pdf"){
-        setPdf(file)
-      }
+      if (name === "pdf") setPdf(file);
       try {
         const url = await uploadSingleImage(files);
-        setWhitePaperData(prev => ({ ...prev, [name]: url }));
+        setWhitePaperData((prev) => ({ ...prev, [name]: url }));
       } catch {
-        toast.error("Failed to upload PDF");
+        toast.error("Failed to upload file");
       }
     } else {
-      setWhitePaperData(prev => ({ ...prev, [name]: value }));
+      setWhitePaperData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleClearInput = (name) => {
-    setWhitePaperData(prev => ({ ...prev, [name]: name === "pdf" ? null : "" }));
+    setWhitePaperData((prev) => ({ ...prev, [name]: name === "pdf" ? null : "" }));
     if (name === "pdf") {
       setPdf(null);
       fileInputRef.current.value = null;
@@ -61,113 +58,135 @@ const WhitePaperListing = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    let t= toast.loading("Updating white paper..")
+    const t = toast.loading("Updating white paper...");
     const res = await putCommonApiForEvnts(`/whitepaper/${whitePaperData?.id}`, whitePaperData);
     if (res?.success) {
-      toast.dismiss(t)
-      toast.success("White paper Created Successfully");
-     setAllWhitePaper((prev) => {
-  return prev.map((el) => {
-    if (el.id === res.whitepaper.id) {
-      return { ...el, ...toCamelCase(res.whitepaper) };
-    }
-    return el;
-  });
-});
-
+      toast.dismiss(t);
+      toast.success("White Paper updated successfully");
+      setAllWhitePaper((prev) =>
+        prev.map((el) => (el.id === res.whitepaper.id ? { ...el, ...toCamelCase(res.whitepaper) } : el))
+      );
       setWhitePaperData(null);
       setPdf(null);
-      setIsOpen(false);
     } else {
-      toast.dismiss(t)
-      toast.error("Couldn't Create White Paper!");
+      toast.dismiss(t);
+      toast.error("Couldn't update White Paper");
     }
   };
-  
+
+  if (loading) return <PageBuildingLoader />;
+  if (!loading && allWhitePaper.length === 0)
+    return <NoDataFound message="No white papers found" />;
+
   return (
-  <>
-  {!allWhitePaper && <PageBuildingLoader/>}
-    <div className="mt-5">
-      {allWhitePaper?.map((data, index) => (
-        <WhitePaperCard
-          key={index}
-          setWhitePaperData={setWhitePaperData}
-          id={index}
-          data={data}
-          isOpen={openCardId === index}
-          onToggle={handleToggle}
-        />
-      ))}
-    </div>
-
-
-
-    {whitePaperData && 
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#00000034] bg-opacity-30">
-      <div onClick={e => e.stopPropagation()} className="bg-white rounded-[20px] shadow-lg min-h-[600px] w-[50%] p-6 relative">
-        <div className="border-b-[1px] border-stone-400 pb-4 flex w-full justify-between">
-          <h2 className="text-[22px] font-medium text-black">Update White Paper</h2>
-          <button type="button" onClick={() => setWhitePaperData(null)}>
-            <img className="h-[30px] w-[30px]" src="./closeDarkBtn.png" alt="Close" />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="flex flex-wrap gap-10 mt-0 pt-10">
-          <div className="min-h-[50px] w-[40%]">
-            <p className="text-[17px] font-[500] text-stone-700">Heading</p>
-            <div className="w-full shadow-[rgba(149,157,165,0.2)_0px_8px_24px] h-[45px] rounded-lg border-[1px] items-center border-stone-200 mt-3 flex">
-              <input required placeholder="Enter Heading" className="w-[90%] text-stone-700 placeholder:text-stone-500 placeholder:text-[14px] h-full outline-none border-0 px-3" type="text" name="heading" value={whitePaperData.heading} onChange={handleInputs} />
-              {whitePaperData.heading && <button type="button" onClick={() => handleClearInput("heading")} className="pr-3"><img className="h-[20px] w-[20px]" src="./closeDarkBtn.png" alt="Clear" /></button>}
-            </div>
-          </div>
-
-          <div className="min-h-[50px] w-[40%]">
-            <p className="text-[17px] font-[500] text-stone-700">Sub-Heading</p>
-            <div className="w-full shadow-[rgba(149,157,165,0.2)_0px_8px_24px] h-[45px] rounded-lg border-[1px] items-center border-stone-200 mt-3 flex">
-              <input required placeholder="Enter Sub-Heading" className="w-[90%] text-stone-700 placeholder:text-stone-500 placeholder:text-[14px] h-full outline-none border-0 px-3" type="text" name="subHeading" value={whitePaperData.subHeading} onChange={handleInputs} />
-              {whitePaperData.subHeading && <button type="button" onClick={() => handleClearInput("subHeading")} className="pr-3"><img className="h-[20px] w-[20px]" src="./closeDarkBtn.png" alt="Clear" /></button>}
-            </div>
-          </div>
-
-          <div className="min-h-[50px] w-[40%] mt-0">
-            <p className="text-[16px] font-[500] text-stone-700">Upload PDF</p>
-            <div className="w-full justify-between px-3 shadow-[rgba(149,157,165,0.2)_0px_8px_24px] h-[45px] rounded-lg border-[1px] items-center border-stone-200 mt-3 flex relative">
-              <label className="flex items-center gap-3 cursor-pointer w-full">
-                <img className="h-[25px] w-[25px]" src="./folder.png" alt="Upload" />
-                <div className="flex flex-col">
-                  <span className="text-gray-700 text-[14px]">{true ? "Pdf Uploaded" : "Choose File"}</span>
-                </div>
-                <input ref={fileInputRef} type="file" name="pdf" onChange={handleInputs} className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" />
-              </label>
-              {pdf && <button type="button" onClick={() => handleClearInput("pdf")} className="ml-2"><img className="h-[20px] w-[20px]" src="./closeDarkBtn.png" alt="Clear" /></button>}
-            </div>
-          </div>
-
-          <div className="min-h-[50px] w-[40%] mt-0">
-           <div className="flex bg-[#bd2e2c11] border-dashed border-[1px] h-[200px] w-full relative flex-col items-center justify-center">
-                <input onChange={handleInputs} className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20" type="file" name="img" 
-                 />
-                {whitePaperData?.img ? (
-                  <img className="h-[200px] w-full object-scale-down"  src={whitePaperData?.img} alt="" />
-                ) : (
-                  <div className="h-full w-full flex flex-col justify-center items-center">
-                    <img className="h-[20%] w-[20%] object-contain" src="/icons/upload.png" alt="" />
-                    <h3 className="text-[#BD2F2C] mt-2 text-[13px]">Upload Image</h3>
-                  </div>
-                )}
-              </div>
-          </div>
-
-          <div className="flex w-full justify-end gap-5">
-            <button type="button" onClick={() => setWhitePaperData(null)} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[16px] mt-5">Cancel</button>
-            <button type="submit" className="grediantBg text-white p-2 rounded-full font-medium px-9 text-[16px] mt-5">Save</button>
-          </div>
-        </form>
+    <>
+      <div className="mt-5">
+        {allWhitePaper.map((data, index) => (
+          <WhitePaperCard
+            key={index}
+            id={index}
+            data={data}
+            setWhitePaperData={setWhitePaperData}
+            isOpen={openCardId === index}
+            onToggle={handleToggle}
+          />
+        ))}
       </div>
-    </div>
-    }
-     
-  </> 
+
+      {whitePaperData && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-2xl shadow-xl w-[50%] min-h-[600px] p-6 relative">
+            <div className="border-b border-gray-300 pb-4 flex justify-between items-center">
+              <h2 className="text-[22px] font-medium text-black">Update White Paper</h2>
+              <button type="button" onClick={() => setWhitePaperData(null)}>
+                <img src="./closeDarkBtn.png" alt="Close" className="h-6 w-6" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="flex flex-wrap gap-10 mt-8">
+              <div className="w-[45%]">
+                <p className="text-[16px] font-medium text-gray-700">Heading</p>
+                <div className="flex items-center mt-3 border border-gray-200 rounded-lg h-[45px] shadow-sm">
+                  <input
+                    required
+                    type="text"
+                    name="heading"
+                    value={whitePaperData.heading}
+                    onChange={handleInputs}
+                    placeholder="Enter Heading"
+                    className="flex-1 px-3 outline-none text-gray-700 placeholder:text-gray-400"
+                  />
+                  {whitePaperData.heading && (
+                    <button type="button" onClick={() => handleClearInput("heading")} className="pr-3">
+                      <img src="./closeDarkBtn.png" alt="Clear" className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[45%]">
+                <p className="text-[16px] font-medium text-gray-700">Sub-Heading</p>
+                <div className="flex items-center mt-3 border border-gray-200 rounded-lg h-[45px] shadow-sm">
+                  <input
+                    required
+                    type="text"
+                    name="subHeading"
+                    value={whitePaperData.subHeading}
+                    onChange={handleInputs}
+                    placeholder="Enter Sub-Heading"
+                    className="flex-1 px-3 outline-none text-gray-700 placeholder:text-gray-400"
+                  />
+                  {whitePaperData.subHeading && (
+                    <button type="button" onClick={() => handleClearInput("subHeading")} className="pr-3">
+                      <img src="./closeDarkBtn.png" alt="Clear" className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[45%]">
+                <p className="text-[16px] font-medium text-gray-700">Upload PDF</p>
+                <div className="flex items-center justify-between mt-3 border border-gray-200 rounded-lg h-[45px] shadow-sm px-3 relative">
+                  <label className="flex items-center gap-3 cursor-pointer w-full">
+                    <img src="./folder.png" alt="Upload" className="h-5 w-5" />
+                    <span className="text-[14px] text-gray-600">{pdf ? "PDF Uploaded" : "Choose File"}</span>
+                    <input ref={fileInputRef} type="file" name="pdf" onChange={handleInputs} className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" />
+                  </label>
+                  {pdf && (
+                    <button type="button" onClick={() => handleClearInput("pdf")} className="ml-2">
+                      <img src="./closeDarkBtn.png" alt="Clear" className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-[45%]">
+                <div className="flex items-center justify-center border border-dashed border-gray-300 bg-[#bd2e2c11] h-[200px] rounded-lg relative overflow-hidden">
+                  <input onChange={handleInputs} type="file" name="img" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" />
+                  {whitePaperData?.img ? (
+                    <img src={whitePaperData.img} alt="" className="h-full w-full object-contain" />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <img src="/icons/upload.png" alt="Upload" className="h-[25%] w-[25%] object-contain" />
+                      <p className="text-[#BD2F2C] text-[13px] mt-2">Upload Image</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-full flex justify-end gap-4 mt-4">
+                <button type="button" onClick={() => setWhitePaperData(null)} className="border border-gray-200 px-8 py-2 rounded-full text-gray-700 bg-white hover:bg-gray-100 transition">
+                  Cancel
+                </button>
+                <button type="submit" className="grediantBg text-white px-8 py-2 rounded-full font-medium">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

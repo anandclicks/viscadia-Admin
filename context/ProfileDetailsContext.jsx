@@ -1,21 +1,26 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import PageBuildingLoader from "../src/components/common/PageBuildingLoader";
 
 export const PorfileContext = createContext({});
 
 export const PorfileContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
   const redirect = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const getData = async () => {
       try {
         const token = localStorage.getItem("token");
+
         if (!token) {
           toast.error("No token found, please log in.");
           redirect("/login");
+          setLoading(false);
           return;
         }
 
@@ -32,14 +37,22 @@ export const PorfileContextProvider = ({ children }) => {
       } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong!");
         redirect("/login");
+      } finally {
+        setLoading(false); 
       }
     };
 
     getData();
   }, [redirect]);
 
+  if (loading && location.pathname !== "/login") {
+    return <PageBuildingLoader />;
+  }
+
   return (
     <PorfileContext.Provider value={{ loggedInUser }}>
+      {/* Only render children if user is logged in and it's not the login page */}
+      {!loggedInUser && location.pathname !== "/login" && <PageBuildingLoader />}
       {children}
     </PorfileContext.Provider>
   );

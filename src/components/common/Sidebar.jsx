@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { PorfileContext } from "../../../context/ProfileDetailsContext";
 
 const Sidebar = () => {
   const location = useLocation();
+  const {loggedInUser} = useContext(PorfileContext)
 
   const links = [
     {
@@ -55,11 +58,117 @@ const Sidebar = () => {
     },
   ];
 
+    const linksTwo = [
+    {
+      to: "/",
+      label: "Home Page",
+      icon: "home",
+      whiteIcon: "homeWhite",
+    },
+    {
+      to: "/news-and-press-releases",
+      label: "Latest News & Press Releases",
+      icon: "newsPerson",
+      whiteIcon: "newsPersonWhite",
+    },
+    {
+      to: "/case-studies",
+      label: "Case Studies & White Papers",
+      icon: "caseStudy",
+      whiteIcon: "caseStudyWhite",
+    },
+    {
+      to: "/leadership",
+      label: "Leadership Page",
+      icon: "leadership",
+      whiteIcon: "leadershipWhite",
+    },
+    {
+      to: "/events-and-webinars",
+      label: "Events & Webinars",
+      icon: "event",
+      whiteIcon: "eventWhite",
+      extraActiveRoutes: ["/create/event"],
+    },
+    {
+      to: "/careers",
+      label: "Careers",
+      icon: "careers",
+      whiteIcon: "careersWhite",
+    },
+    {
+      to: "/contacts",
+      label: "Contacts",
+      icon: "contacts",
+      whiteIcon: "contactsWhite",
+    },
+  ];
+
+    const linksThree = [
+    {
+      to: "/careers",
+      label: "Careers",
+      icon: "careers",
+      whiteIcon: "careersWhite",
+    },
+    {
+      to: "/contacts",
+      label: "Contacts",
+      icon: "contacts",
+      whiteIcon: "contactsWhite",
+    },
+  ];
+
+   const linksFour = [
+    {
+      to: "/",
+      label: "Home Page",
+      icon: "home",
+      whiteIcon: "homeWhite",
+    },
+    {
+      to: "/news-and-press-releases",
+      label: "Latest News & Press Releases",
+      icon: "newsPerson",
+      whiteIcon: "newsPersonWhite",
+    },
+    {
+      to: "/case-studies",
+      label: "Case Studies & White Papers",
+      icon: "caseStudy",
+      whiteIcon: "caseStudyWhite",
+    },
+    {
+      to: "/leadership",
+      label: "Leadership Page",
+      icon: "leadership",
+      whiteIcon: "leadershipWhite",
+    },
+    {
+      to: "/events-and-webinars",
+      label: "Events & Webinars",
+      icon: "event",
+      whiteIcon: "eventWhite",
+      extraActiveRoutes: ["/create/event"],
+    },
+    {
+      to: "/contacts",
+      label: "Contacts",
+      icon: "contacts",
+      whiteIcon: "contactsWhite",
+    },
+  ];
+
+  const finalObjsForRender = loggedInUser?.role === "Super Admin" 
+                              ? links : loggedInUser?.role === "Admin" 
+                              ? linksTwo : loggedInUser?.role === "HR" 
+                              ? linksThree : linksFour
+
   return (
     <div className="h-full overflow-scroll scrollbrNone w-full px-2 pe-4 flex flex-col justify-between bg-[#F4F1F2]">
       <div className="w-full pt-3">
         <div className="space-y-1">
-          {links.map(({ to, label, icon, whiteIcon, extraActiveRoutes = [] }) => (
+          {finalObjsForRender?.map(({ to, label, icon, whiteIcon, extraActiveRoutes = [] }) => (
             <NavLink
               key={to}
               to={to}
