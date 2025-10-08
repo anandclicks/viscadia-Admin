@@ -85,6 +85,7 @@ function App() {
               <Route path="/edit/webinar/:id" element={<CreateWebinarPage/>}/>
               <Route path="/edit/career/:id" element={<CreteCareersPage/>}/>
               <Route path="/edit/leadership/:id" element={<CreateLeadership/>}/>
+              <Route path="/edit/news-and-press-releases/:id" element={<CreatePressReleases/>}/>
             </Route>
           </Routes>
       </NewCaseStudyContextProvider>

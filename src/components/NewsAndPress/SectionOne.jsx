@@ -5,12 +5,14 @@ const SectionOne = forwardRef((props, ref) => {
   const { handlePaperAndPressInputs, createPaperAndPressData, setCreatePaperAndPressData } = useContext(NewsAndPressContext);
   const autoResize = (e) => { e.target.style.height = "24px"; e.target.style.height = e.target.scrollHeight + "px"; };
   const handleSectionOneStatus = () => setCreatePaperAndPressData((prev) => ({ ...prev, sectionOneStatus: !prev?.sectionOneStatus }));
-
+  console.log(createPaperAndPressData);
+  
   return (
     <div ref={ref} className="min-h-[500px] w-full shadow my-3">
       <div className="p-5">
         <div className="w-full">
           <textarea
+          required
             placeholder="Enter Title"
             style={{ height: "30px" }}
             name="title"
@@ -22,6 +24,7 @@ const SectionOne = forwardRef((props, ref) => {
         <div className="flex gap-2 justify-start">
           <div className="w-[150px] border-r-[1px] border-stone-400 h-[20px]">
             <textarea
+            required
               placeholder="Enter Month Date, Year"
               style={{ height: "25px" }}
               name="date"
@@ -32,6 +35,7 @@ const SectionOne = forwardRef((props, ref) => {
           </div>
           <div className="border-r-[1px] border-stone-400 w-[95px] h-[20px]">
             <textarea
+              required
               placeholder="Press Release"
               style={{ height: "25px" }}
               name="type"
@@ -42,6 +46,7 @@ const SectionOne = forwardRef((props, ref) => {
           </div>
           <div className="border-r-[1px] border-stone-400 w-[95px] h-[20px]">
             <textarea
+              required
               placeholder="2-minute read"
               style={{ height: "25px" }}
               name="duration"
@@ -66,11 +71,12 @@ const SectionOne = forwardRef((props, ref) => {
         <div className="h-full w-full relative">
           <div className="flex h-full w-full relative z-10">
             <div className="h-full w-full flex justify-center items-center flex-col relative">
-              <input type="file" name="bannerImg" className="absolute left-0 top-0 h-full w-full z-30 opacity-0 cursor-pointer" />
-              <div className="flex flex-col items-center justify-center">
+              <input onInput={handlePaperAndPressInputs} required={!createPaperAndPressData?.sectionOneImage && true} type="file" name="sectionOneImage" className="absolute left-0 top-0 h-full w-full z-30 opacity-0 cursor-pointer" />
+             {!createPaperAndPressData?.sectionOneImage &&  <div className="flex flex-col items-center justify-center">
                 <img src="/icons/upload.png" alt="" />
                 <h3 className="text-[#BD2F2C] mt-2 font-semibold">Upload Logo</h3>
-              </div>
+              </div>}
+              {createPaperAndPressData?.sectionOneImage && <img className="h-full w-full object-contain" src={createPaperAndPressData?.sectionOneImage}/>}
             </div>
           </div>
         </div>
