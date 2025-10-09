@@ -65,9 +65,9 @@ const ProfilePage = () => {
             <h2 className="text-[22px] font-semibold">Create Profile</h2>
           </div>
         </div>
-        <div className="h-[100px] w-[100px] relative overflow-hidden bg-[url('/public/images/userPlceholder.webp')] mt-4 rounded-2xl shadow-[rgba(149,157,165,0.2)_0px_8px_24px]">
+        <div className="h-[100px] w-[100px] relative overflow-hidden bg-[url('/images/userPlceholder.webp')] mt-4 rounded-2xl shadow-[rgba(149,157,165,0.2)_0px_8px_24px]">
         <input type="file" name="profileImage" className="h-full cursor-pointer w-full opacity-0 z-10 absolute top-0 left-0" onInput={handleInputChange} />
-          <img className="h-full w-full object-cover" src={profileData?.profileImage || "/public/images/userPlceholder.webp"} alt="Profile Placeholder" />
+          <img className="h-full w-full object-cover" src={profileData?.profileImage || "/images/userPlceholder.webp"} alt="Profile Placeholder" />
         </div>
         <form onSubmit={handleSubmit} className="pt-5 px-2 flex flex-wrap justify-between">
           <div className="min-h-[55px] w-[46%] mt-7">

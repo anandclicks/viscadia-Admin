@@ -17,6 +17,7 @@ const SectionOne = ({ref}) => {
         <div className="flex flex-col min-w-[200px]">
           <div className="w-full">
             <textarea
+              required
               placeholder="Enter Heading"
               style={{ height: "30px" }}
               name="bannerHeading"
@@ -30,6 +31,7 @@ const SectionOne = ({ref}) => {
           </div>
           <div className="w-full">
             <textarea
+              required
               placeholder="Designation"
               style={{ height: "30px" }}
               name="designation"
@@ -43,6 +45,7 @@ const SectionOne = ({ref}) => {
           </div>
           <div className="w-full">
             <textarea
+              required
               placeholder="Enter Sub Heading"
               style={{ height: "30px" }}
               name="bannerSubHeading"
@@ -57,6 +60,7 @@ const SectionOne = ({ref}) => {
 
           <div className="h-[90px] overflow-hidden w-[90px] mt-4 rounded-full border border-[#BD2F2C] border-dashed bg-[#FFF8F8] relative">
             <input
+              required={createLeadershipData?.logo ? false : true}
               type="file"
               className="h-full w-full absolute top-0 left-0 z-10 opacity-0 cursor-pointer rounded-full"
               name="logo"
@@ -83,6 +87,7 @@ const SectionOne = ({ref}) => {
       </div>
       <div className="max-h-[300px] h-[300px] w-[40%] relative border border-dashed border-[#BD2F2C] bg-[#FFF8F8]">
         <input
+          required={createLeadershipData?.bannerImage ? false : true}
           type="file"
           className="h-full w-full absolute cursor-pointer z-10 opacity-0"
           name="bannerImage"

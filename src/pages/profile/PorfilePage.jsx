@@ -18,7 +18,7 @@ const PorfilePage = () => {
       </div>
 
       <div className="h-[100px] w-[100px] overflow-hidden bg-[url('/public/images/userPlceholder.webp')] mt-4 rounded-2xl shadow-[rgba(149,157,165,0.2)_0px_8px_24px]">
-        <img className="h-full w-full object-cover" src={loggedInUser?.profile_picture} alt="Profile" />
+        <img className="h-full w-full object-cover" src={loggedInUser?.profile_picture || "/images/userPlceholder.webp"} alt="Profile" />
       </div>
 
       <div className="pt-5 px-2 flex flex-wrap justify-between">

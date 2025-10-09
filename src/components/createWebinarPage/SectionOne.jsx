@@ -12,9 +12,9 @@ const SectionOne = ({ref}) => {
       <div className="w-[60%] pt-10 h-full px-7 flex flex-col gap-10 relative z-20">
         <div className="">
           <div className="h-[40px] w-full">
-            <input onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.headingOne}  placeholder="Enter Heading" className="w-full h-full outline-0 border-0 text-[#000000] placeholder:text-[#000000]  text-[30px]" type="text" name="headingOne" id="" />
+            <input required onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.headingOne}  placeholder="Enter Heading" className="w-full h-full outline-0 border-0 text-[#000000] placeholder:text-[#000000]  text-[30px]" type="text" name="headingOne" id="" />
           </div>
-            <textarea  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeading} placeholder="Enter Heading" className="w-full h-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
+            <textarea required  onInput={(evt)=> hanldeWebinarInputsChanges(evt)} value={webinarCreateData?.subHeading} placeholder="Enter Heading" className="w-full h-full mt-3 outline-0 border-0 text-[#000000] placeholder:text-[#000000] placeholder:font-light  text-[20px]" type="text" name="subHeading" id=""></textarea>
           <button type="button" className="grediantBg cursor-pointer text-white p-2 rounded-none px-8 text-[16px] ">View Webinar</button>
         </div>
       </div>
@@ -29,7 +29,7 @@ const SectionOne = ({ref}) => {
           </div>
         )}
       </div>
-      <input onChange={(evt)=> hanldeWebinarInputsChanges(evt)}  type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="imageOne" id="" />
+      <input required={webinarCreateData?.imageOne ? false : true} onChange={(evt)=> hanldeWebinarInputsChanges(evt)}  type="file" className="opacity-0 h-full end-0 cursor-pointer absolute z-10 w-[40%]" accept="image/*" name="imageOne" id="" />
     </div>
   );
 };

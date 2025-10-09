@@ -13,10 +13,10 @@ const SectionTwo = ({ref}) => {
       </div>
         <h2 className='text-[30px] text-center text-[#BD2F2C]'>Principal, Integrated Insights</h2>
         <div className='w-full flex justify-center'>
-            <textarea onInput={handleCareersInpust} value={createCareerData?.country} name="country" placeholder='Enter Country' className='placeholder:text-[21px] placeholder:text-center text-[21px] generalCssForInputs w-full text-center' id=""></textarea>
+            <textarea required onInput={handleCareersInpust} value={createCareerData?.country} name="country" placeholder='Enter Country' className='placeholder:text-[21px] placeholder:text-center text-[21px] generalCssForInputs w-full text-center' id=""></textarea>
         </div>
          <div className=''>
-            <textarea onInput={handleCareersInpust} value={createCareerData?.sectionTwoSubHeading} name="sectionTwoSubHeading" placeholder='Enter Sub Heading' className='placeholder:text-[21px] text-[14px] generalCssForInputs w-[100%] mt-5' id=""></textarea>
+            <textarea required onInput={handleCareersInpust} value={createCareerData?.sectionTwoSubHeading} name="sectionTwoSubHeading" placeholder='Enter Sub Heading' className='placeholder:text-[21px] text-[14px] generalCssForInputs w-[100%] mt-5' id=""></textarea>
         </div>
     </div>
   )

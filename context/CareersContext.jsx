@@ -17,7 +17,9 @@ const payload = {
   responsibilities: [{ subHeading: "", keyPoints: [""] }],
   responsibilitiesStatus: true,
   qualifications: [{ subHeading: "", keyPoints: [""] }],
+  benefits: [{ subHeading: "", keyPoints: [""] }],
   qualificationsStatus: true,
+  benefitsStatus: true,
   keySkills: [{ subHeading: "", keyPoints: [""] }],
   keySkillsStatus: true,
   slug: "",
@@ -100,11 +102,13 @@ export const CareersContextProvider = ({ children }) => {
 
   const handleSubmit = async (evt, type, id) => {
     evt.preventDefault();
-    let t = toast.loading("Creating career!");
+    let t= null
     let res = null;
     if (type) {
+      t = toast.loading("Updating career!");
       res = await putCommonApiForEvnts(`/career/${id}`, createCareerData);
     } else {
+       t = toast.loading("Creating career!");
       res = await postCommonApi(`career`, createCareerData);
     }
     if (res.success) {
@@ -118,6 +122,11 @@ export const CareersContextProvider = ({ children }) => {
       toast.error("couldn't Update!");
     }
   };
+
+  useEffect(()=>{
+    console.log(createCareerData);
+    
+  },[createCareerData])
 
   return (
     <CareersContext.Provider

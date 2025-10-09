@@ -19,6 +19,7 @@ const SectionThree = ({ref}) => {
           <div className="h-[150px] w-[150px] rounded-full bg-[#FFF8F8] overflow-hidden border border-dashed border-[#BD2F2C]">
             <div className="flex h-full w-full relative flex-col items-center justify-center">
               <input
+              required={el?.img ? false : true}
                 className="h-full w-full opacity-0 cursor-pointer left-0 top-0 absolute z-20"
                 type="file"
                 name="img"
@@ -39,7 +40,8 @@ const SectionThree = ({ref}) => {
           </div>
 
           <div className="mt-3">
-            <textarea
+            <textarea 
+            required
               className="h-[40px] leading-[30px] w-full outline-0 border-0 resize-none overflow-hidden placeholder:text-[#000000] text-[#000000] text-[22px]"
               placeholder="Heading"
               name="heading"
@@ -56,6 +58,7 @@ const SectionThree = ({ref}) => {
                 (key, keyIndex) => (
                   <div key={keyIndex} className="flex items-start gap-2">
                     <textarea
+                    required
                       value={key}
                       onInput={(e)=> handlePointsInputOfObjs(e,index,keyIndex)}
                       placeholder="Key Points"

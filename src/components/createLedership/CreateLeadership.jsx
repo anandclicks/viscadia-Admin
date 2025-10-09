@@ -194,7 +194,7 @@ const CreateLeadership = () => {
                   </div>
                 </div>
                 <Link to={"/leadership"} className="h-[40px] w-[40px] rounded-full">
-                  <img className="h-full w-full rounded-full object-cover" src="../icons/close.png" alt="" />
+                  <img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" />
                 </Link>
               </div>
             </div>

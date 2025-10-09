@@ -231,7 +231,7 @@ const CreateWebinarPage = () => {
                 <SectionThree ref={sectionThreeRef} />
                 <SectionFour ref={sectionFourRef} />
                 <div>
-                  <div className="min-h-[50px] min-w-[500px] py-10">
+                  {/* <div className="min-h-[50px] min-w-[500px] py-10">
                     <p>Enter Page url</p>
                     <div className="flex items-center h-full">
                       <input
@@ -255,7 +255,7 @@ const CreateWebinarPage = () => {
                         id=""
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex w-full justify-end gap-5">
                   <button

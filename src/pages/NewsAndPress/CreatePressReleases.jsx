@@ -107,7 +107,7 @@ const CreatePressReleases = () => {
                     <button type="button" onClick={() => handlePresStatus("live")} className="w-full h-[28%] my-1 hover:bg-stone-50 text-start px-2 border-b border-[#f8f8f8]">Publish</button>
                   </div>
                 </div>
-                <Link to={"/news-and-press-releases"} className="h-[40px] w-[40px] rounded-full"><img className="h-full w-full rounded-full object-cover" src="../icons/close.png" alt="" /></Link>
+                <Link to={"/news-and-press-releases"} className="h-[40px] w-[40px] rounded-full"><img className="h-full w-full rounded-full object-cover" src="/icons/close.png" alt="" /></Link>
               </div>
             </div>
             <div className="flex gap-2 h-[calc(100%-90px)] pb-2">

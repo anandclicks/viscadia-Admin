@@ -3,7 +3,7 @@ import { commonGetApiCall, excelGenerator } from "../../utils/reuseableFunctions
 import PageBuildingLoader from "../common/PageBuildingLoader";
 import NoDataFound from "../common/NoDataFound";
 
-const Table = ({ setJsonData }) => {
+const Table = () => {
   const [tableData, setTableData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,8 +26,24 @@ const Table = ({ setJsonData }) => {
     return fullName.includes(query) || email.includes(query);
   });
 
+function formatSubmissions(data) {
+  return data.map(({ form_data = {}, created_at }) => ({
+    "First Name": form_data.first_name || form_data.name || "NA",
+    "Last Name": form_data.last_name || "NA",
+    "Email": form_data.email || "NA",
+    "Contact Number": form_data.contact_number || "NA",
+    "Company": form_data.company || form_data.current_employer || "NA",
+    "Message": form_data.message || "NA",
+    "Submission Date": new Date(created_at).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    })
+  }));
+}
+
   const handleExcelExport = () => {
-    const dataToExport = tableData?.map((el) => el?.form_data);
+    const dataToExport = formatSubmissions(tableData);
     excelGenerator(dataToExport);
   };
 

@@ -126,6 +126,15 @@ export function formatDate(dateString) {
     return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+export function truncateText(text, maxWords = 50) {
+    const words = text.split(/\s+/); 
+    if (words.length <= maxWords) {
+        return text;
+    }
+    return words.slice(0, maxWords).join(" ") + "...";
+}
+
+
 export const commonGetApiCall = async (endpoint) => {
   try {
     const res = await API.get(endpoint);

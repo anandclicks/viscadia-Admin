@@ -26,7 +26,7 @@ const SectionTwo = ({ref}) => {
                 <img src={webinarCreateData?.imageTwo} className="h-full w-full object-cover" alt="" />
               </div>
             )}
-            <input onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="imageTwo" accept="image/*" />
+            <input required={webinarCreateData?.imageTwo ? false : true} onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="imageTwo" accept="image/*" />
           </div>
         </div>
       </div>
@@ -34,13 +34,13 @@ const SectionTwo = ({ref}) => {
         <div className="w-[100%] relative z-10 flex justify-end">
           <div className="w-[80%]">
             <div className="h-[60px]">
-              <input onInput={(e)=> hanldeWebinarInputsChanges(e)} value={webinarCreateData?.headingTwo} placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="headingTwo" type="text" />
+              <input required onInput={(e)=> hanldeWebinarInputsChanges(e)} value={webinarCreateData?.headingTwo} placeholder="HEADING" className="w-full h-full outline-0 border-0 text-white placeholder:text-white text-[31px] font-light" name="headingTwo" type="text" />
             </div>
            <div>
              {webinarCreateData?.keyPoints.map((data,index)=>(
              <div key={index} className="h-[30px] flex items-center gap-2 my-1">
              <img className="h-[80%] object-cover" src="/icons/keyPoints.png" alt="" />
-             <input value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[18px] font-light" name="keyPoint" type="text" />
+             <input required value={data} onChange={(evt)=> handleKeyPointsChange(evt,index)} placeholder="Key Points" className="w-[80%] h-full outline-0 border-0 text-white placeholder:text-white text-[18px] font-light" name="keyPoint" type="text" />
             </div>
            ))}
             

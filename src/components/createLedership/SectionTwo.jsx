@@ -16,6 +16,7 @@ const SectionTwo = ({ref}) => {
      <h3 className="text-black border-0 resize-none overflow-hidden text-[21px] mb-3">Experience</h3>
         <div className="w-full">
           <textarea
+            required
             placeholder="Enter Sub Heading"
             name="experienceSubheading"
             value={createLeadershipData?.experienceSubheading}
@@ -31,6 +32,7 @@ const SectionTwo = ({ref}) => {
       <div className="h-full w-[50%] flex flex-col justify-center">
         <div className="w-full pt-20">
           <textarea
+            required
             placeholder="Enter Title"
             value={createLeadershipData?.title}
             style={{ height: "30px" }}
@@ -46,6 +48,7 @@ const SectionTwo = ({ref}) => {
           {createLeadershipData?.company?.map((val, index) => (
             <div key={index} className="w-full">
               <textarea
+                required
                 placeholder="Enter Company"
                 value={val}
                 style={{ height: "20px" }}

@@ -24,7 +24,14 @@ export const PorfileContextProvider = ({ children }) => {
       "/contacts",
       "/profile",
     ],
-    HR: ["/careers", "/contacts", "/create/new-career", "/edit/career","/profile"],
+    HR: [
+      "/careers",
+      "/contacts",
+      "/create/new-career",
+      "/edit/career",
+      "/preview/career/",
+      "/profile",
+    ],
     Marketing: [
       "/",
       "/events-and-webinars",
@@ -32,6 +39,14 @@ export const PorfileContextProvider = ({ children }) => {
       "/leadership",
       "/news-and-press-releases",
       "/profile",
+      "/preview/event",
+      "/preview/webinar",
+      "/preview/case-study",
+      "/preview/career",
+      "/edit/event",
+      "/edit/webinar",
+      "/edit/case-study",
+     
     ],
   };
 

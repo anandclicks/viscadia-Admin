@@ -11,6 +11,7 @@ const SectionOne = ({ref}) => {
             <div className="w-[40%] flex flex-col justify-center">
               <div className="w-full">
                 <textarea
+                 required
                  name="subHeading"
                  onInput={handleCareersInpust}
                   value={createCareerData?.subHeading}
@@ -21,6 +22,7 @@ const SectionOne = ({ref}) => {
               </div>
               <div className=" w-full">
                 <textarea
+                  required
                   placeholder="HEADING"
                   onInput={handleCareersInpust}
                   value={createCareerData?.heading}

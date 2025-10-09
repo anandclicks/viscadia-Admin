@@ -29,13 +29,12 @@ function SectionThree({ref}) {
               <img src="/icons/upload.png" alt="" />
               <h3 className="text-[#BD2F2C]  mt-2">Upload Video</h3>
             </div>
-            {webinarCreateData?.webibarVideo && (
+            {webinarCreateData?.webinarVideo && (
               <div className="absolute left-0 top-0 h-full overflow-hidden w-full bg-white flex justify-center items-center flex-col">
-                <video autoPlay muted loop src={webinarCreateData?.webibarVideo} className="h-full w-full object-cover" alt="" />
-
+                <video autoPlay muted loop src={webinarCreateData?.webinarVideo} className="h-full w-full object-cover" alt="" />
               </div>
             )}
-            <input onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="webibarVideo" accept="video/*" />
+            <input required={webinarCreateData?.webinarVideo ? false : true} onChange={(evt)=> hanldeWebinarInputsChanges(evt)} type="file" className="opacity-0 h-full w-full cursor-pointer relative z-20" name="webinarVideo" accept="video/*" />
           </div>
      </div>
     </div>

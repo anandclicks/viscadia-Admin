@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { putCommonApiForEvnts } from "../../utils/reuseableFunctions";
+import { putCommonApiForEvnts, truncateText } from "../../utils/reuseableFunctions";
 
 const NewsCards = ({ id, isOpen, onToggle, data }) => {
   const [newsStatus, setNewsStatus] = useState(data?.status);
@@ -126,7 +126,7 @@ const NewsCards = ({ id, isOpen, onToggle, data }) => {
               </div>
             </div>
 
-            <p className="text-[17px] leading-[20px]">{data?.section_two_details}</p>
+            <p className="text-[17px] leading-[20px]">{truncateText(data.section_two_details)}</p>
           </div>
         </div>
       )}

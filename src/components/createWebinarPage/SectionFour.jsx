@@ -42,6 +42,7 @@ const SectionFour = ({ ref }) => {
                     </div>
                   )}
                   <input
+                   required={el?.image ? false : true}
                     type="file"
                     name="image"
                     className="absolute w-full h-full opacity-0 cursor-pointer z-20"
@@ -51,6 +52,7 @@ const SectionFour = ({ ref }) => {
                 <div className="mt-3">
                   <div className="flex items-center my-2">
                     <textarea
+                      required
                       name="fullName"
                       value={el?.fullName}
                       placeholder="Full Name"
@@ -60,6 +62,7 @@ const SectionFour = ({ ref }) => {
                   </div>
                   <div className="flex items-center my-2">
                     <textarea
+                     required
                       name="designation"
                       value={el?.designation}
                       placeholder="Designation"
@@ -69,6 +72,7 @@ const SectionFour = ({ ref }) => {
                   </div>
                   <div className="flex items-center my-2">
                     <textarea
+                      required
                       name="introduction"
                       value={el?.introduction}
                       placeholder="Introduction"

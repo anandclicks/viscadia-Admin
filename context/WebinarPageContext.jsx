@@ -43,6 +43,7 @@ export const WebinarContextProvider = ({ children }) => {
     }
   };
 
+
   const functionForAddingPoints = (evt) => {
     const { value } = evt.target;
     setWebinarCreateData((prev) => ({

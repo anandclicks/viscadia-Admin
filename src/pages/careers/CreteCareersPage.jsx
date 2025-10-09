@@ -13,6 +13,7 @@ import {
   toCamelCase,
 } from "../../utils/reuseableFunctions";
 import PageBuildingLoader from "../../components/common/PageBuildingLoader";
+import SectionSix from "../../components/careers/SectionSix";
 
 const CreteCareersPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,7 @@ const CreteCareersPage = () => {
   const sectionThreeRef = useRef(null);
   const sectionFourRef = useRef(null);
   const sectionFiveRef = useRef(null);
+  const sectionSixRef = useRef(null);
 
   const sectionRef = [
     { ref: sectionOneRef, id: "sectionOne" },
@@ -40,6 +42,7 @@ const CreteCareersPage = () => {
     { ref: sectionThreeRef, id: "sectionThree" },
     { ref: sectionFourRef, id: "sectionFour" },
     { ref: sectionFiveRef, id: "sectionFive" },
+    { ref: sectionSixRef, id: "sectionSix" },
   ];
 
   useEffect(() => {
@@ -131,6 +134,7 @@ const CreteCareersPage = () => {
           setIsEditingPage(true);
           setLoading(false);
         } else {
+          setCareerData()
           redirect("/careers");
           toast.error("Couldn't Fetch Event!");
           setLoading(false);
@@ -259,6 +263,16 @@ const CreteCareersPage = () => {
                   >
                     <button>Key Skills</button>
                   </li>
+                  <li
+                    onClick={() => handleScrolling(sectionSixRef)}
+                    className={`px-4 cursor-pointer text-stone-600 flex items-center text-[18px] h-[45px] ${
+                      activeSection === "sectionSix"
+                        ? "font-bold activeEventPageSection text-black"
+                        : ""
+                    }`}
+                  >
+                    <button className="">Benefits</button>
+                  </li>
                 </ul>
               </div>
               <form
@@ -270,9 +284,10 @@ const CreteCareersPage = () => {
                 <SectionThree ref={sectionThreeRef} />
                 <SectionFour ref={sectionFourRef} />
                 <SectionFive ref={sectionFiveRef} />
+                <SectionSix ref={sectionSixRef}/>
 
                 <div className="flex w-[auto] justify-end gap-5">
-                  <Link to={'/events-and-webinars'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
+                  <Link to={'/careers'} className="bg-[#FFFFFF] border-[1px] border-[#E8E8E8] shadow hover:bg-[#e8e8e88e] transition-all p-2 rounded-full font-medium px-9 text-[17px] mt-5">Cancle</Link>
                   <input value={'Save'} type="submit" className="cursor-pointer grediantBg text-white p-2 rounded-full font-medium px-9 text-[17px] mt-5"/>
                 </div>
               </form>
