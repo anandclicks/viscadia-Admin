@@ -29,7 +29,7 @@ import Contact from "./pages/contactPage/Contct";
 import Users from "./pages/usersPage/Users";
 import ProfilePage from './pages/profile/PorfilePage';
 import Login from "./pages/Login";
-import Leadership from "./pages/preview/leadership";
+import Leadership from "./pages/preview/Leadership";
 import { PorfileContextProvider } from "../context/ProfileDetailsContext";
 import AddUser from "./pages/AddUser";
 import { NewsAndPressContextProvider } from "../context/NewsAndPressContext";
