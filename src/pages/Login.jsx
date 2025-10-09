@@ -8,27 +8,32 @@ const Login = () => {
   const adminOptions = [
     {
       heading: "Forecast with Confidence",
-      subheading: "Manage forecasting models, user roles, and system settings efficiently in one place.",
+      subheading:
+        "Manage forecasting models, user roles, and system settings efficiently in one place.",
       image: "/loginSliderImage/one.png",
     },
     {
       heading: "Your Admin Hub",
-      subheading: "Control user access, monitor data trends, and optimize workflows seamlessly.",
+      subheading:
+        "Control user access, monitor data trends, and optimize workflows seamlessly.",
       image: "/loginSliderImage/two.png",
     },
     {
       heading: "Smart Admin Tools",
-      subheading: "Access analytics, manage users, and configure system settings effortlessly.",
+      subheading:
+        "Access analytics, manage users, and configure system settings effortlessly.",
       image: "/loginSliderImage/three.png",
     },
     {
       heading: "Welcome to Viscadia Admin",
-      subheading: "Oversee forecasting operations, automate tasks, and gain actionable insights.",
+      subheading:
+        "Oversee forecasting operations, automate tasks, and gain actionable insights.",
       image: "/loginSliderImage/four.png",
     },
     {
       heading: "Manage, Monitor, Optimize",
-      subheading: "From users to data models, control every aspect of your forecasting platform.",
+      subheading:
+        "From users to data models, control every aspect of your forecasting platform.",
       image: "/loginSliderImage/one.png",
     },
   ];
@@ -37,6 +42,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  // ✅ Preload all slider images once
+  useEffect(() => {
+    adminOptions.forEach((option) => {
+      const img = new Image();
+      img.src = option.image;
+    });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,9 +77,9 @@ const Login = () => {
         // Role-based redirect
         const role = data.user.role?.toLowerCase();
         if (role === "hr") navigate("/careers");
-        else if (role === "marketing" || role === "sales") navigate("/events-and-webinars");
+        else if (role === "marketing" || role === "sales")
+          navigate("/events-and-webinars");
         else navigate("/"); // Admin & Super Admin go to main dashboard
-
       } else {
         toast.dismiss(toastId);
         toast.error(data.message || "Something went wrong!");
@@ -86,10 +99,16 @@ const Login = () => {
         <div className="h-full w-full flex items-end">
           <div className="text-white px-5 mb-5 h-[200px] flex flex-col justify-between items-start">
             <div>
-              <h2 className="text-[35px] font-medium">{adminOptions[currentSlide].heading}</h2>
-              <p className="text-[20px] font-light leading-7">{adminOptions[currentSlide].subheading}</p>
+              <h2 className="text-[35px] font-medium">
+                {adminOptions[currentSlide].heading}
+              </h2>
+              <p className="text-[20px] font-light leading-7">
+                {adminOptions[currentSlide].subheading}
+              </p>
             </div>
-            <p className="text-center w-full flex justify-center">@ 2025 Viscadia, All rights reserved.</p>
+            <p className="text-center w-full flex justify-center">
+              @ 2025 Viscadia, All rights reserved.
+            </p>
           </div>
         </div>
       </div>
@@ -97,8 +116,12 @@ const Login = () => {
       <div className="h-full w-[45%] flex flex-col pt-8 items-center">
         <img className="w-[60%]" src="./logo.png" alt="" />
         <div className="w-full flex justify-center items-center flex-col pt-3">
-          <h3 className="text-[#BD2F2C] text-[35px] font-medium">Welcome Back!</h3>
-          <p className="text-[20px] text-center font-medium text-[#4A4A4A]">Let’s get you Log in</p>
+          <h3 className="text-[#BD2F2C] text-[35px] font-medium">
+            Welcome Back!
+          </h3>
+          <p className="text-[20px] text-center font-medium text-[#4A4A4A]">
+            Let’s get you Log in
+          </p>
         </div>
 
         <form onSubmit={handleLogin} className="pt-7 w-full px-6">
@@ -114,8 +137,16 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               {email && (
-                <button type="button" className="pr-3" onClick={() => setEmail("")}>
-                  <img className="h-[20px] w-[20px]" src="./closeDarkBtn.png" alt="Clear" />
+                <button
+                  type="button"
+                  className="pr-3"
+                  onClick={() => setEmail("")}
+                >
+                  <img
+                    className="h-[20px] w-[20px]"
+                    src="./closeDarkBtn.png"
+                    alt="Clear"
+                  />
                 </button>
               )}
             </div>
@@ -132,10 +163,18 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="button" className="pr-3" onClick={() => setShowPassword(!showPassword)}>
+              <button
+                type="button"
+                className="pr-3"
+                onClick={() => setShowPassword(!showPassword)}
+              >
                 <img
                   className="h-[20px] w-[20px]"
-                  src={showPassword ? "/loginSliderImage/eyeOf.png" : "/loginSliderImage/eyeOn.png"}
+                  src={
+                    showPassword
+                      ? "/loginSliderImage/eyeOf.png"
+                      : "/loginSliderImage/eyeOn.png"
+                  }
                   alt="Toggle Password"
                 />
               </button>
@@ -144,10 +183,17 @@ const Login = () => {
 
           <div className="flex gap-2 mt-4">
             <input type="checkbox" id="remember" />
-            <label htmlFor="remember" className="text-[13px]">Remember Me</label>
+            <label htmlFor="remember" className="text-[13px]">
+              Remember Me
+            </label>
           </div>
 
-          <button type="submit" className="grediantBg w-full mt-5 text-white p-2 rounded-xl font-medium px-9 text-[17px]">Log in</button>
+          <button
+            type="submit"
+            className="grediantBg w-full mt-5 text-white p-2 rounded-xl font-medium px-9 text-[17px]"
+          >
+            Log in
+          </button>
         </form>
       </div>
       <Toaster />
